@@ -4,6 +4,7 @@ ajaxHandle = {
 	regexData: null,
 	filters: [],
 	nextLoad: 5,
+	loadingInterval:null,
 	matchedData: [],
 	ajax: function(o){
 		var that = this, ajax = new XMLHttpRequest();
@@ -91,7 +92,6 @@ ajaxHandle = {
 		var collection = getText.match(/^\s*$/) ? []:getText.replace(/\s+/g,' ').replace(/^\s+|\s+$/,'').split(' ');
 		var that = this;
 		if(this.utils.equalArrays(collection,this.filters)) return;
-		
 		this.filters = collection.slice();
 		this.matchedData = [];
 		
@@ -154,22 +154,29 @@ ajaxHandle = {
 		$('#inner-section').find('#load-more').remove();
 	},
 	loadNext: function(reset){
+		var iter, that = this, cMax = 0, all = this.matchedData.length;
+		
 		if(reset) $('#inner-section').empty();
+		iter = $('#inner-section').children('.regex-item').length;
+		
+		if(this.loadingInterval!==null) clearInterval(this.loadingInterval);
 
-		var iter = $('#inner-section').children('.regex-item').length;
-		var cMax = 0;
-		var all = this.matchedData.length;
-		var max = this.nextLoad;
-		for(;iter<all&&cMax<max;iter++,cMax++){
-			var getHTML = this.loadInputData(this.matchedData[iter]);
-			this.scriptSection(getHTML);
+		this.loadingInterval = setInterval(function(){
+			if(iter>=all||cMax>=this.nextLoad) {
+				clearInterval(that.loadingInterval);
+				if(reset) that.createNextButton();
+				if(iter===all) that.removeNextButton();
+				return;
+			}
+			var getHTML = that.loadInputData(that.matchedData[iter]);
+			that.scriptSection(getHTML);
+			$(getHTML).hide();
 			if(reset) $('#inner-section').append(getHTML);
 			if(!reset) $('#load-more').before(getHTML);
-		}
-		
-		if(reset) this.createNextButton();
-		if(iter===all) this.removeNextButton();
-
+			$(getHTML).fadeIn(120);			
+			iter++;
+			cMax++;
+		},120);
 	},
 	utils:{
 		matchArrays: function(item,filter){
