@@ -82,11 +82,15 @@ ajaxHandle = {
 		var getHTML = $(this.htmlSection).clone();
 		var itemData = this.regexData[this.matchedData[matchedNum]];
 		var parseRegExp = new RegExp(itemData.regex[0],itemData.regex[1]).toString();
+		var regBox = $($(getHTML).find('.regex-keywords'));
 		
 		$($(getHTML).find('.regex-code')).html(parseRegExp);
 		$($(getHTML).find('.regex-input>textarea')).html(itemData.content);
 		$($(getHTML).find('.regex-tips')).html(itemData.description);
-		$($(getHTML).find('.regex-keywords')).html(itemData.keywords);
+		
+		$.each(itemData.keywords,function(ind,val){
+			regBox.append('<span>'+val+'</span>');
+		});
 		
 		return getHTML;
 	},
