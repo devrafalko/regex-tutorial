@@ -29,21 +29,21 @@
 				</header>
 				<section>
 					<nav id="nav-menu">
-						<select id="nav-min-menu"></select>
+						<select id="nav-min-menu"><option>---</option></select>
 						<ul id="nav-max-menu">
-							<li>
+							<li data-key="modifier">
 								<span class="nav-menu-line"></span>
 								<span class="nav-menu-name">modifiers</span>
 							</li>
-							<li>
+							<li data-key="bracket">
 								<span class="nav-menu-line"></span>
 								<span class="nav-menu-name">brackets</span>
 							</li>
-							<li>
+							<li data-key="metacharacter">
 								<span class="nav-menu-line"></span>
 								<span class="nav-menu-name">metachars</span>
 							</li>
-							<li>
+							<li data-key="quantifier">
 								<span class="nav-menu-line"></span>
 								<span class="nav-menu-name">quantifiers</span>
 							</li>
@@ -52,7 +52,7 @@
 					<nav id="nav-search">
 						<form action="#">
 							<input type="text" id="searchInp"/>
-							<button type="submit" id="sumInp" class="glyphicon glyphicon-search"></button>
+							<button id="sumInp" class="glyphicon glyphicon-search"></button>
 						</form>
 					</nav>					
 				</section>

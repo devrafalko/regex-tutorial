@@ -20,6 +20,42 @@ ajaxHandle = {
 	init: function(){
 		this.getHtmlSection();
 		this.getRegExData();
+		this.addListeners();
+	},
+	addListeners: function(){
+		var that = this;
+		
+		$("#main-section,.regex-section").mCustomScrollbar();
+
+		$('#nav-max-menu').children().each(function(i,ob) {
+			$(ob).on('mouseover mouseout',function(){
+				$(ob).find(".nav-menu-line").toggleClass('line-hover');
+				$(ob).find(".nav-menu-name").toggleClass('name-hover');
+			});
+			var createOpt = $.parseHTML('<option>'+$(ob).find(".nav-menu-name").html()+'</option>');
+			$(createOpt).attr('data-key',$(ob).attr('data-key'));
+			$("#nav-min-menu").append(createOpt);
+		});
+		
+		$('#nav-max-menu>li').on('click',function(){
+			var getKeyword = $(this).attr('data-key');
+			setNewFilter(getKeyword);
+		});
+		
+		$('#nav-min-menu').on('input',function(){
+			var getKeyword = $(this).find(':selected').attr('data-key');
+			setNewFilter(getKeyword);
+			this.selectedIndex = 0;
+		});
+		
+		function setNewFilter(getKeyword){
+			$('#searchInp').val(getKeyword);
+			that.filterItems(getKeyword);		
+		}
+		
+		$('#sumInp').on('click',function(){
+			that.filterItems($('#searchInp').val());		
+		});
 	},
 	getHtmlSection: function(){
 		this.ajax({
@@ -52,13 +88,18 @@ ajaxHandle = {
 		this.loadNext(true);
 	},
 	filterItems: function(getText){
-		//get the String argument
-		//parse string into array type split(' ');
-		//if this.filters equals getText - return (do nothing)
-		//empty this.matched -> []
-		//find items in JSON object which match filters and add its indeces into this.matched
-		//fire this.loadNext(true)
-
+		var collection = getText.match(/^\s*$/) ? []:getText.replace(/\s+/g,' ').replace(/^\s+|\s+$/,'').split(' ');
+		var that = this;
+		if(this.utils.equalArrays(collection,this.filters)) return;
+		
+		this.filters = collection.slice();
+		this.matchedData = [];
+		
+		$.each(this.regexData,function(iter,val){
+			if(that.utils.matchArrays(val.keywords,collection)) that.matchedData.push(iter);
+		});
+		
+		this.loadNext(true);
 	},
 	scriptSection: function(getHTML){
 		var getClasses = '.regex-tips, .regex-keywords, .regex-console';
@@ -77,10 +118,18 @@ ajaxHandle = {
 				$($(getHTML).find(".regex-"+clss[a])).slideToggle();
 			});
 		}
+		
+		$(getHTML).find('.regex-keywords>span').on('click',function(){
+			var getSearch = $('#searchInp');
+			var getSearchValue = getSearch.val();
+			var setNew = $(this).html();
+			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
+			getSearch.val(getSearchValue + ' ' + setNew);
+		});
 	},
 	loadInputData: function(matchedNum){
 		var getHTML = $(this.htmlSection).clone();
-		var itemData = this.regexData[this.matchedData[matchedNum]];
+		var itemData = this.regexData[matchedNum];
 		var parseRegExp = new RegExp(itemData.regex[0],itemData.regex[1]).toString();
 		var regBox = $($(getHTML).find('.regex-keywords'));
 		
@@ -95,7 +144,6 @@ ajaxHandle = {
 		return getHTML;
 	},
 	createNextButton: function(){
-		console.log("tworzę nowy button");
 		var butt = $.parseHTML('<nav id="load-more"><span>load more</span</nav>');
 		var bLoadNext = this.loadNext.bind(this,false);
 		$(butt).on('click',bLoadNext);
@@ -157,16 +205,5 @@ ajaxHandle.init();
 
 
 
-//load ul menu elements into responsive select option
-(function(){
-	var getLis = $('#nav-max-menu').children().each(function(i,ob) {
-		$(ob).on('mouseover mouseout',function(){
-			$(this).children("span:first-of-type").toggleClass('line-hover');
-			$(this).children("span:last-of-type").toggleClass('name-hover');
-		});
-		$("#nav-min-menu").append('<option>'+ob.innerHTML+'</option>');
-	});
-})();
 
-//attach scrollbar for containers
-$("#main-section,.regex-section").mCustomScrollbar();
+
