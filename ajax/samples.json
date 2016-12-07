@@ -1,9 +1,10 @@
 [
 	{
-		"regex":["hello world","ig"],
+		"regex":["hello world","g"],
 		"content":"helo world! samp A",
 		"description":"some description",
-		"keywords":["modifier","bracket","metacharacter","i","g","m","[abc]","[0-9]","(x|y)",".","\\w"]
+		"keywords":["modifier","bracket","metacharacter","i","g","m","[abc]","[0-9]","(x|y)",".","\\w"],
+		"d":"8j0HUh"
 	},
 	{
 		"regex":["hello world","ig"],
