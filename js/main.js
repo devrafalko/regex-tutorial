@@ -2,7 +2,8 @@ ajaxHandle = {
 	inputBoxId: 'waiting-ico',
 	htmlSection: null,
 	regexData: null,
-	filters: [],
+	filters: [null],
+	hash: null,
 	nextLoad: 5,
 	loadingInterval:null,
 	matchedData: [],
@@ -19,11 +20,11 @@ ajaxHandle = {
 		ajax.send();
 	},
 	init: function(){
+		this.utils.getParent = this;
 		this.defaultFormSubmit();
 		this.getHtmlSection();
 		this.getRegExData();
 		this.addListeners();
-		
 	},
 	defaultFormSubmit: function(){
 		$("#nav-search").submit(function(e){
@@ -47,29 +48,38 @@ ajaxHandle = {
 
 		$('#nav-max-menu>li').on('click',function(){
 			var getKeyword = $(this).attr('data-key');
-			setNewFilter(getKeyword);
+			$('#searchInp').val(getKeyword);
+			that.filterItems(getKeyword);
+			that.hash = null;
+			location.hash = '';
 		});
 
 		$('#nav-min-menu').on('input',function(){
 			var getKeyword = $(this).find(':selected').attr('data-key');
-			setNewFilter(getKeyword);
+			$('#searchInp').val(getKeyword);
+			that.filterItems(getKeyword);
 			this.selectedIndex = 0;
+			that.hash = null;
+			location.hash = '';
 		});
 
 		$('#sumInp').on('click',function(){
-			that.filterItems($('#searchInp').val());		
+			var getKeyword = $('#searchInp').val();
+			that.filterItems(getKeyword);
+			that.hash = null;
+			location.hash = '';
 		});
 
 		$('#header-section>header').on('click',function(){
-			setNewFilter('');
-			that.filterItems('');	
+			location.hash = '';
+			that.filterItems('');
+			$('#searchInp').val('');
+			that.hash = null;
 		});
-
-			function setNewFilter(getKeyword){
-				$('#searchInp').val(getKeyword);
-				that.filterItems(getKeyword);		
-			}
-
+		
+		$('#searchInp').on('mouseover',function(){
+			$(this).attr('title',$(this).val());
+		});
 	},
 	getHtmlSection: function(){
 		this.ajax({
@@ -96,34 +106,73 @@ ajaxHandle = {
 		});
 	},
 	initItems: function(){
-		for(var i=0;i<this.regexData.length;i++){
-			this.matchedData.push(i);
+		this.filterHash();
+	},
+	filterHash: function(){
+		var that = this;
+		var getHash = location.hash;
+		var hash = getHash.length ? getHash.replace(/^\x23/,''):false;
+		var found;
+
+		if(hash){
+			$.each(this.regexData,function(iter,val){
+				if(hash===val.id) {
+					found = iter;
+					that.hash = hash;
+					return false;	
+				}
+			});
 		}
+
+		if(typeof found === 'number'){
+			this.matchedData = [];
+			this.matchedData.push(found);
+			this.loadNext(true);
+			} else {
+				this.filterItems('');
+				}
+	},
+
+	selectHash: function(getItem){
+		var getItemNumber = getItem[0].regexData.itemNum;
+		var getItemId = this.regexData[getItemNumber].id;
+		if(typeof getItemId==='undefined') return;
+		if(getItemId===this.hash) return;
+		this.hash = getItemId;
+
+		location.hash = getItemId;
+		this.matchedData = [];
+		this.filters = [null];
+		$('#searchInp').val('');
+		this.matchedData.push(getItemNumber);
 		this.loadNext(true);
 	},
+
 	filterItems: function(getText){
 		var collection = getText.match(/^\s*$/) ? []:getText.replace(/\s+/g,' ').replace(/^\s+|\s+$/,'').split(' ');
 		var that = this;
 		if(this.utils.equalArrays(collection,this.filters)) return;
 		this.filters = collection.slice();
 		this.matchedData = [];
-		
+
 		$.each(this.regexData,function(iter,val){
-			if(that.utils.matchArrays(val.keywords,collection)) that.matchedData.push(iter);
+			if(that.utils.matchArrays(val.keywords,collection)){
+				that.matchedData.push(iter);
+			}
 		});
-		
 		this.loadNext(true);
 	},
+
 	scriptSection: function(getHTML){
 		var toggleClasses = '.regex-tips, .regex-keywords, .regex-console';
 		var that = this, utils = this.utils;
-		
+
 		$($(getHTML).find(toggleClasses)).hide();
 		$($(getHTML).find(toggleClasses)).hide();
 		attachToggle(0,1,2);
 		attachToggle(1,2,0);
 		attachToggle(2,0,1);
-		
+
 		function attachToggle(a,b,c){
 			var clss = ['tips','keywords','console'];
 			$($(getHTML).find('.regex-button-'+clss[a])).click(function(){
@@ -141,69 +190,123 @@ ajaxHandle = {
 			getSearch.val(getSearchValue + ' ' + setNew);
 		});
 
-		$(getHTML).find('.test-text').on('input', function(){
-			testRegExp();
+		$(getHTML).find('.regex-code').on('input', function(){
+			utils.parseStringToRegExp(getHTML);
+			that.testRegExp(getHTML,true);
 		});
 
-		$(getHTML).find('.regex-code').on('input', function(){
-			this.innerHTML = this.innerHTML.replace(/\n/g,'');
-			utils.parseStringToRegExp($(this).html(),getHTML[0]);
-			testRegExp();
+		$(getHTML).find('.regex-code').on('keydown', function(event){
+			if(event.keyCode===13) event.preventDefault();
 		});
-		
+
 		$(getHTML).find('.regex-button-reset').on('click', function(){
 			that.loadData(getHTML,true);
 			$(getHTML).find('.regex-code').trigger('input');
 		});		
-		
-		$(getHTML).find('.regex-code').trigger('input');
-		
-			function testRegExp(){
-				var getRegEx = getHTML[0].dataRegExp;
-				var button = $(getHTML).find('.regex-button-console');
-				var consoleBox = $(getHTML).find('.inner-console');
-				if(!getRegEx.passed){
-					appendMessage(['fail','failMess']);
-					} else {
-						var getText = $(getHTML).find('.test-text').html();
-						if(getRegEx.output.test(getText)){
-							appendMessage(['ok','StrProto']);
-							} else {
-								appendMessage(['fail','StrProto']);
-								}
-						}
 
-					function appendMessage(coll){
-						consoleBox.empty();
-						for(var i=0;i<coll.length;i++){
-							if(coll[i]==='ok') {
-								setClass(button,true);
-								consoleBox.append('<kbd class="ok">Test passed</kbd>');
-							}
-							if(coll[i]==='fail') {
-								setClass(button,false);
-								consoleBox.append('<kbd class="fail">Test failed</kbd>');
-							}
-							if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">'+getRegEx.output+'</kbd>');
-							if(coll[i]==='StrProto'){
-								$.each(['match','search','split'],function(c,v){
-									consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(getText[v](getRegEx.output))+'</kbd>');						
-								});
-							}
+		$(getHTML).find('.regex-header').on('click',function(){
+			that.selectHash(getHTML);
+		});
+
+		$(getHTML).find('.test-text').on('input', function(event){
+			utils.newRegularText(getHTML);
+			that.testRegExp(getHTML);
+		});
+
+		$(getHTML).find('.test-text').on('keydown', function(event){
+			if(event.keyCode===13){
+				event.preventDefault();
+				var range = document.createRange();
+				var getSelObj = window.getSelection();
+				var getPosition = getSelObj.focusOffset;
+				var getText = $(getHTML).find('.test-text').html();
+				var textLeft = getText.slice(0,getPosition);
+				var textRight = getText.slice(getPosition,getText.length);
+				var insertBreak = !textRight.length ? '\n\n':'\n';
+				var newText = textLeft + insertBreak + textRight;
+				$(this).html(newText);
+				range.setStart(this.childNodes[0], textLeft.length+1);
+				range.collapse(true);
+				getSelObj.removeAllRanges();
+				getSelObj.addRange(range);
+				$(getHTML).find('.test-text').trigger('input');
+			}			
+		});
+		
+		var rText = utils.appendRegularText.bind(this,getHTML);
+		var hText = utils.appendHighlightText.bind(this,getHTML);
+		
+		$(getHTML).find('.test-text').on('focus',function(){
+			$(this).off('mouseover mouseout');
+		});
+		
+		$(getHTML).find('.test-text').on('blur',function(){
+			$(this).on('mouseover',rText);
+			$(this).on('mouseout',hText);
+			$(this).trigger('mouseout');
+		});
+		
+		$(getHTML).find('.test-text').on('mouseover',rText);
+		$(getHTML).find('.test-text').on('mouseout',hText);
+		
+		utils.parseStringToRegExp(getHTML);
+		this.testRegExp(getHTML,true);		
+		
+	},
+	testRegExp: function(getHTML,reg){
+		var utils = this.utils;
+		var getRegEx = getHTML[0].regexData.regex;
+		var button = $(getHTML).find('.regex-button-console');
+		var consoleBox = $(getHTML).find('.inner-console');
+		//var getText = $(getHTML).find('.test-text').text();
+		var getText = getHTML[0].regexData.rText;
+		if(!getRegEx.passed){
+			appendMessage(['fail','failMess']);
+			utils.newHighlightText(getHTML,true);
+			if(reg) utils.appendRegularText(getHTML);
+			} else {
+				if(getRegEx.output.test(getText)){
+					appendMessage(['ok','StrProto']);
+					utils.newHighlightText(getHTML);
+					if(reg) utils.appendHighlightText(getHTML);
+					} else {
+						appendMessage(['fail','StrProto']);
+						utils.newHighlightText(getHTML,true);
+						if(reg) utils.appendRegularText(getHTML);
 						}
-							function setClass(obj,bool){
-								var end = ['fail','ok'];
-								obj.removeClass('test-status-'+end[Number(!bool)]).addClass('test-status-'+end[Number(bool)]);
-							};
+				}
+				
+			function appendMessage(coll){
+				consoleBox.empty();
+				for(var i=0;i<coll.length;i++){
+					if(coll[i]==='ok') {
+						setClass(button,true);
+						consoleBox.append('<kbd class="ok">Test passed</kbd>');
 					}
-			};
+					if(coll[i]==='fail') {
+						setClass(button,false);
+						consoleBox.append('<kbd class="fail">Test failed</kbd>');
+					}
+					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">'+getRegEx.output+'</kbd>');
+					if(coll[i]==='StrProto'){
+						$.each(['match','search','split'],function(c,v){
+							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(getText[v](getRegEx.output))+'</kbd>');						
+						});
+					}
+				}
+					function setClass(obj,bool){
+						var end = ['fail','ok'];
+						obj.removeClass('test-status-'+end[Number(!bool)]).addClass('test-status-'+end[Number(bool)]);
+					};
+			}
 	},
 	loadData: function(getItem,isRefresh){
-		var matchedNum = getItem[0].dataItemNumber;
+		var matchedNum = getItem[0].regexData.itemNum;
 		var itemData = this.regexData[matchedNum];
 		var parseRegExp = new RegExp(itemData.regex[0],itemData.regex[1]).toString();
-		$($(getItem).find('.regex-code')).html(parseRegExp);
-		$($(getItem).find('.test-text')).html(itemData.content);
+		$(getItem).find('.regex-code').html(parseRegExp);
+		this.utils.newRegularText(getItem,itemData.content);
+		this.utils.appendRegularText(getItem);
 		
 		if(!isRefresh){
 			var regBox = $(getItem).find('.regex-keywords');
@@ -225,10 +328,9 @@ ajaxHandle = {
 	removeNextButton: function(){
 		$('#inner-section').find('#load-more').remove();
 	},
-	loadNext: function(reset){
+	loadNext: function(clearAll){
 		var iter, that = this, cMax = 0, all = this.matchedData.length;
-		
-		if(reset) $('#inner-section').empty();
+		if(clearAll) $('#inner-section').empty();
 		iter = $('#inner-section').children('.regex-item').length;
 		
 		if(this.loadingInterval!==null) clearInterval(this.loadingInterval);
@@ -236,17 +338,17 @@ ajaxHandle = {
 		this.loadingInterval = setInterval(function(){
 			if(iter>=all||cMax>=that.nextLoad) {
 				clearInterval(that.loadingInterval);
-				if(reset) that.createNextButton();
+				if(clearAll) that.createNextButton();
 				if(iter===all) that.removeNextButton();
 				return;
 			}
 			var newItem = $(that.htmlSection).clone();
-			newItem[0].dataItemNumber = that.matchedData[iter];
+			newItem[0].regexData = {itemNum:that.matchedData[iter]};
 			var getHTML = that.loadData(newItem);
 			that.scriptSection(getHTML);
 			$(getHTML).hide();
-			if(reset) $('#inner-section').append(getHTML);
-			if(!reset) $('#load-more').before(getHTML);
+			if(clearAll) $('#inner-section').append(getHTML);
+			if(!clearAll) $('#load-more').before(getHTML);
 
 			$(getHTML).find('.regex-section').mCustomScrollbar({theme:'minimal'});
 			$(getHTML).find('.regex-console,.regex-tips,.regex-keywords,.regex-input').mCustomScrollbar({theme:'minimal-dark'});			
@@ -257,6 +359,27 @@ ajaxHandle = {
 		},120);
 	},
 	utils:{
+		newRegularText: function(getObj,getText){
+			var data = getObj[0].regexData;
+			data.rText = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
+		},
+		newHighlightText: function(getObj,reset){
+			var data = getObj[0].regexData;
+			if(reset) delete data.hText;
+			var newText = data.rText.replace(data.regex.output,function(a){
+				return '<span class="reg-hlight">'+a+'</span>';
+			});
+			data.hText = newText;
+		},
+		appendRegularText: function(getObj){
+			var getText = getObj[0].regexData.rText;
+			$(getObj).find('.test-text').html(getText);
+		},
+		appendHighlightText: function(getObj){
+			var getText = getObj[0].regexData.hText;
+			if(typeof getText==='undefined') this.appendRegularText(getObj);
+			$(getObj).find('.test-text').html(getText);
+		},
 		matchArrays: function(item,filter){
 			for(var i=0;i<filter.length;i++){
 				var test = item.some(function(curr,ind,arr){
@@ -281,7 +404,8 @@ ajaxHandle = {
 			}
 			return true;
 		},
-		parseStringToRegExp: function(getString,getObj){
+		parseStringToRegExp: function(getObj){
+			var getString = $(getObj).find('.regex-code').text();
 			var err = [
 				'SyntaxError: Invalid regular expression. Expression should begin and end with: /',
 				'SyntaxError: Invalid regular expression. Expression should not end with: \\/',
@@ -289,30 +413,37 @@ ajaxHandle = {
 				'SyntaxError: Invalid regular expression. Incorrect flags. Use: g i m y',
 				'SyntaxError: Invalid regular expression. Incorrect flags. Use: \'g\' \'i\' \'m\' \'y\' flag just once'
 			];
-			
+
 			var tests = [/^\x2F.*\x2F\w*$/gi,
 						 /^(?:(?!(^|[^\x5C])\x5C(\x5C\x5C)*\x2F\w*$).)+$/gi,
 						 /^(?:(?![^\x5C](\x5C\x5C)*\x2F(?!\w*$)).)+$/gi,
 						 /\x2F(g|i|m|y){0,4}$/gi,
-						 /^(?:(?!\x2F(.*g.*g.*|.*m.*m.*|.*i.*i.*|.*y.*y.*)$).)+$/gi];
-
+						 /^(?:(?!\x2F.*\x2F(.*g.*g.*|.*m.*m.*|.*i.*i.*|.*y.*y.*)$).)+$/gi
+					 ];
 			for(var i=0;i<tests.length;i++){
 				if(!getString.match(tests[i])){
 					return retObj(false,err[i]);
 				};
 			}
-			
+
 			var firstSlash = getString.indexOf('/');
 			var lastSlash = getString.lastIndexOf('/');
 			var parseExpression = getString.slice(firstSlash+1,lastSlash);
 			var parseFlags = getString.slice(lastSlash+1,getString.length);
-			return retObj(true,new RegExp(parseExpression,parseFlags));
+			
+			try{
+				var newRegEx = new RegExp(parseExpression,parseFlags);
+				} catch(a){
+					return retObj(false,a.name+': '+a.message);
+					};
+			
+			return retObj(true,newRegEx);
 			
 				function retObj(test,output){
 					var r = {};
 					r.passed = test;
 					r.output = output;
-					getObj.dataRegExp = r;
+					getObj[0].regexData.regex = r;
 					return r;
 				}
 		},
@@ -346,19 +477,11 @@ ajaxHandle = {
 				if(obj===null&&type==='null') return true;
 				return obj.constructor.toString().toLowerCase().search(type)>=0;
 			}
-			
-			
+		},
+		generateId: function(){
+			return new Date().getTime().toString(36);
 		}
 	}
 };
 
 ajaxHandle.init();
-
-
-
-
-
-//TASKS:
-//create sample text highlighting when the fragments matches regular expression
-//put all signs into regExp and check if any errors appear
-//when click on item-round-number should link the URL to the # (create id's for each item, maybe in JSON)
