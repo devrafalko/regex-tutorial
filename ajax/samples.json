@@ -1,99 +1,114 @@
 [
 	{
-		"regex":["hello world","g"],
+		"regex":["helo world","g"],
 		"content":"helo world! samp A",
 		"description":"some description",
 		"keywords":["modifier","bracket","metacharacter","i","g","m","[abc]","[0-9]","(x|y)",".","\\w"],
-		"d":"8j0HUh"
+		"id":"iwfms33h"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp B",
 		"description":"some description",
-		"keywords":["modifier","bracket","metacharacter","quantifier","g","[abc]","[0-9]",".","\\w","\\W"]
+		"keywords":["modifier","bracket","metacharacter","quantifier","g","[abc]","[0-9]",".","\\w","\\W"],
+		"id":"iwfms98m"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp C",
 		"description":"some description",
-		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"]
+		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"],
+		"id":"iwfmsco7"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp D",
 		"description":"some description",
-		"keywords":["modifier","metacharacter","g","m","[^0-9]"]
+		"keywords":["modifier","metacharacter","g","m","[^0-9]"],
+		"id":"iwfmsgf0"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp E",
 		"description":"some description",
-		"keywords":["quantifier","i","g","[^0-9]"]
+		"keywords":["quantifier","i","g","[^0-9]"],
+		"id":"iwfmsk62"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp F",
 		"description":"some description",
-		"keywords":["modifier","[^abc]","."]
+		"keywords":["modifier","[^abc]","."],
+		"id":"iwfmspu1"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp G",
 		"description":"some description",
-		"keywords":["modifier","i","[abc]","[^0-9]","(x|y)","."]
+		"keywords":["modifier","i","[abc]","[^0-9]","(x|y)","."],
+		"id":"iwfmsxjr"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp H",
 		"description":"some description",
-		"keywords":["metacharacter","[0-9]"]
+		"keywords":["metacharacter","[0-9]"],
+		"id":"iwfmu5wq"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp I",
 		"description":"some description",
-		"keywords":["modifier","metacharacter","bracket","i","[^abc]","(x|y)","\\W"]
+		"keywords":["modifier","metacharacter","bracket","i","[^abc]","(x|y)","\\W"],
+		"id":"iwfmucr2"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp J",
 		"description":"some description",
-		"keywords":["modifier","bracket","g","[abc]","[^0-9]","\\W"]
+		"keywords":["modifier","bracket","g","[abc]","[^0-9]","\\W"],
+		"id":"iwfmugw8"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp K",
 		"description":"some description",
-		"keywords":["modifier","metacharacter","i","g","[abc]"]
+		"keywords":["modifier","metacharacter","i","g","[abc]"],
+		"id":"iwfmulfb"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp L",
 		"description":"some description",
-		"keywords":["metacharacter","[^abc]","[0-9]","(x|y)"]
+		"keywords":["metacharacter","[^abc]","[0-9]","(x|y)"],
+		"id":"iwfmupco"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp M",
 		"description":"some description",
-		"keywords":["i","g","m","\\W"]
+		"keywords":["i","g","m","\\W"],
+		"id":"iwfmusnf"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp N",
 		"description":"some description",
-		"keywords":["modifier","m"]
+		"keywords":["modifier","m"],
+		"id":"iwfmuw4o"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp O",
 		"description":"some description",
-		"keywords":["i","m","[abc]","(x|y)","\\w"]
+		"keywords":["i","m","[abc]","(x|y)","\\w"],
+		"id":"iwfmuzyb"
 	},
 	{
-		"regex":["hello world","ig"],
+		"regex":["helo world","ig"],
 		"content":"helo world! samp P",
 		"description":"some description",
-		"keywords":["modifier","bracket","i","g","[0-9]","(x|y)","."]
+		"keywords":["modifier","bracket","i","g","[0-9]","(x|y)","."],
+		"id":"iwfmv4oo"
 	}
 ]
