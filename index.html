@@ -12,7 +12,6 @@
 		
 		<script src="libs/jquery.mCustomScrollbar.concat.min.js"></script>
 		<link rel="stylesheet" href="libs/jquery.mCustomScrollbar.css"/>
-		
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -52,7 +51,8 @@
 					</nav>
 					<nav id="nav-search">
 						<form>
-							<input type="text" id="searchInp"/>
+							<input type="text" id="searchInp" list="keywords" autocomplete="off"/>
+							<datalist id="keywords"></datalist>
 							<button id="sumInp" class="glyphicon glyphicon-search"></button>
 						</form>
 					</nav>					

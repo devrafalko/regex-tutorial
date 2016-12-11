@@ -1,9 +1,12 @@
+/* global MutationObserver */
+
 ajaxHandle = {
 	inputBoxId: 'waiting-ico',
 	htmlSection: null,
 	regexData: null,
 	filters: [null],
 	hash: null,
+	observer: null,
 	nextLoad: 5,
 	loadingInterval:null,
 	matchedData: [],
@@ -26,6 +29,24 @@ ajaxHandle = {
 		this.getRegExData();
 		this.addListeners();
 	},
+	generateSearchKeywordsList: function(){
+		var keywordsCollection = [];
+		var data = this.regexData;
+		var findList = $('#keywords');
+		for(var i=0;i<data.length;i++){
+			var kWords = this.regexData[i].keywords;
+			for(var ii=0;ii<kWords.length;ii++){
+				var current = kWords[ii];
+				var hasKeyword = keywordsCollection.some(function(c){
+					return c === current;
+				});
+				if(!hasKeyword) keywordsCollection.push(current);
+			}
+		}
+		for(var i=0;i<keywordsCollection.length;i++){
+			$(findList).append('<option value="'+keywordsCollection[i]+'"/>');
+		}
+	},
 	defaultFormSubmit: function(){
 		$("#nav-search").submit(function(e){
 			e.preventDefault();
@@ -33,7 +54,6 @@ ajaxHandle = {
 	},
 	addListeners: function(){
 		var that = this;
-		
 		$("#main-section").mCustomScrollbar({theme:'minimal-dark'});
 
 		$('#nav-max-menu').children().each(function(i,ob) {
@@ -46,7 +66,7 @@ ajaxHandle = {
 			$("#nav-min-menu").append(createOpt);
 		});
 
-		$('#nav-max-menu>li').on('click',function(){
+		$('#nav-max-menu>li').on('mouseup',function(){
 			var getKeyword = $(this).attr('data-key');
 			$('#searchInp').val(getKeyword);
 			that.filterItems(getKeyword);
@@ -100,6 +120,7 @@ ajaxHandle = {
 			},
 			ready:function(o){
 				this.regexData = JSON.parse(o.responseText);
+				this.generateSearchKeywordsList();
 				if(this.htmlSection) this.initItems();
 				$('#waiting-ico').remove();
 			}
@@ -164,11 +185,15 @@ ajaxHandle = {
 	},
 
 	scriptSection: function(getHTML){
-		var toggleClasses = '.regex-tips, .regex-keywords, .regex-console';
 		var that = this, utils = this.utils;
-
-		$($(getHTML).find(toggleClasses)).hide();
-		$($(getHTML).find(toggleClasses)).hide();
+		var toggleClasses = '.regex-tips, .regex-keywords, .regex-console';
+		var keyword = $(getHTML).find('.regex-keywords>span');
+		var regex = $(getHTML).find('.regex-code');
+		var text = $(getHTML).find('.test-text');
+		var resetButton = $(getHTML).find('.regex-button-reset');
+		var itemHeader = $(getHTML).find('.regex-header');
+		
+		$(getHTML).find(toggleClasses).hide();
 		attachToggle(0,1,2);
 		attachToggle(1,2,0);
 		attachToggle(2,0,1);
@@ -182,44 +207,60 @@ ajaxHandle = {
 			});
 		}
 
-		$(getHTML).find('.regex-keywords>span').on('click',function(){
+		$(keyword).on('click',function(){
 			var getSearch = $('#searchInp');
 			var getSearchValue = getSearch.val();
 			var setNew = $(this).html();
 			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
 			getSearch.val(getSearchValue + ' ' + setNew);
 		});
+		
+		$(resetButton).on('click', function(){
+			that.loadData(getHTML,true);
+			$(regex).trigger('keyup');
+		});		
 
-		$(getHTML).find('.regex-code').on('input', function(){
+		$(itemHeader).on('click',function(){
+			that.selectHash(getHTML);
+		});
+
+		$(regex).on('keyup cut paste',function(){
 			utils.parseStringToRegExp(getHTML);
 			that.testRegExp(getHTML,true);
 		});
 
-		$(getHTML).find('.regex-code').on('keydown', function(event){
+		$(regex).on('keydown', function(event){
 			if(event.keyCode===13) event.preventDefault();
 		});
-
-		$(getHTML).find('.regex-button-reset').on('click', function(){
-			that.loadData(getHTML,true);
-			$(getHTML).find('.regex-code').trigger('input');
-		});		
-
-		$(getHTML).find('.regex-header').on('click',function(){
-			that.selectHash(getHTML);
+		
+		var rText = utils.appendRegularText.bind(this,getHTML);
+		var hText = utils.appendHighlightText.bind(this,getHTML);
+		
+		$(text).on('focus',function(){
+			$(this).off('mouseover mouseout');
 		});
-
-		$(getHTML).find('.test-text').on('input', function(event){
+		
+		$(text).on('blur',function(){
+			$(this).on('mouseover',rText);
+			$(this).on('mouseout',hText);
+			$(this).trigger('mouseout');
+		});
+		
+		$(text).on('mouseover',rText);
+		$(text).on('mouseout',hText);
+		
+		$(text).on('keyup cut paste', function(event){
 			utils.newRegularText(getHTML);
 			that.testRegExp(getHTML);
 		});
 
-		$(getHTML).find('.test-text').on('keydown', function(event){
+		$(text).on('keydown', function(event){
 			if(event.keyCode===13){
 				event.preventDefault();
 				var range = document.createRange();
 				var getSelObj = window.getSelection();
 				var getPosition = getSelObj.focusOffset;
-				var getText = $(getHTML).find('.test-text').html();
+				var getText = $(text).html();
 				var textLeft = getText.slice(0,getPosition);
 				var textRight = getText.slice(getPosition,getText.length);
 				var insertBreak = !textRight.length ? '\n\n':'\n';
@@ -229,25 +270,9 @@ ajaxHandle = {
 				range.collapse(true);
 				getSelObj.removeAllRanges();
 				getSelObj.addRange(range);
-				$(getHTML).find('.test-text').trigger('input');
+				$(text).trigger('keyup');
 			}			
 		});
-		
-		var rText = utils.appendRegularText.bind(this,getHTML);
-		var hText = utils.appendHighlightText.bind(this,getHTML);
-		
-		$(getHTML).find('.test-text').on('focus',function(){
-			$(this).off('mouseover mouseout');
-		});
-		
-		$(getHTML).find('.test-text').on('blur',function(){
-			$(this).on('mouseover',rText);
-			$(this).on('mouseout',hText);
-			$(this).trigger('mouseout');
-		});
-		
-		$(getHTML).find('.test-text').on('mouseover',rText);
-		$(getHTML).find('.test-text').on('mouseout',hText);
 		
 		utils.parseStringToRegExp(getHTML);
 		this.testRegExp(getHTML,true);		
@@ -258,7 +283,6 @@ ajaxHandle = {
 		var getRegEx = getHTML[0].regexData.regex;
 		var button = $(getHTML).find('.regex-button-console');
 		var consoleBox = $(getHTML).find('.inner-console');
-		//var getText = $(getHTML).find('.test-text').text();
 		var getText = getHTML[0].regexData.rText;
 		if(!getRegEx.passed){
 			appendMessage(['fail','failMess']);
@@ -353,10 +377,10 @@ ajaxHandle = {
 			$(getHTML).find('.regex-section').mCustomScrollbar({theme:'minimal'});
 			$(getHTML).find('.regex-console,.regex-tips,.regex-keywords,.regex-input').mCustomScrollbar({theme:'minimal-dark'});			
 			
-			$(getHTML).fadeIn(120);			
+			$(getHTML).fadeIn(300);			
 			iter++;
 			cMax++;
-		},120);
+		},150);
 	},
 	utils:{
 		newRegularText: function(getObj,getText){
@@ -485,3 +509,10 @@ ajaxHandle = {
 };
 
 ajaxHandle.init();
+
+//TO DO:
+//create search propositions made of all keywords
+
+//DONE:
+
+
