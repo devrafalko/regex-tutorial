@@ -29,6 +29,24 @@ ajaxHandle = {
 		this.getRegExData();
 		this.addListeners();
 	},
+	generateSearchKeywordsList: function(){
+		var keywordsCollection = [];
+		var data = this.regexData;
+		var findList = $('#keywords');
+		for(var i=0;i<data.length;i++){
+			var kWords = this.regexData[i].keywords;
+			for(var ii=0;ii<kWords.length;ii++){
+				var current = kWords[ii];
+				var hasKeyword = keywordsCollection.some(function(c){
+					return c === current;
+				});
+				if(!hasKeyword) keywordsCollection.push(current);
+			}
+		}
+		for(var i=0;i<keywordsCollection.length;i++){
+			$(findList).append('<option value="'+keywordsCollection[i]+'"/>');
+		}
+	},
 	defaultFormSubmit: function(){
 		$("#nav-search").submit(function(e){
 			e.preventDefault();
@@ -102,6 +120,7 @@ ajaxHandle = {
 			},
 			ready:function(o){
 				this.regexData = JSON.parse(o.responseText);
+				this.generateSearchKeywordsList();
 				if(this.htmlSection) this.initItems();
 				$('#waiting-ico').remove();
 			}
@@ -495,5 +514,5 @@ ajaxHandle.init();
 //create search propositions made of all keywords
 
 //DONE:
-//add keyup cut paste events instead of input event for regex-input and text-input to support IE
-//change the easing time of sliding items
+
+
