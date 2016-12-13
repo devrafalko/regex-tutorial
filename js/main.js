@@ -27,7 +27,8 @@ ajaxHandle = {
 		this.defaultFormSubmit();
 		this.getHtmlSection();
 		this.getRegExData();
-		this.addListeners();
+		this.addNavListeners();
+		this.addItemListeners();
 	},
 	generateSearchKeywordsList: function(){
 		var keywordsCollection = [];
@@ -52,7 +53,7 @@ ajaxHandle = {
 			e.preventDefault();
 		});		
 	},
-	addListeners: function(){
+	addNavListeners: function(){
 		var that = this;
 		$("#main-section").mCustomScrollbar({theme:'minimal-dark'});
 
@@ -100,6 +101,103 @@ ajaxHandle = {
 		$('#searchInp').on('mouseover',function(){
 			$(this).attr('title',$(this).val());
 		});
+	},
+	addItemListeners:function(){
+		var utils = this.utils;
+		var that = this;
+		var s = $('#inner-section');
+		
+		s.on('click','.regex-keywords span',function(){
+			var getSearch = $('#searchInp');
+			var getSearchValue = getSearch.val();
+			var setNew = $(this).html();
+			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
+			getSearch.val(getSearchValue + ' ' + setNew);
+		});	
+	
+		s.on('click','.regex-button-reset', function(){
+			var getItem = item(this);
+			that.loadData(getItem,true);
+			$(getItem).find('.regex-code').trigger('keyup');
+		});		
+
+		s.on('click','.regex-header',function(){
+			that.selectHash(item(this));
+		});
+		
+		s.on('keyup cut paste', '.regex-code',function(){
+			var getItem = item(this);
+			utils.parseStringToRegExp(getItem);
+			that.testRegExp(getItem,true);
+		});
+
+		s.on('keydown', '.regex-code',function(event){
+			if(event.keyCode===13) event.preventDefault();
+		});		
+		
+		s.on('focus blur', '.test-text',function(event){
+			item(this).get(0).regexData.focused = event.type==='focusin' ? true:false;
+			if(event.type==='focusout') $(this).trigger('mouseout');
+		});
+
+		s.on('mouseover mouseout', '.test-text',function(){
+			var isParentFocused = item(this).get(0).regexData.focused;
+			if(isParentFocused) return;
+			var type = event.type==='mouseover' ? 'appendRegularText':'appendHighlightText';
+			utils[type](item(this));
+		});
+		
+		s.on('paste', '.test-text', function(event){
+			event.preventDefault();
+			var text = this;
+			var getText = $(text).html();
+			var getPaste = (event.originalEvent.clipboardData || window.clipboardData).getData("text");
+			var getSelObj = window.getSelection();
+			var getPosition = getSelObj.focusOffset;
+			var textLeft = getText.slice(0,getPosition);
+			var textRight = getText.slice(getPosition,getText.length);
+			var newText = textLeft + getPaste + textRight;
+
+			setTimeout(function(){
+				$(text).html(newText);
+				var range = document.createRange();
+				range.setStart (text.childNodes[0], textLeft.length+getPaste.length);
+				range.collapse(false);
+				getSelObj.removeAllRanges();
+				getSelObj.addRange(range);
+				$(text).trigger('keyup');
+			},0);
+		});		
+		
+		s.on('keyup cut', '.test-text', function(){
+			if($(this).text()===item(this)[0].regexData.rText) return;
+			utils.newRegularText(item(this));
+			that.testRegExp(item(this));
+		});		
+		
+		s.on('keydown', '.test-text', function(event){
+			if(event.keyCode===13){
+				event.preventDefault();
+				var getSelObj = window.getSelection();
+				var getPosition = getSelObj.focusOffset;
+				var getText = $(this).html();
+				var textLeft = getText.slice(0,getPosition);
+				var textRight = getText.slice(getPosition,getText.length);
+				var insertBreak = !textRight.length ? '\n\n':'\n';
+				var newText = textLeft + insertBreak + textRight;
+				$(this).html(newText);
+				var range = document.createRange();
+				range.setStart(this.childNodes[0], textLeft.length+1);
+				range.collapse(true);
+				getSelObj.removeAllRanges();
+				getSelObj.addRange(range);
+				$(this).trigger('keyup');
+			}			
+		});
+		
+			function item(child){
+				return $(child).parents('.regex-item');
+			}	
 	},
 	getHtmlSection: function(){
 		this.ajax({
@@ -185,98 +283,25 @@ ajaxHandle = {
 	},
 
 	scriptSection: function(getHTML){
-		var that = this, utils = this.utils;
+		var utils = this.utils;
 		var toggleClasses = '.regex-tips, .regex-keywords, .regex-console';
-		var keyword = $(getHTML).find('.regex-keywords>span');
-		var regex = $(getHTML).find('.regex-code');
-		var text = $(getHTML).find('.test-text');
-		var resetButton = $(getHTML).find('.regex-button-reset');
-		var itemHeader = $(getHTML).find('.regex-header');
 		
 		$(getHTML).find(toggleClasses).hide();
 		attachToggle(0,1,2);
 		attachToggle(1,2,0);
 		attachToggle(2,0,1);
-
-		function attachToggle(a,b,c){
-			var clss = ['tips','keywords','console'];
-			$($(getHTML).find('.regex-button-'+clss[a])).click(function(){
-				$($(getHTML).find(".regex-"+clss[b])).slideUp();
-				$($(getHTML).find(".regex-"+clss[c])).slideUp();
-				$($(getHTML).find(".regex-"+clss[a])).slideToggle();
-			});
-		}
-
-		$(keyword).on('click',function(){
-			var getSearch = $('#searchInp');
-			var getSearchValue = getSearch.val();
-			var setNew = $(this).html();
-			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
-			getSearch.val(getSearchValue + ' ' + setNew);
-		});
-		
-		$(resetButton).on('click', function(){
-			that.loadData(getHTML,true);
-			$(regex).trigger('keyup');
-		});		
-
-		$(itemHeader).on('click',function(){
-			that.selectHash(getHTML);
-		});
-
-		$(regex).on('keyup cut paste',function(){
-			utils.parseStringToRegExp(getHTML);
-			that.testRegExp(getHTML,true);
-		});
-
-		$(regex).on('keydown', function(event){
-			if(event.keyCode===13) event.preventDefault();
-		});
-		
-		var rText = utils.appendRegularText.bind(this,getHTML);
-		var hText = utils.appendHighlightText.bind(this,getHTML);
-		
-		$(text).on('focus',function(){
-			$(this).off('mouseover mouseout');
-		});
-		
-		$(text).on('blur',function(){
-			$(this).on('mouseover',rText);
-			$(this).on('mouseout',hText);
-			$(this).trigger('mouseout');
-		});
-		
-		$(text).on('mouseover',rText);
-		$(text).on('mouseout',hText);
-		
-		$(text).on('keyup cut paste', function(event){
-			utils.newRegularText(getHTML);
-			that.testRegExp(getHTML);
-		});
-
-		$(text).on('keydown', function(event){
-			if(event.keyCode===13){
-				event.preventDefault();
-				var range = document.createRange();
-				var getSelObj = window.getSelection();
-				var getPosition = getSelObj.focusOffset;
-				var getText = $(text).html();
-				var textLeft = getText.slice(0,getPosition);
-				var textRight = getText.slice(getPosition,getText.length);
-				var insertBreak = !textRight.length ? '\n\n':'\n';
-				var newText = textLeft + insertBreak + textRight;
-				$(this).html(newText);
-				range.setStart(this.childNodes[0], textLeft.length+1);
-				range.collapse(true);
-				getSelObj.removeAllRanges();
-				getSelObj.addRange(range);
-				$(text).trigger('keyup');
-			}			
-		});
 		
 		utils.parseStringToRegExp(getHTML);
-		this.testRegExp(getHTML,true);		
+		this.testRegExp(getHTML,true);	
 		
+			function attachToggle(a,b,c){
+				var clss = ['tips','keywords','console'];
+				$($(getHTML).find('.regex-button-'+clss[a])).click(function(){
+					$($(getHTML).find(".regex-"+clss[b])).slideUp();
+					$($(getHTML).find(".regex-"+clss[c])).slideUp();
+					$($(getHTML).find(".regex-"+clss[a])).slideToggle();
+				});
+			}
 	},
 	testRegExp: function(getHTML,reg){
 		var utils = this.utils;
@@ -407,7 +432,7 @@ ajaxHandle = {
 		matchArrays: function(item,filter){
 			for(var i=0;i<filter.length;i++){
 				var test = item.some(function(curr,ind,arr){
-					return curr === filter[i];
+					return curr.toLowerCase() === filter[i].toLowerCase();
 				});
 				if(!test) return false;
 			}
@@ -511,8 +536,7 @@ ajaxHandle = {
 ajaxHandle.init();
 
 //TO DO:
-//create search propositions made of all keywords
+	//replace JSON description's value into array, and create function to change this array into UL/OL list.
 
 //DONE:
-
 
