@@ -114,6 +114,12 @@ ajaxHandle = {
 			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
 			getSearch.val(getSearchValue + ' ' + setNew);
 		});	
+		
+		s.on('click','.tip-reg',function(){
+			var getRegInp = item(this).find('.regex-code');
+			getRegInp.text($(this).text());
+			getRegInp.trigger('keyup');
+		});	
 	
 		s.on('click','.regex-button-reset', function(){
 			var getItem = item(this);
@@ -147,7 +153,7 @@ ajaxHandle = {
 			utils[type](item(this));
 		});
 		
-		s.on('paste', '.test-text', function(event){
+		s.on('paste', '.test-text, .regex-code', function(event){
 			event.preventDefault();
 			var text = this;
 			var getText = $(text).html();
@@ -359,7 +365,7 @@ ajaxHandle = {
 		
 		if(!isRefresh){
 			var regBox = $(getItem).find('.regex-keywords');
-			$($(getItem).find('.regex-tips')).html(itemData.description);
+			$($(getItem).find('.regex-tips')).html(this.utils.generateList(itemData.description));
 			$.each(itemData.keywords,function(ind,val){
 				regBox.append('<span>'+val+'</span>');
 			});
@@ -527,6 +533,32 @@ ajaxHandle = {
 				return obj.constructor.toString().toLowerCase().search(type)>=0;
 			}
 		},
+		generateList: function(getArr){
+			var newList = '<ul class="description-list">';
+			for(var i=0;i<getArr.length;i++){
+				newList += '<li>';
+				if(typeof getArr[i]==='string') {
+					newList += parseStringToCode(getArr[i]);
+					} else if(getArr[i].constructor.toString().match('Object')!==null){
+						var name = Object.getOwnPropertyNames(getArr[i])[0];
+						newList += parseStringToCode(name)+this.generateList(getArr[i][name]);
+						}
+				newList += '</li>';
+			}
+			newList += '</ul>';
+			return newList;
+			
+				function parseStringToCode(getStr){
+					return getStr.replace(/\x7B.*?\x7D{1,}/g,function(c){
+						var el = c.split(/\x7B|\x7D/g);
+						if(el[1]==='reg') return '<code class="tip-reg">'+el[2]+'</code>';
+						if(el[1]==='code') return '<code class="tip-code">'+el[2]+'</code>';
+						if(el[1]==='val') return '<kbd class="tip-val">'+el[2]+'</kbd>';
+						if(el[1]==='mark') return '<span class="tip-mark">'+el[2]+'</span>';
+						if(el[1]==='link') return '<a href="'+el[2]+'" class="tip-link">'+el[3]+'</a>';
+					});
+				}
+		},
 		generateId: function(){
 			return new Date().getTime().toString(36);
 		}
@@ -534,9 +566,3 @@ ajaxHandle = {
 };
 
 ajaxHandle.init();
-
-//TO DO:
-	//replace JSON description's value into array, and create function to change this array into UL/OL list.
-
-//DONE:
-

@@ -2,7 +2,16 @@
 	{
 		"regex":["hello"],
 		"content":"hello hello hello hello",
-		"description":"",
+		"description":[	"Some example with {reg{/regExp/gi}} inside of it.",
+						"Some example of text with {code{some code}} inside of it.",
+						"Some example with {val{some value}} and {val{another value}} inside of it.",{
+						"Some example with {mark{some marked word}} inside of it.":[
+							"Some example with {reg{/\\w*&#123;2&#125;/}} inside of it.",
+							"Some example with {code{var = samp;}} inside of it.",
+							"Some example with {mark{marked text}} and {val{value}} and {link{https://www.google.pl{google link}}} inside of it."]},
+						"Some example with {link{https://github.com/{github link}}} inside of it.",
+						"Some example with {reg{/reg/gi}} inside of it.",
+						"Some example with {code{Math.floor(2.653)}} and {mark{marked text}} and {val{some value}} and {link{http://stackoverflow.com/{stackoverflow link}}} inside of it."],
 		"keywords":["simple","pattern","noFlags"],
 		"id":"iwfms33h"
 	},
