@@ -1,63 +1,79 @@
 [
 	{
-		"regex":["helo world","g"],
-		"content":"helo world! samp A",
-		"description":"some description",
-		"keywords":["modifier","bracket","metacharacter","i","g","m","[abc]","[0-9]","(x|y)",".","\\w"],
+		"regex":["hello"],
+		"content":"hello \\b hello \\d hello \\f hello \\n hello \\r hello \\t hello \\v hello \\w",
+		"description":[	"Some example with {reg{/regExp/gi}} inside of it.",
+						"Some example of text with {code{some code}} inside of it.",
+						"Some example with {val{some value}} and {val{another value}} inside of it.",{
+						"Some example with {mark{some marked word}} inside of it.":[
+							"Some example with {reg{/\\w*&#123;2&#125;/}} inside of it.",
+							"Some example with {code{var = samp;}} inside of it.",
+							"Some example with {mark{marked text}} and {val{value}} and {link{https://www.google.pl{google link}}} inside of it."]},
+						"Some example with {link{https://github.com/{github link}}} inside of it.",
+						"Some example with {reg{/reg/gi}} inside of it.",
+						"Some example with {code{Math.floor(2.653)}} and {mark{marked text}} and {val{some value}} and {link{http://stackoverflow.com/{stackoverflow link}}} inside of it."],
+		"keywords":["simple","pattern","noFlags"],
 		"id":"iwfms33h"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp B",
-		"description":"some description",
+		"regex":["hello"],
+		"content":"Hello HeLLo heeellooo HELLO hello hello hello",
+		"description":"",
 		"keywords":["modifier","bracket","metacharacter","quantifier","g","[abc]","[0-9]",".","\\w","\\W"],
 		"id":"iwfms98m"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp C",
-		"description":"some description",
+		"regex":["hello"],
+		"content":"abcdehelloabcde",
+		"description":"",
 		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"],
 		"id":"iwfmsco7"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp D",
-		"description":"some description",
+		"regex":["hello"],
+		"content":"h e l l o he-llo hel lo",
+		"description":"",
+		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"],
+		"id":"iwob9n2g"
+	},
+	{
+		"regex":["hello","g"],
+		"content":"abc hello abc hello abc hello abc hello abc hello",
+		"description":"",
 		"keywords":["modifier","metacharacter","g","m","[^0-9]"],
 		"id":"iwfmsgf0"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp E",
-		"description":"some description",
+		"regex":["hello","g"],
+		"content":"hello HeLLo hhhelloooo Hello hello hello hello",
+		"description":"",
 		"keywords":["quantifier","i","g","[^0-9]"],
 		"id":"iwfmsk62"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp F",
-		"description":"some description",
+		"regex":["value","g"],
+		"content":"The function passed into reduce() or reduceRight() accepts four arguments: the previous value, the current value, the item’s index, and the array object.",
+		"description":"",
 		"keywords":["modifier","[^abc]","."],
 		"id":"iwfmspu1"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp G",
-		"description":"some description",
+		"regex":["a","g"],
+		"content":"The function passed into reduce() or reduceRight() accepts four arguments: the previous value, the current value, the item’s index, and the array object.",
+		"description":"",
 		"keywords":["modifier","i","[abc]","[^0-9]","(x|y)","."],
 		"id":"iwfmsxjr"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp H",
-		"description":"some description",
+		"regex":["hello","i"],
+		"content":"HELLO",
+		"description":"",
 		"keywords":["metacharacter","[0-9]"],
 		"id":"iwfmu5wq"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp I",
+		"regex":["hello","ig"],
+		"content":"hello HELLO Hello hhelloo HHEELLOO",
 		"description":"some description",
 		"keywords":["modifier","metacharacter","bracket","i","[^abc]","(x|y)","\\W"],
 		"id":"iwfmucr2"

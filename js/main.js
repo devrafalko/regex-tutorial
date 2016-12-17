@@ -27,7 +27,8 @@ ajaxHandle = {
 		this.defaultFormSubmit();
 		this.getHtmlSection();
 		this.getRegExData();
-		this.addListeners();
+		this.addNavListeners();
+		this.addItemListeners();
 	},
 	generateSearchKeywordsList: function(){
 		var keywordsCollection = [];
@@ -50,9 +51,9 @@ ajaxHandle = {
 	defaultFormSubmit: function(){
 		$("#nav-search").submit(function(e){
 			e.preventDefault();
-		});		
+		});
 	},
-	addListeners: function(){
+	addNavListeners: function(){
 		var that = this;
 		$("#main-section").mCustomScrollbar({theme:'minimal-dark'});
 
@@ -100,6 +101,109 @@ ajaxHandle = {
 		$('#searchInp').on('mouseover',function(){
 			$(this).attr('title',$(this).val());
 		});
+	},
+	addItemListeners:function(){
+		var utils = this.utils;
+		var that = this;
+		var s = $('#inner-section');
+		
+		s.on('click','.regex-keywords span',function(){
+			var getSearch = $('#searchInp');
+			var getSearchValue = getSearch.val();
+			var setNew = $(this).html();
+			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
+			getSearch.val(getSearchValue + ' ' + setNew);
+		});	
+		
+		s.on('click','.tip-reg',function(){
+			var getRegInp = item(this).find('.regex-code');
+			getRegInp.text($(this).text());
+			getRegInp.trigger('keyup');
+		});	
+	
+		s.on('click','.regex-button-reset', function(){
+			var getItem = item(this);
+			that.loadData(getItem,true);
+			$(getItem).find('.regex-code').trigger('keyup');
+		});		
+
+		s.on('click','.regex-header',function(){
+			that.selectHash(item(this));
+		});
+		
+		s.on('keyup cut paste', '.regex-code',function(){
+			var getItem = item(this);
+			utils.parseStringToRegExp(getItem);
+			that.testRegExp(getItem,true);
+		});
+
+		s.on('keydown', '.regex-code',function(event){
+			if(event.keyCode===13) event.preventDefault();
+		});		
+		
+		s.on('focus blur', '.test-text',function(event){
+			item(this).get(0).regexData.focused = event.type==='focusin' ? true:false;
+			if(event.type==='focusout') $(this).trigger('mouseout');
+		});
+
+		s.on('mouseover mouseout', '.test-text',function(event){
+			var isParentFocused = item(this).get(0).regexData.focused;
+			if(isParentFocused) return;
+			var type = event.type==='mouseover' ? 'appendRegularText':'appendHighlightText';
+			utils[type](item(this));
+		});
+		
+		s.on('paste', '.test-text, .regex-code', function(event){
+			event.preventDefault();
+			var text = this;
+			var getText = $(text).html();
+			var getPaste = (event.originalEvent.clipboardData || window.clipboardData).getData("text");
+			var getSelObj = window.getSelection();
+			var getPosition = getSelObj.focusOffset;
+			var textLeft = getText.slice(0,getPosition);
+			var textRight = getText.slice(getPosition,getText.length);
+			var newText = textLeft + getPaste + textRight;
+
+			setTimeout(function(){
+				$(text).html(newText);
+				var range = document.createRange();
+				range.setStart (text.childNodes[0], textLeft.length+getPaste.length);
+				range.collapse(false);
+				getSelObj.removeAllRanges();
+				getSelObj.addRange(range);
+				$(text).trigger('keyup');
+			},0);
+		});		
+		
+		s.on('keyup cut', '.test-text', function(){
+			if($(this).text()===item(this)[0].regexData.rText) return;
+			utils.newRegularText(item(this));
+			that.testRegExp(item(this));
+		});		
+		
+		s.on('keydown', '.test-text', function(event){
+			if(event.keyCode===13){
+				event.preventDefault();
+				var getSelObj = window.getSelection();
+				var getPosition = getSelObj.focusOffset;
+				var getText = $(this).html();
+				var textLeft = getText.slice(0,getPosition);
+				var textRight = getText.slice(getPosition,getText.length);
+				var insertBreak = !textRight.length ? '\n\n':'\n';
+				var newText = textLeft + insertBreak + textRight;
+				$(this).html(newText);
+				var range = document.createRange();
+				range.setStart(this.childNodes[0], textLeft.length+1);
+				range.collapse(true);
+				getSelObj.removeAllRanges();
+				getSelObj.addRange(range);
+				$(this).trigger('keyup');
+			}			
+		});
+		
+			function item(child){
+				return $(child).parents('.regex-item');
+			}	
 	},
 	getHtmlSection: function(){
 		this.ajax({
@@ -185,121 +289,53 @@ ajaxHandle = {
 	},
 
 	scriptSection: function(getHTML){
-		var that = this, utils = this.utils;
+		var utils = this.utils;
 		var toggleClasses = '.regex-tips, .regex-keywords, .regex-console';
-		var keyword = $(getHTML).find('.regex-keywords>span');
-		var regex = $(getHTML).find('.regex-code');
-		var text = $(getHTML).find('.test-text');
-		var resetButton = $(getHTML).find('.regex-button-reset');
-		var itemHeader = $(getHTML).find('.regex-header');
 		
 		$(getHTML).find(toggleClasses).hide();
 		attachToggle(0,1,2);
 		attachToggle(1,2,0);
 		attachToggle(2,0,1);
-
-		function attachToggle(a,b,c){
-			var clss = ['tips','keywords','console'];
-			$($(getHTML).find('.regex-button-'+clss[a])).click(function(){
-				$($(getHTML).find(".regex-"+clss[b])).slideUp();
-				$($(getHTML).find(".regex-"+clss[c])).slideUp();
-				$($(getHTML).find(".regex-"+clss[a])).slideToggle();
-			});
-		}
-
-		$(keyword).on('click',function(){
-			var getSearch = $('#searchInp');
-			var getSearchValue = getSearch.val();
-			var setNew = $(this).html();
-			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
-			getSearch.val(getSearchValue + ' ' + setNew);
-		});
-		
-		$(resetButton).on('click', function(){
-			that.loadData(getHTML,true);
-			$(regex).trigger('keyup');
-		});		
-
-		$(itemHeader).on('click',function(){
-			that.selectHash(getHTML);
-		});
-
-		$(regex).on('keyup cut paste',function(){
-			utils.parseStringToRegExp(getHTML);
-			that.testRegExp(getHTML,true);
-		});
-
-		$(regex).on('keydown', function(event){
-			if(event.keyCode===13) event.preventDefault();
-		});
-		
-		var rText = utils.appendRegularText.bind(this,getHTML);
-		var hText = utils.appendHighlightText.bind(this,getHTML);
-		
-		$(text).on('focus',function(){
-			$(this).off('mouseover mouseout');
-		});
-		
-		$(text).on('blur',function(){
-			$(this).on('mouseover',rText);
-			$(this).on('mouseout',hText);
-			$(this).trigger('mouseout');
-		});
-		
-		$(text).on('mouseover',rText);
-		$(text).on('mouseout',hText);
-		
-		$(text).on('keyup cut paste', function(event){
-			utils.newRegularText(getHTML);
-			that.testRegExp(getHTML);
-		});
-
-		$(text).on('keydown', function(event){
-			if(event.keyCode===13){
-				event.preventDefault();
-				var range = document.createRange();
-				var getSelObj = window.getSelection();
-				var getPosition = getSelObj.focusOffset;
-				var getText = $(text).html();
-				var textLeft = getText.slice(0,getPosition);
-				var textRight = getText.slice(getPosition,getText.length);
-				var insertBreak = !textRight.length ? '\n\n':'\n';
-				var newText = textLeft + insertBreak + textRight;
-				$(this).html(newText);
-				range.setStart(this.childNodes[0], textLeft.length+1);
-				range.collapse(true);
-				getSelObj.removeAllRanges();
-				getSelObj.addRange(range);
-				$(text).trigger('keyup');
-			}			
-		});
 		
 		utils.parseStringToRegExp(getHTML);
-		this.testRegExp(getHTML,true);		
+		this.testRegExp(getHTML,true);	
 		
+			function attachToggle(a,b,c){
+				var clss = ['tips','keywords','console'];
+				$($(getHTML).find('.regex-button-'+clss[a])).click(function(){
+					$($(getHTML).find(".regex-"+clss[b])).slideUp();
+					$($(getHTML).find(".regex-"+clss[c])).slideUp();
+					$($(getHTML).find(".regex-"+clss[a])).slideToggle();
+				});
+			}
 	},
 	testRegExp: function(getHTML,reg){
 		var utils = this.utils;
 		var getRegEx = getHTML[0].regexData.regex;
 		var button = $(getHTML).find('.regex-button-console');
 		var consoleBox = $(getHTML).find('.inner-console');
-		var getText = getHTML[0].regexData.rText;
+		var getText = $(document.createElement('SPAN')).html(getHTML[0].regexData.rText).text();
+		var parseEscapes = utils.replaceEscapes(getText);
+		getHTML[0].regexData.mText = parseEscapes;
+		//return if the same regex check
+		console.log('testuję');
+		
 		if(!getRegEx.passed){
 			appendMessage(['fail','failMess']);
 			utils.newHighlightText(getHTML,true);
-			if(reg) utils.appendRegularText(getHTML);
+			if(reg) utils.appendHighlightText(getHTML);
 			} else {
-				if(getRegEx.output.test(getText)){
+				if(getRegEx.output.test(parseEscapes)){
 					appendMessage(['ok','StrProto']);
 					utils.newHighlightText(getHTML);
 					if(reg) utils.appendHighlightText(getHTML);
 					} else {
 						appendMessage(['fail','StrProto']);
 						utils.newHighlightText(getHTML,true);
-						if(reg) utils.appendRegularText(getHTML);
+						if(reg) utils.appendHighlightText(getHTML);
 						}
 				}
-				
+
 			function appendMessage(coll){
 				consoleBox.empty();
 				for(var i=0;i<coll.length;i++){
@@ -314,8 +350,9 @@ ajaxHandle = {
 					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">'+getRegEx.output+'</kbd>');
 					if(coll[i]==='StrProto'){
 						$.each(['match','search','split'],function(c,v){
-							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(getText[v](getRegEx.output))+'</kbd>');						
+							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(getText[v](getRegEx.output))+'</kbd>');	
 						});
+						
 					}
 				}
 					function setClass(obj,bool){
@@ -331,10 +368,9 @@ ajaxHandle = {
 		$(getItem).find('.regex-code').html(parseRegExp);
 		this.utils.newRegularText(getItem,itemData.content);
 		this.utils.appendRegularText(getItem);
-		
 		if(!isRefresh){
 			var regBox = $(getItem).find('.regex-keywords');
-			$($(getItem).find('.regex-tips')).html(itemData.description);
+			$($(getItem).find('.regex-tips')).html(this.utils.generateList(itemData.description));
 			$.each(itemData.keywords,function(ind,val){
 				regBox.append('<span>'+val+'</span>');
 			});
@@ -384,15 +420,19 @@ ajaxHandle = {
 	},
 	utils:{
 		newRegularText: function(getObj,getText){
-			var data = getObj[0].regexData;
-			data.rText = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
+			var pierogi = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
+			
+			
+			getObj[0].regexData.rText = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
 		},
 		newHighlightText: function(getObj,reset){
 			var data = getObj[0].regexData;
+			var parse = this.escapeHtml;
 			if(reset) delete data.hText;
-			var newText = data.rText.replace(data.regex.output,function(a){
-				return '<span class="reg-hlight">'+a+'</span>';
-			});
+			var newText = data.mText.replace(data.regex.output,function(a){return '{mtch{'+a+'}mtch}';});
+			newText = parse(newText);
+			newText = newText.replace(/\x7Bmtch\x7B/g,'<span class="reg-hlight">');
+			newText = newText.replace(/\x7Dmtch\x7D/g,'</span>');
 			data.hText = newText;
 		},
 		appendRegularText: function(getObj){
@@ -400,14 +440,14 @@ ajaxHandle = {
 			$(getObj).find('.test-text').html(getText);
 		},
 		appendHighlightText: function(getObj){
+			var getTextBox = $(getObj).find('.test-text');
 			var getText = getObj[0].regexData.hText;
-			if(typeof getText==='undefined') this.appendRegularText(getObj);
-			$(getObj).find('.test-text').html(getText);
+			getTextBox.html(getText);
 		},
 		matchArrays: function(item,filter){
 			for(var i=0;i<filter.length;i++){
-				var test = item.some(function(curr,ind,arr){
-					return curr === filter[i];
+				var test = item.some(function(curr){
+					return curr.toLowerCase() === filter[i].toLowerCase();
 				});
 				if(!test) return false;
 			}
@@ -460,7 +500,6 @@ ajaxHandle = {
 				} catch(a){
 					return retObj(false,a.name+': '+a.message);
 					};
-			
 			return retObj(true,newRegEx);
 			
 				function retObj(test,output){
@@ -471,13 +510,23 @@ ajaxHandle = {
 					return r;
 				}
 		},
+		replaceEscapes: function(getText){
+			return getText
+				.replace(/\\b/g, "\b")
+				.replace(/\\f/g, "\f")
+				.replace(/\\n/g, "\n")
+				.replace(/\\r/g, "\r")
+				.replace(/\\t/g, "\t")
+				.replace(/\\v/g, "\v")
+				.replace(/\\0/g, "\0");
+		},
 		styleType: function(val){
+			var getEscapeFun = this.escapeHtml;
 			return createSpan(val);
-			
 			function createSpan(v){
 				var t = ['null','undefined','string','number','array'];
 				var cl = ['msgNull','msgUndefined','msgString','msgNumber','msgArray'];
-				var val = ['null','undefined','&#8220;'+v+'&#8221;',String(v)];
+				var val = ['null','undefined','&#8220;'+getEscapeFun(v)+'&#8221;',String(v)];
 				
 				for(var i=0;i<t.length;i++){
 					var addArr = i<t.length-1 ? val[i]:createArray(v);
@@ -502,6 +551,39 @@ ajaxHandle = {
 				return obj.constructor.toString().toLowerCase().search(type)>=0;
 			}
 		},
+		escapeHtml: function(getStr) {
+			if(typeof getStr!=='string') return getStr;
+			return getStr
+				 .replace(/&/g, "&amp;")
+				 .replace(/</g, "&lt;")
+				 .replace(/>/g, "&gt;");
+		},
+		generateList: function(getArr){
+			var newList = '<ul class="description-list">';
+			for(var i=0;i<getArr.length;i++){
+				newList += '<li>';
+				if(typeof getArr[i]==='string') {
+					newList += parseStringToCode(getArr[i]);
+					} else if(getArr[i].constructor.toString().match('Object')!==null){
+						var name = Object.getOwnPropertyNames(getArr[i])[0];
+						newList += parseStringToCode(name)+this.generateList(getArr[i][name]);
+						}
+				newList += '</li>';
+			}
+			newList += '</ul>';
+			return newList;
+			
+				function parseStringToCode(getStr){
+					return getStr.replace(/\x7B.*?\x7D{1,}/g,function(c){
+						var el = c.split(/\x7B|\x7D/g);
+						if(el[1]==='reg') return '<code class="tip-reg">'+el[2]+'</code>';
+						if(el[1]==='code') return '<code class="tip-code">'+el[2]+'</code>';
+						if(el[1]==='val') return '<kbd class="tip-val">'+el[2]+'</kbd>';
+						if(el[1]==='mark') return '<span class="tip-mark">'+el[2]+'</span>';
+						if(el[1]==='link') return '<a href="'+el[2]+'" target="_blank" class="tip-link">'+el[3]+'</a>';
+					});
+				}
+		},
 		generateId: function(){
 			return new Date().getTime().toString(36);
 		}
@@ -510,9 +592,9 @@ ajaxHandle = {
 
 ajaxHandle.init();
 
+
 //TO DO:
-//create search propositions made of all keywords
+	//paste against selected text do not work correctly
+	//the selected text is not replaced by pasted text
 
-//DONE:
-
-
+	

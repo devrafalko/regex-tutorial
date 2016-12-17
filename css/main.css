@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis");
 @import url("https://fonts.googleapis.com/css?family=PT+Mono");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Cutive+Mono");
 * {
   outline: none 0px transparent;
   box-sizing: border-box;
@@ -12,6 +13,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  background-color: #438d99;
   background: linear-gradient(to bottom, #1e6b84, #aae9d1); }
 
 #main-ui {
@@ -558,3 +560,80 @@ body {
     box-shadow: 0px 0px 0px 0px #0c8da0 inset; }
   #load-more:active {
     letter-spacing: 3px; }
+
+.description-list {
+  list-style-type: circle;
+  list-style-position: outside;
+  margin: 0px;
+  padding: 0px 20px; }
+  .description-list li {
+    margin: 0px;
+    padding: 0px;
+    text-indent: 0px; }
+
+.regex-tips ul {
+  list-style-type: circle;
+  font-size: 17px; }
+  .regex-tips ul li {
+    margin: 5px 0px; }
+.regex-tips ul ul {
+  list-style-type: disc;
+  font-size: 14px; }
+
+.tip-reg {
+  background-color: #4db6ac;
+  color: white;
+  box-shadow: 0px 2px 3px #0c8da0;
+  border-radius: 10px;
+  padding: 1px 10px;
+  cursor: pointer; }
+
+.tip-code {
+  background-color: #fbfbfb;
+  color: #787878;
+  box-shadow: 0px 1px 3px #c8c8c8;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  font-size: .9em;
+  font-family: 'PT Mono', monospace; }
+
+.tip-val {
+  background-color: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  padding: 0px;
+  color: black;
+  font-size: .95em;
+  color: #787878;
+  font-style: italic;
+  letter-spacing: -1px; }
+  .tip-val:before, .tip-val:after {
+    color: #c8c8c8;
+    content: "'"; }
+
+.tip-mark {
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 0px 4px; }
+
+.tip-link {
+  color: #787878;
+  text-decoration: underline;
+  letter-spacing: 2px;
+  font-size: 15px;
+  transition: letter-spacing .15s ease-in-out, color .1s .1s ease-in-out; }
+  .tip-link:hover {
+    color: #4db6ac;
+    letter-spacing: 3px; }
+
+#ghub {
+  display: inline-block;
+  width: 60px;
+  height: 16px;
+  float: right;
+  margin: 10px 22px;
+  background: url("../media/ghub.svg");
+  background-size: 100% 100%;
+  opacity: .3;
+  transition: opacity .15s ease-in-out; }
+  #ghub:hover {
+    opacity: .45; }
