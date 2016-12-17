@@ -132,6 +132,7 @@ ajaxHandle = {
 		});
 		
 		s.on('keyup cut paste', '.regex-code',function(){
+			if($(this).text()===item(this)[0].regexData.regex.output.toString()) return;
 			var getItem = item(this);
 			utils.parseStringToRegExp(getItem);
 			that.testRegExp(getItem,true);
@@ -317,9 +318,6 @@ ajaxHandle = {
 		var getText = $(document.createElement('SPAN')).html(getHTML[0].regexData.rText).text();
 		var parseEscapes = utils.replaceEscapes(getText);
 		getHTML[0].regexData.mText = parseEscapes;
-		//return if the same regex check
-		console.log('testuję');
-		
 		if(!getRegEx.passed){
 			appendMessage(['fail','failMess']);
 			utils.newHighlightText(getHTML,true);
@@ -545,10 +543,10 @@ ajaxHandle = {
 			}
 			
 			function type(obj,t){
-				var type = t.toLowerCase();
-				if(typeof obj==='undefined'&&type==='undefined') return true;
-				if(obj===null&&type==='null') return true;
-				return obj.constructor.toString().toLowerCase().search(type)>=0;
+				if(typeof obj==='undefined'&&t==='undefined') return true;
+				if(obj===null&&t==='null') return true;
+				if(obj===null||obj===undefined) return false;
+				return obj.constructor.toString().toLowerCase().search(t)>=0;
 			}
 		},
 		escapeHtml: function(getStr) {
@@ -592,9 +590,6 @@ ajaxHandle = {
 
 ajaxHandle.init();
 
-
 //TO DO:
 	//paste against selected text do not work correctly
 	//the selected text is not replaced by pasted text
-
-	
