@@ -51,7 +51,7 @@ ajaxHandle = {
 	defaultFormSubmit: function(){
 		$("#nav-search").submit(function(e){
 			e.preventDefault();
-		});		
+		});
 	},
 	addNavListeners: function(){
 		var that = this;
@@ -146,7 +146,7 @@ ajaxHandle = {
 			if(event.type==='focusout') $(this).trigger('mouseout');
 		});
 
-		s.on('mouseover mouseout', '.test-text',function(){
+		s.on('mouseover mouseout', '.test-text',function(event){
 			var isParentFocused = item(this).get(0).regexData.focused;
 			if(isParentFocused) return;
 			var type = event.type==='mouseover' ? 'appendRegularText':'appendHighlightText';
@@ -314,23 +314,28 @@ ajaxHandle = {
 		var getRegEx = getHTML[0].regexData.regex;
 		var button = $(getHTML).find('.regex-button-console');
 		var consoleBox = $(getHTML).find('.inner-console');
-		var getText = getHTML[0].regexData.rText;
+		var getText = $(document.createElement('SPAN')).html(getHTML[0].regexData.rText).text();
+		var parseEscapes = utils.replaceEscapes(getText);
+		getHTML[0].regexData.mText = parseEscapes;
+		//return if the same regex check
+		console.log('testuję');
+		
 		if(!getRegEx.passed){
 			appendMessage(['fail','failMess']);
 			utils.newHighlightText(getHTML,true);
-			if(reg) utils.appendRegularText(getHTML);
+			if(reg) utils.appendHighlightText(getHTML);
 			} else {
-				if(getRegEx.output.test(getText)){
+				if(getRegEx.output.test(parseEscapes)){
 					appendMessage(['ok','StrProto']);
 					utils.newHighlightText(getHTML);
 					if(reg) utils.appendHighlightText(getHTML);
 					} else {
 						appendMessage(['fail','StrProto']);
 						utils.newHighlightText(getHTML,true);
-						if(reg) utils.appendRegularText(getHTML);
+						if(reg) utils.appendHighlightText(getHTML);
 						}
 				}
-				
+
 			function appendMessage(coll){
 				consoleBox.empty();
 				for(var i=0;i<coll.length;i++){
@@ -345,8 +350,9 @@ ajaxHandle = {
 					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">'+getRegEx.output+'</kbd>');
 					if(coll[i]==='StrProto'){
 						$.each(['match','search','split'],function(c,v){
-							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(getText[v](getRegEx.output))+'</kbd>');						
+							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(getText[v](getRegEx.output))+'</kbd>');	
 						});
+						
 					}
 				}
 					function setClass(obj,bool){
@@ -362,7 +368,6 @@ ajaxHandle = {
 		$(getItem).find('.regex-code').html(parseRegExp);
 		this.utils.newRegularText(getItem,itemData.content);
 		this.utils.appendRegularText(getItem);
-		
 		if(!isRefresh){
 			var regBox = $(getItem).find('.regex-keywords');
 			$($(getItem).find('.regex-tips')).html(this.utils.generateList(itemData.description));
@@ -415,15 +420,19 @@ ajaxHandle = {
 	},
 	utils:{
 		newRegularText: function(getObj,getText){
-			var data = getObj[0].regexData;
-			data.rText = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
+			var pierogi = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
+			
+			
+			getObj[0].regexData.rText = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
 		},
 		newHighlightText: function(getObj,reset){
 			var data = getObj[0].regexData;
+			var parse = this.escapeHtml;
 			if(reset) delete data.hText;
-			var newText = data.rText.replace(data.regex.output,function(a){
-				return '<span class="reg-hlight">'+a+'</span>';
-			});
+			var newText = data.mText.replace(data.regex.output,function(a){return '{mtch{'+a+'}mtch}';});
+			newText = parse(newText);
+			newText = newText.replace(/\x7Bmtch\x7B/g,'<span class="reg-hlight">');
+			newText = newText.replace(/\x7Dmtch\x7D/g,'</span>');
 			data.hText = newText;
 		},
 		appendRegularText: function(getObj){
@@ -431,13 +440,13 @@ ajaxHandle = {
 			$(getObj).find('.test-text').html(getText);
 		},
 		appendHighlightText: function(getObj){
+			var getTextBox = $(getObj).find('.test-text');
 			var getText = getObj[0].regexData.hText;
-			if(typeof getText==='undefined') this.appendRegularText(getObj);
-			$(getObj).find('.test-text').html(getText);
+			getTextBox.html(getText);
 		},
 		matchArrays: function(item,filter){
 			for(var i=0;i<filter.length;i++){
-				var test = item.some(function(curr,ind,arr){
+				var test = item.some(function(curr){
 					return curr.toLowerCase() === filter[i].toLowerCase();
 				});
 				if(!test) return false;
@@ -491,7 +500,6 @@ ajaxHandle = {
 				} catch(a){
 					return retObj(false,a.name+': '+a.message);
 					};
-			
 			return retObj(true,newRegEx);
 			
 				function retObj(test,output){
@@ -502,13 +510,23 @@ ajaxHandle = {
 					return r;
 				}
 		},
+		replaceEscapes: function(getText){
+			return getText
+				.replace(/\\b/g, "\b")
+				.replace(/\\f/g, "\f")
+				.replace(/\\n/g, "\n")
+				.replace(/\\r/g, "\r")
+				.replace(/\\t/g, "\t")
+				.replace(/\\v/g, "\v")
+				.replace(/\\0/g, "\0");
+		},
 		styleType: function(val){
+			var getEscapeFun = this.escapeHtml;
 			return createSpan(val);
-			
 			function createSpan(v){
 				var t = ['null','undefined','string','number','array'];
 				var cl = ['msgNull','msgUndefined','msgString','msgNumber','msgArray'];
-				var val = ['null','undefined','&#8220;'+v+'&#8221;',String(v)];
+				var val = ['null','undefined','&#8220;'+getEscapeFun(v)+'&#8221;',String(v)];
 				
 				for(var i=0;i<t.length;i++){
 					var addArr = i<t.length-1 ? val[i]:createArray(v);
@@ -533,6 +551,13 @@ ajaxHandle = {
 				return obj.constructor.toString().toLowerCase().search(type)>=0;
 			}
 		},
+		escapeHtml: function(getStr) {
+			if(typeof getStr!=='string') return getStr;
+			return getStr
+				 .replace(/&/g, "&amp;")
+				 .replace(/</g, "&lt;")
+				 .replace(/>/g, "&gt;");
+		},
 		generateList: function(getArr){
 			var newList = '<ul class="description-list">';
 			for(var i=0;i<getArr.length;i++){
@@ -555,7 +580,7 @@ ajaxHandle = {
 						if(el[1]==='code') return '<code class="tip-code">'+el[2]+'</code>';
 						if(el[1]==='val') return '<kbd class="tip-val">'+el[2]+'</kbd>';
 						if(el[1]==='mark') return '<span class="tip-mark">'+el[2]+'</span>';
-						if(el[1]==='link') return '<a href="'+el[2]+'" class="tip-link">'+el[3]+'</a>';
+						if(el[1]==='link') return '<a href="'+el[2]+'" target="_blank" class="tip-link">'+el[3]+'</a>';
 					});
 				}
 		},
@@ -566,3 +591,10 @@ ajaxHandle = {
 };
 
 ajaxHandle.init();
+
+
+//TO DO:
+	//paste against selected text do not work correctly
+	//the selected text is not replaced by pasted text
+
+	

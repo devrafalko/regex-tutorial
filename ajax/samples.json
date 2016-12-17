@@ -1,7 +1,7 @@
 [
 	{
 		"regex":["hello"],
-		"content":"hello hello hello hello",
+		"content":"hello \\b hello \\d hello \\f hello \\n hello \\r hello \\t hello \\v hello \\w",
 		"description":[	"Some example with {reg{/regExp/gi}} inside of it.",
 						"Some example of text with {code{some code}} inside of it.",
 						"Some example with {val{some value}} and {val{another value}} inside of it.",{
@@ -28,6 +28,13 @@
 		"description":"",
 		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"],
 		"id":"iwfmsco7"
+	},
+	{
+		"regex":["hello"],
+		"content":"h e l l o he-llo hel lo",
+		"description":"",
+		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"],
+		"id":"iwob9n2g"
 	},
 	{
 		"regex":["hello","g"],
@@ -65,8 +72,8 @@
 		"id":"iwfmu5wq"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp I",
+		"regex":["hello","ig"],
+		"content":"hello HELLO Hello hhelloo HHEELLOO",
 		"description":"some description",
 		"keywords":["modifier","metacharacter","bracket","i","[^abc]","(x|y)","\\W"],
 		"id":"iwfmucr2"

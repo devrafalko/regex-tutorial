@@ -13,6 +13,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  background-color: #438d99;
   background: linear-gradient(to bottom, #1e6b84, #aae9d1); }
 
 #main-ui {
@@ -623,3 +624,16 @@ body {
   .tip-link:hover {
     color: #4db6ac;
     letter-spacing: 3px; }
+
+#ghub {
+  display: inline-block;
+  width: 60px;
+  height: 16px;
+  float: right;
+  margin: 10px 22px;
+  background: url("../media/ghub.svg");
+  background-size: 100% 100%;
+  opacity: .3;
+  transition: opacity .15s ease-in-out; }
+  #ghub:hover {
+    opacity: .45; }
