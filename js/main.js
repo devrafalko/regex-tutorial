@@ -159,10 +159,12 @@ ajaxHandle = {
 			var text = this;
 			var getText = $(text).html();
 			var getPaste = (event.originalEvent.clipboardData || window.clipboardData).getData("text");
-			var getSelObj = window.getSelection();
-			var getPosition = getSelObj.focusOffset;
-			var textLeft = getText.slice(0,getPosition);
-			var textRight = getText.slice(getPosition,getText.length);
+			var s = window.getSelection();
+			var a = s.anchorOffset;
+			var f = s.focusOffset;
+			var selSide = a>f ? [f,a]:[a,f];
+			var textLeft = getText.slice(0,selSide[0]);
+			var textRight = getText.slice(selSide[1],getText.length);
 			var newText = textLeft + getPaste + textRight;
 
 			setTimeout(function(){
@@ -170,8 +172,8 @@ ajaxHandle = {
 				var range = document.createRange();
 				range.setStart (text.childNodes[0], textLeft.length+getPaste.length);
 				range.collapse(false);
-				getSelObj.removeAllRanges();
-				getSelObj.addRange(range);
+				s.removeAllRanges();
+				s.addRange(range);
 				$(text).trigger('keyup');
 			},0);
 		});		
@@ -348,7 +350,7 @@ ajaxHandle = {
 					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">'+getRegEx.output+'</kbd>');
 					if(coll[i]==='StrProto'){
 						$.each(['match','search','split'],function(c,v){
-							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(getText[v](getRegEx.output))+'</kbd>');	
+							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(parseEscapes[v](getRegEx.output))+'</kbd>');	
 						});
 						
 					}
@@ -591,5 +593,9 @@ ajaxHandle = {
 ajaxHandle.init();
 
 //TO DO:
-	//paste against selected text do not work correctly
-	//the selected text is not replaced by pasted text
+
+
+//DONE:
+	
+	
+	

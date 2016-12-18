@@ -1,7 +1,7 @@
 [
 	{
 		"regex":["hello"],
-		"content":"hello \\b hello \\d hello \\f hello \\n hello \\r hello \\t hello \\v hello \\w",
+		"content":"hello\nhello",
 		"description":[	"Some example with {reg{/regExp/gi}} inside of it.",
 						"Some example of text with {code{some code}} inside of it.",
 						"Some example with {val{some value}} and {val{another value}} inside of it.",{
