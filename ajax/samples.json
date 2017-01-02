@@ -1,7 +1,7 @@
 [
 	{
-		"regex":["hello"],
-		"content":"hello \\b hello \\d hello \\f hello \\n hello \\r hello \\t hello \\v hello \\w",
+		"regex":"/hello/",
+		"content":"abc",
 		"description":[	"Some example with {reg{/regExp/gi}} inside of it.",
 						"Some example of text with {code{some code}} inside of it.",
 						"Some example with {val{some value}} and {val{another value}} inside of it.",{
@@ -13,118 +13,111 @@
 						"Some example with {reg{/reg/gi}} inside of it.",
 						"Some example with {code{Math.floor(2.653)}} and {mark{marked text}} and {val{some value}} and {link{http://stackoverflow.com/{stackoverflow link}}} inside of it."],
 		"keywords":["simple","pattern","noFlags"],
+		"id":"iwfmsabc"
+	},	
+	{
+		"regex":"/h(e)llo/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
 		"id":"iwfms33h"
 	},
 	{
-		"regex":["hello"],
-		"content":"Hello HeLLo heeellooo HELLO hello hello hello",
-		"description":"",
-		"keywords":["modifier","bracket","metacharacter","quantifier","g","[abc]","[0-9]",".","\\w","\\W"],
-		"id":"iwfms98m"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxg9lt"
 	},
 	{
-		"regex":["hello"],
-		"content":"abcdehelloabcde",
-		"description":"",
-		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"],
-		"id":"iwfmsco7"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxgelg"
 	},
 	{
-		"regex":["hello"],
-		"content":"h e l l o he-llo hel lo",
-		"description":"",
-		"keywords":["modifier","metacharacter","quantifier","g","m","[^abc]",".","\\w"],
-		"id":"iwob9n2g"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxgj0n"
 	},
 	{
-		"regex":["hello","g"],
-		"content":"abc hello abc hello abc hello abc hello abc hello",
-		"description":"",
-		"keywords":["modifier","metacharacter","g","m","[^0-9]"],
-		"id":"iwfmsgf0"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxgmxm"
 	},
 	{
-		"regex":["hello","g"],
-		"content":"hello HeLLo hhhelloooo Hello hello hello hello",
-		"description":"",
-		"keywords":["quantifier","i","g","[^0-9]"],
-		"id":"iwfmsk62"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxh2p6"
 	},
 	{
-		"regex":["value","g"],
-		"content":"The function passed into reduce() or reduceRight() accepts four arguments: the previous value, the current value, the item’s index, and the array object.",
-		"description":"",
-		"keywords":["modifier","[^abc]","."],
-		"id":"iwfmspu1"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxh74z"
 	},
 	{
-		"regex":["a","g"],
-		"content":"The function passed into reduce() or reduceRight() accepts four arguments: the previous value, the current value, the item’s index, and the array object.",
-		"description":"",
-		"keywords":["modifier","i","[abc]","[^0-9]","(x|y)","."],
-		"id":"iwfmsxjr"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxhbaj"
 	},
 	{
-		"regex":["hello","i"],
-		"content":"HELLO",
-		"description":"",
-		"keywords":["metacharacter","[0-9]"],
-		"id":"iwfmu5wq"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxhfvr"
 	},
 	{
-		"regex":["hello","ig"],
-		"content":"hello HELLO Hello hhelloo HHEELLOO",
-		"description":"some description",
-		"keywords":["modifier","metacharacter","bracket","i","[^abc]","(x|y)","\\W"],
-		"id":"iwfmucr2"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxhjyq"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp J",
-		"description":"some description",
-		"keywords":["modifier","bracket","g","[abc]","[^0-9]","\\W"],
-		"id":"iwfmugw8"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxhokn"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp K",
-		"description":"some description",
-		"keywords":["modifier","metacharacter","i","g","[abc]"],
-		"id":"iwfmulfb"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxhs7v"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp L",
-		"description":"some description",
-		"keywords":["metacharacter","[^abc]","[0-9]","(x|y)"],
-		"id":"iwfmupco"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxhwt8"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp M",
-		"description":"some description",
-		"keywords":["i","g","m","\\W"],
-		"id":"iwfmusnf"
+		"regex":"/hello/gm",
+		"content":"The sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxi1bs"
 	},
 	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp N",
-		"description":"some description",
-		"keywords":["modifier","m"],
-		"id":"iwfmuw4o"
-	},
-	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp O",
-		"description":"some description",
-		"keywords":["i","m","[abc]","(x|y)","\\w"],
-		"id":"iwfmuzyb"
-	},
-	{
-		"regex":["helo world","ig"],
-		"content":"helo world! samp P",
-		"description":"some description",
-		"keywords":["modifier","bracket","i","g","[0-9]","(x|y)","."],
-		"id":"iwfmv4oo"
+		"regex":"/hello/ig",
+		"content":"Another sample of text",
+		"description":[],
+		"keywords":[],
+		"id":"ixaxi52w"
 	}
 ]

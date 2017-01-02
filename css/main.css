@@ -4,6 +4,7 @@
 @import url("https://fonts.googleapis.com/css?family=PT+Mono");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("https://fonts.googleapis.com/css?family=Cutive+Mono");
+@import url("https://fonts.googleapis.com/css?family=PT+Sans");
 * {
   outline: none 0px transparent;
   box-sizing: border-box;
@@ -403,8 +404,7 @@ body {
   height: 150px;
   padding: 6px 18px;
   color: #438d99;
-  font-family: 'Dosis', sans-serif;
-  font-size: 16px; }
+  font-family: 'PT Sans', sans-serif; }
 
 .regex-keywords {
   margin: 0;
@@ -423,10 +423,11 @@ body {
     cursor: pointer;
     color: #438d99;
     transition: box-shadow .06s ease-in; }
-    .regex-keywords span:hover::before {
-      content: '#'; }
     .regex-keywords span:active {
       box-shadow: 1px 1px 4px 1px #c8c8c8; }
+
+.keyword-butt:hover::before {
+  content: '#'; }
 
 .reg-hlight {
   display: inline;
@@ -480,6 +481,9 @@ body {
 
 .msgArray {
   color: black; }
+
+.msgBoolean {
+  color: #ad1457; }
 
 .regex-item footer {
   background-color: whitesmoke;
@@ -573,57 +577,60 @@ body {
 
 .regex-tips ul {
   list-style-type: circle;
-  font-size: 17px; }
+  font-size: 16px; }
   .regex-tips ul li {
     margin: 5px 0px; }
 .regex-tips ul ul {
   list-style-type: disc;
-  font-size: 14px; }
+  font-size: 15px; }
 
 .tip-reg {
-  background-color: #4db6ac;
-  color: white;
-  box-shadow: 0px 2px 3px #0c8da0;
-  border-radius: 10px;
-  padding: 1px 10px;
-  cursor: pointer; }
-
-.tip-code {
-  background-color: #fbfbfb;
-  color: #787878;
-  box-shadow: 0px 1px 3px #c8c8c8;
+  font-family: 'PT Mono', monospace;
+  border-radius: 4px;
+  background-color: white;
+  color: #438d99;
+  box-shadow: 1px 1px 3px #438d99, 0px 0px 0px #438d99 inset;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: box-shadow .1s ease-in-out; }
+  .tip-reg:hover {
+    box-shadow: 0px 0px 0px #438d99, 0px 0px 5px #0c8da0 inset; }
+.tip-code, .tip-search {
+  font-family: 'PT Mono', monospace;
   border-radius: 3px;
+  background-color: white;
+  padding: 2px 4px;
+  color: #787878;
+  box-shadow: 0px 1px 5px #828282;
   letter-spacing: 1px;
-  font-size: .9em;
-  font-family: 'PT Mono', monospace; }
-
+  font-size: .9em; }
 .tip-val {
   background-color: transparent;
   box-shadow: 0px 0px 0px transparent;
   padding: 0px;
-  color: black;
-  font-size: .95em;
-  color: #787878;
+  color: #a0a0a0;
   font-style: italic;
   letter-spacing: -1px; }
   .tip-val:before, .tip-val:after {
     color: #c8c8c8;
     content: "'"; }
-
 .tip-mark {
+  color: #0c8da0;
   font-weight: bold;
-  letter-spacing: 2px;
-  padding: 0px 4px; }
-
+  font-size: .9em;
+  letter-spacing: 1px;
+  padding: 0px 0px; }
 .tip-link {
-  color: #787878;
+  color: #438d99;
   text-decoration: underline;
-  letter-spacing: 2px;
+  letter-spacing: 0px;
   font-size: 15px;
   transition: letter-spacing .15s ease-in-out, color .1s .1s ease-in-out; }
   .tip-link:hover {
-    color: #4db6ac;
-    letter-spacing: 3px; }
+    color: #62a8a9;
+    letter-spacing: 2px; }
+.tip-search {
+  cursor: pointer; }
 
 #ghub {
   display: inline-block;
@@ -637,3 +644,24 @@ body {
   transition: opacity .15s ease-in-out; }
   #ghub:hover {
     opacity: .45; }
+
+.tooltip {
+  font-family: 'Dosis' !important;
+  font-size: 15px !important; }
+
+.right .tooltip-arrow {
+  border-right-color: #438d99 !important; }
+
+.bottom .tooltip-arrow {
+  border-bottom-color: #438d99 !important; }
+
+.left .tooltip-arrow {
+  border-left-color: #438d99 !important; }
+
+.top .tooltip-arrow {
+  border-top-color: #438d99 !important; }
+
+.tooltip-inner {
+  background-color: white !important;
+  color: #438d99 !important;
+  border: solid 1px #438d99; }

@@ -1,0 +1,214 @@
+[
+	{
+		"key":"simple-pattern",
+		"desc":"Simple patterns  matches character combinations in strings only when exactly these characters  occur together and in that order."
+	},
+	{
+		"key":"flag",
+		"desc":"Regular expressions support four optional flags {search{g}} {search{i}} {search{m}} and {code{y}}, which can be used together in any order or separately."
+	},
+	{
+		"key":"g",
+		"desc":"The {search{g}} modifier is used to perform {mark{global search}}. It finds all matches in string."
+	},
+	{
+		"key":"i",
+		"desc":"The {search{i}} modifier is used to perform {mark{case-insensitive search}}. It finds all matches regardless the characters are uppercase or lowercase letters."
+	},
+	{
+		"key":"m",
+		"desc":"The {search{m}} modifier is used to perform {mark{multi-line search}}. If the string is a {mark{multiline}} string (delimited by {search{\\n}} or {search{\\r}} metacharacter), the {search{^n}} and {search{n$}} quantifiers match at the start and the end {mark{of each line}} of string, rather than at the beginning and the end {mark{of entire string}}."
+	},
+	{
+		"key":"no-flag-g",
+		"desc":"It finds the first match from the left to the right and ignores remaining matches after the first match found."
+	},
+	{
+		"key":"no-flag-i",
+		"desc":"It performs {mark{case-sensitive match}}. Patterns match character combinations only when characters of the same case combination occur in strings."
+	},
+	{
+		"key":"no-flag-m",
+		"desc":"If the string is a {mark{multiline}} string (delimited by {search{\\n}} or {search{\\r}} metacharacter), the {search{^n}} and {search{n$}} quantifiers match at the start and the end {mark{of entire string}}, rather than  at the beginning and the end {mark{of each line}} of string."
+	},
+	{
+		"key":"n*",
+		"desc":"The {search{n*}} quantifier matches any character combination that contains {mark{0 or more}} occurances of preceding {code{n}} expression. It is the equivalent of {code{n&#123;0,&#125;}} quantifier."
+	},
+	{
+		"key":"n+",
+		"desc":"The {search{n+}} quantifier matches any character combination that contains {mark{at least one}} occurance of preceding {code{n}} expression. It is the equivalent of {code{n&#123;1,&#125;}} quantifier."
+	},
+	{
+		"key":"special",
+		"desc":"If the {mark{special}} character like {code{*}} {code{+}} {code{&#123;}} {code{&#125;}} {code{(}} {code{)}} {code{[}} {code{]}} {code{^}} {code{$}} {code{?}} {code{.}} {code{\\}} {code{|}} is preceded by {code{\\}} it is turned into {mark{non-special}} character."
+	},
+	{
+		"key":"non-special",
+		"desc":"If the {mark{non-special}} character like {code{d}} {code{D}} {code{w}} {code{W}} {code{b}} {code{B}} {code{s}} {code{S}} {code{n}} {code{r}} {code{f}} {code{t}} {code{v}} {code{0}} is preceded by {code{\\}} it is turned into {mark{special}} character."
+	},
+	{
+		"key":"^n",
+		"desc":"The {search{^n}} quantifier matches any character combination {code{n}} at the beginning of string or, if {search{m}} flag is set to true, at the begining of line (after {search{\\n}} or {search{\\r}} metacharacter)."
+	},
+	{
+		"key":"n$",
+		"desc":"The {search{n$}} quantifier matches any character combination {code{n}} at the end of string or, if {search{m}} flag is set to true, at the end of line (before {search{\\n}} or {search{\\r}} metacharacter)."
+	},
+	{
+		"key":"n?",
+		"desc":"The {search{n?}} quantifier matches any character combination that contains {mark{0 or 1}} occurance of preceding {code{n}} expression. It is the equivalent of {code{n&#123;0,1&#125;}} quantifier."
+	},
+	{
+		"key":"non-greedy",
+		"desc":"The {search{n*}} {search{n+}} {search{n?}} {search{n&#123;x,&#125;} {search{n&#123;x,y&#125;} quantifiers match as many characters as possible (greedy matching), while {code{n*?}} {code{n+?}} {code{n??}} {code{n&#123;x,&#125;?} {code{n&#123;x,y&#125;?} (the character {code{?}}  used immediately after quantifier) match as fewest characters as possible ({search{non-greedy}} matching)."
+	},
+	{
+		"key":".",
+		"desc":"The {search{.}} metacharacter matches {mark{any}} character except {search{\\n}} and {search{\\r}} metacharacters."
+	},
+	{
+		"key":"(n)",
+		"desc":"If any part {code{n}} of regular expression pattern is embraced with parentheses {search{(n)} (capturing parentheses), it is remembered for use in the further part of regular expression pattern. The remembered substring can be recalled later by {search{\\x}}, where {code{x}} is the number of remembered substring (counting from left). The capturing parentheses can be nested like {code{(n(m))}}. When the character combination {code{n}} is embraced with parentheses {search{(n)}}, the quantifiers like {search{n*}} {search{n+}} {search{n?}} {search{^n}} {search{n$}} {search{n&#123;x&#125;}} {search{n&#123;x,&#125;}} {search{n&#123;x,y&#125;}} concern entire substring {search{(n)}}, rather than a single character preceding or following the quantifier."
+	},
+	{
+		"key":"\\x",
+		"desc":"The {search{\\x}} metacharacter, where {code{x}} is a positive integer, is a reference to remembered {search{(n)}} substring. {code{\\1}} recalls the first remembered substring (from left to right), {code{\\2}} recalls the second one, etc. The {search{\\x}} reference to {search{(n)}} has a priority over {search{\\ddd}} octal number metacharacter. If 5th capturing group exists, the {code{\\5}} metacharacter is a reference to this capturing group, otherwise the {code{\\5}} is treated as {code{\\005}} octal number metacharacter. The {code{\\8}} (if 8th capturing group do not exist) cannot be treated as octal number metacharacter because octal numbers are limited to {code{[0-7]}} digits."
+	},
+	{
+		"key":"(?:n)",
+		"desc":"If any part {code{n}} of regular expression pattern is preceded by {code{?:}} and embraced with parentheses {search{(?:n)}} (non-capturing parentheses), it makes the substring {code{n} not to be remembered, oppositely to the capturing parentheses {search{(n)} where the substring {code{n} is remembered for further use. When the character combination {code{n}} is embraced with parentheses {search{(?:n)}}, the quantifiers like {search{n*}} {search{n+}} {search{n?}} {search{^n}} {search{n$}} {search{n&#123;x&#125;}} {search{n&#123;x,&#125;}} {search{n&#123;x,y&#125;}} concern entire substring {search{(?:n)}}, rather than a single character preceding or following the quantifier."
+	},
+	{
+		"key":"x(?=y)",
+		"desc":"The {search{x(?=y)}} quantifier matches the character combination {code{x}} if and only if it is {mark{followed}} by the character combination {code{y}}. The {code{y}} substring is not the part of the match."
+	},
+	{
+		"key":"x(?!y)",
+		"desc":"The {search{x(?!y)}} quantifier matches the character combination {code{x}} if and only if it is {mark{not followed}} by the character combination {code{y}}."
+	},
+	{
+		"key":"x|y",
+		"desc":"The {search{x|y}} expression match either {code{x}} or {code{y}}. The {code{|}} special character represents the logical operator {mark{OR}}."
+	},
+	{
+		"key":"n{x}",
+		"desc":"The {search{n&#123;x&#125;}} quantifier matches particular {code{x}} number of {code{n}} sequential repetitions. The {code{x}} must be a positive integer."
+	},
+	{
+		"key":"n{x,y}",
+		"desc":"The  {search{n&#123;x,y&#125;}}  quantifier matches at least {code{x}} and at most {code{y}} number of {code{n}} sequential repetitions. The {code{x}} and {code{y}} must be a positive integers. The {code{x}} must be less than or equal to {code{y}}."
+	},
+	{
+		"key":"n{x,}",
+		"desc":"The {search{n&#123;x,&#125;}} quantifier matches at least {code{x}} number of {code{n}} sequential repetitions.  The {code{x}} must be a positive integer. The second (ommited) integer is treated as {mark{positive infinity}}."
+	},
+	{
+		"key":"[xyz]",
+		"desc":"The {search{[xyz]} character set matches any one of the characters included in square brackets. The characters inside the brackets can be both {mark{special}} and {mark{non-special}} characters. Special characters {code{*}} {code{+}} {code{^}} {code{$}} {code{?}} {code{!}} {code{:}} {code{=}} {code{.}} {code{(}} {code{)}} {code{{|}} {code{,}} {code{-}} {code{[}} {code{]}} {code{&#123;}} become non-special inside the character set, so they don't have to be escaped. The {code{\\}} and {code{]}} must be escaped {code{\\\\}} {code{\\]}}."
+	},
+	{
+		"key":"[a-z]",
+		"desc":"The {search{[a-z]} character set matches any one of the {mark{lower case}} characters from the range {code{a-z}} of characters. The range of characters can be limited, eg. {code{[a-f]}} or {code{[m-s]}}."
+	},
+	{
+		"key":"[A-Z]",
+		"desc":"The {search{[A-Z]} character set matches any one of the {mark{upper case}} characters from the range {code{A-Z}} of characters. The range of characters can be limited, eg. {code{[A-F]}} or {code{[M-S]}}."
+	},
+	{
+		"key":"[A-z]",
+		"desc":"The {search{[A-z]} character set matches any one of the both {mark{upper and lower case}} characters from the range {code{A-z}} of characters. The range of characters can be limited, eg. {code{[A-f]}} or {code{[M-s]}}. If the range of characters is limited {code{[C-f]}}, the range embraces the upper case characters from {code{C}} to {code{Z}} and the lower case characters from {code{a}} to {code{f}}. The {code{[C-f]}} {code{[A-g]}} {code{[M-m]}} character sets are equivalent to as follows: {code{[C-Za-f]}} {code{[A-Za-g]}} {code{[M-Za-m]}}."
+	},
+	{
+		"key":"[0-9]",
+		"desc":"The {search{[0-9]} character set matches any one of the {mark{digits}} from the range {code{0-9}} of characters. The range of characters can be limited, eg. {code{[0-5]}} or {code{[3-6]}}."
+	},
+	{
+		"key":"[^xyz]",
+		"desc":"The character set {code{xyz}} of {search{[xyz]}} preceded by {code{^}} becomes a {mark{negated}} character set. The {search{[^xyz]} negated character set matches anything that is {mark{not}} the character included in square brackets. The characters inside the brackets can be both {mark{special}} and {mark{non-special}} characters. Special characters {code{*}} {code{+}} {code{^}} {code{$}} {code{?}} {code{!}} {code{:}} {code{=}} {code{.}} {code{(}} {code{)}} {code{{|}} {code{,}} {code{-}} {code{[}} {code{]}} {code{&#123;}} become non-special inside the character set, so they don't have to be escaped. The {code{\\}} and {code{]}} must be escaped {code{\\\\}} {code{\\]}}."
+	},
+	{
+		"key":"[^a-z]",
+		"desc":"The character set {code{a-z}} of {search{[a-z]}} preceded by {code{^}} becomes a {mark{negated}} character set. The {search{[^a-z]} character set matches anything that is {mark{ not lower case}} character from the range {code{a-z}} of characters. The range of characters can be limited, eg. {code{[^a-f]}} or {code{[^m-s]}}."
+	},
+	{
+		"key":"[^A-Z]",
+		"desc":"The character set {code{A-Z}} of {search{[A-Z]}} preceded by {code{^}} becomes a {mark{negated}} character set. The {search{[^A-Z]} character set matches anything that is {mark{not upper case}} character from the range {code{A-Z}} of characters. The range of characters can be limited, eg. {code{[^A-F]}} or {code{[^M-S]}}."
+	},
+	{
+		"key":"[^A-z]",
+		"desc":"The character set {code{A-z}} of {search{[A-z]}} preceded by {code{^}} becomes a {mark{negated}} character set. The {search{[^A-z]} character set matches anything that is {mark{not upper and lower case}} character from the range {code{A-z}} of characters. The range of characters can be limited, eg. {code{[^A-f]}} or {code{[^M-s]}}. If the range of characters is limited {code{[^C-f]}}, the range embraces the upper case characters from {code{C}} to {code{Z}} and the lower case characters from {code{a}} to {code{f}}. The {code{[^C-f]}} {code{[^A-g]}} {code{[^M-m]}} character sets are equivalent to as follows: {code{[^C-Za-f]}} {code{[^A-Za-g]}} {code{[^M-Za-m]}}."
+	},
+	{
+		"key":"[^0-9]",
+		"desc":"The character set {code{0-9}} of {search{[0-9]}} preceded by {code{^}} becomes a {mark{negated}} character set. The {search{[^0-9]} character set matches anything that is {mark{not digit}} from the range {code{0-9}} of characters. The range of characters can be limited, eg. {code{[^0-5]}} or {code{[^3-6]}}."
+	},
+	{
+		"key":"\\b",
+		"desc":"The {search{\\b}} {mark{word boundary}} metacharacter is used to match the character combination at the {mark{beginning}} or {mark{end}} of a {mark{word}}. The beginning and the end of the word is the position, where the matching combination is not followed or preceded by any {mark{word-character}} (word-characters is a set of characters equal to {code{[0-9A-Za-z_]}}, characters like {code{&#227;}} {code{&#232;}} {code{&#246;}} are excluded from word-characters set and interpreted as word-break). If the regular expression matches the character combination, {search{\\b}} is not included in the match as if its length was equal to zero. {search{\\b}} is equivalent to {code{\\cH}}."
+	},
+	{
+		"key":"\\B",
+		"desc":"The {search{\\B}} {mark{non-word boundary}}  metacharacter is used to match the character combination {mark{inside the word}}. The inside of the word is the position, where the matching combination is followed and preceded by {mark{word-character}} (word-characters is a set of characters equal to {code{[0-9A-Za-z_]}}, characters like {code{&#227;}} {code{&#232;}} {code{&#246;}} are excluded from word-characters set and interpreted as word-break). If the regular expression matches the character combination, {search{\\B}} is not included in the match as if its length was equal to zero."
+	},
+	{
+		"key":"\\d",
+		"desc":"The {search{\\d}} metacharacter matches a {mark{digit}} character. {search{\\d}} is equivalent to {search{[0-9]}}."
+	},
+	{
+		"key":"\\D",
+		"desc":"The {search{\\D}} metacharacter matches a {mark{non-digit}} character. {search{\\D}} is equivalent to {search{[^0-9]}}."
+	},
+	{
+		"key":"\\f",
+		"desc":"The {search{\\f}} metacharacter matches a {mark{form feed}} character in string. {search{\\f}} was created to support typewriters, teletypes and fax machines and it is meaningless nowadays. {search{\\f}} is equivalent to {code{\\cL}}."
+	},
+	{
+		"key":"\\r",
+		"desc":"The {search{\\r}} metacharacter matches a {mark{carriage return}} character in string. {search{\\r}} was created to support typewriters, teletypes and fax machines and it is meaningless nowadays. {search{\\r}} is equivalent to {code{\\cM}}."
+	},
+	{
+		"key":"\\t",
+		"desc":"The {search{\\t}} metacharacter matches a {mark{tab}} character in string. {search{\\t}} was created to support typewriters, teletypes and fax machines and it is meaningless nowadays. {search{\\t}} is equivalent to {code{\\cI}}."
+	},
+	{
+		"key":"\\v",
+		"desc":"The {search{\\v}} metacharacter matches a {mark{vertical tab}} character in string. {search{\\v}} was created to support typewriters, teletypes and fax machines and it is meaningless nowadays. {search{\\v}} is equivalent to {code{\\cK}}."
+	},
+	{
+		"key":"\\0",
+		"desc":"The {search{\\0}} metacharacter matches a {mark{NUL}} character in string. {search{\\0}} was created to support typewriters, teletypes and fax machines and it is meaningless nowadays. Be aware not to follow {search{\\0}} with further digits because it will be interpreted as {search{\\ddd}} octal number metacharacter."
+	},
+	{
+		"key":"\\n",
+		"desc":"The {search{\\n}} metacharacter matches a {mark{new line}} character in string. {search{\\n}} is equivalent to {code{\\cJ}}."
+	},
+	{
+		"key":"\\s",
+		"desc":"The {search{\\s}} metacharacter matches a {mark{white space}} character in string. {search{\\s}} is equivalent to {code{[ \\f\\n\\r\\t\\v\\u00a0\\u1680\\u180e\\u2000\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\\ufeff]}}."
+	},
+	{
+		"key":"\\S",
+		"desc":"The {search{\\S}} metacharacter matches any {mark{non-white space}} character in string. {search{\\S}} is equivalent to {code{[^ \\f\\n\\r\\t\\v\\u00a0\\u1680\\u180e\\u2000\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\\ufeff]}}."
+	},
+	{
+		"key":"\\w",
+		"desc":"The {search{\\w}} metacharacter matches {mark{word-character}} (word-characters is a set of characters equal to {code{[0-9A-Za-z_]}}, characters like {code{&#227;}} {code{&#232;}} {code{&#246;}} are excluded from word-characters set)."
+	},
+	{
+		"key":"\\W",
+		"desc":"The {search{\\W}} metacharacter matches any {mark{non-word-character}} (word-characters is a set of characters equal to {code{[0-9A-Za-z_]}}, characters like {code{&#227;}} {code{&#232;}} {code{&#246;}} are excluded from word-characters set). {search{\\W}} is equivalent to {code{[^0-9A-Za-z_]}}."
+	},
+	{
+		"key":"\\ddd",
+		"desc":"The {search{\\ddd}} metacharacter matches character specified by an {mark{octal number}} code. {code{ddd} must be a three-digit {code{[0-7]}} number, eg. {code{\\127}}. Check out the {link{http://www.ascii-code.com/{[ASCII Table]}}}. The {code{\\5}} is equivalent to {code{\\005}} but it is recommended to use three-digit number to determine octal number code. If a capturing group {search{(n)}} of reference number {code{\\5}} exists, it has a priority over {code{\\5}} octal number metacharacter and is treated as a reference to this capturing group, while {code{\\005}} is treated as octal number metacharacter."
+	},
+	{
+		"key":"\\xdd",
+		"desc":"The {search{\\xdd}} metacharacter matches character specified by a {mark{hexadecimal number}} code. {code{dd} must be a hexadecimal {code{[0-9A-Fa-f]}} number, eg. {code{\\x6E}}. Check out the {link{http://www.ascii-code.com/{[ASCII Table]}}}"
+	},
+	{
+		"key":"\\udddd",
+		"desc":"The {search{\\udddd}} metacharacter matches {mark{Unicode}} character specified by a {mark{hexadecimal number}} code. {code{dddd} must be a hexadecimal {code{[0-9A-Fa-f]}} number, eg. {code{\\u266B}}. Check out the {link{https://unicode-table.com/en//{[Unicode Table]}}}"
+	}
+]
