@@ -884,23 +884,4 @@ ajaxHandle.init();
 //TO DO:
 	//find some helpful samples of patterns on the internet
 //DONE:
-	//remove regexData property from html Item elements, move all data to js virtual object regexData
-	//add modifier bracket metacharacter quantifier to search in regex code
-	//put hText mText and rText in Item regexData object into one object eg. temp.content
-	//create new span type in descriptions (search) which would be clickable as keywords in keywords-box
-	//add exec() and test() to consol.box
-	//replace keywords in description into search clickable spans
-	//fix description styles
-	//add elegant tips for search and footer buttons instead of title attribute
-	//add validation for json files (samples,descriptions,keywordsOrder)
 	
-
-Function generateKeywordsCollection() created to dynamically generate keywords according to the structure of regular expression input.
-The description.json file added with collection of keyword descriptions dinamically added to the description box according to the collection of generated keywords.
-The keywordsOrder.json file added with the sorted collection of keywords.
-Function sortKeywords() added to sort dynamically generated keywords according to keywordsOrder.json keywords list.
-Escaped characters appear when the content box is focused and disappear when the box is blured.
-Function parseSlashEscaped() implemented to parse escaped characters into \xdd equivalents.
-Function validateRegex() fixed and shortened.
-Parsing all data of the next 5 items before its appending, to fasten jquery fadeIn() animations, rather than computing it one after another.
-HTML Elements property regexData removed and replaced by virtual js objects storing all data.prototype
