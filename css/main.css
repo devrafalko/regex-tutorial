@@ -18,31 +18,32 @@ body {
   background: linear-gradient(to bottom, #1e6b84, #aae9d1); }
 
 #main-ui {
-  position: absolute;
   margin: auto;
-  top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
   min-height: 560px;
-  height: 80vh;
   min-width: 320px;
-  width: 70%;
   background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
   counter-reset: item-number; }
 @media screen and (max-width: 768px) {
   #main-ui {
-    width: 100%; } }
+    width: 98vw;
+    height: 99vh;
+    margin-top: 1vh; } }
 
 @media screen and (min-width: 769px) {
   #main-ui {
-    width: 760px; } }
+    width: 760px;
+    height: 80vh;
+    margin-top: 4vh; } }
 
 @media screen and (min-width: 1201px) {
   #main-ui {
-    width: 960px; } }
+    width: 960px;
+    height: 80vh;
+    margin-top: 7vh; } }
 
 #header-section {
   border-radius: 10px;
@@ -645,23 +646,14 @@ body {
   #ghub:hover {
     opacity: .45; }
 
-.tooltip {
-  font-family: 'Dosis' !important;
-  font-size: 15px !important; }
-
-.right .tooltip-arrow {
-  border-right-color: #438d99 !important; }
-
-.bottom .tooltip-arrow {
-  border-bottom-color: #438d99 !important; }
-
-.left .tooltip-arrow {
-  border-left-color: #438d99 !important; }
-
-.top .tooltip-arrow {
-  border-top-color: #438d99 !important; }
-
-.tooltip-inner {
-  background-color: white !important;
-  color: #438d99 !important;
-  border: solid 1px #438d99; }
+.ui-tooltip {
+  position: absolute;
+  z-index: 9999;
+  max-width: 300px;
+  padding: 4px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px 1px #438d99;
+  background-color: white;
+  color: #438d99;
+  font-family: 'Dosis';
+  font-size: 15px; }
