@@ -132,6 +132,7 @@ var ajaxHandle = {
 		});		
 		
 		s.on('focus blur', '.test-text',function(event){
+			console.log('ab');
 			var dataObject = utils.itemData(item(this)).temp.content;
 			dataObject.focused = event.type==='focusin' ? true:false;
 			if(event.type==='focusout') $(this).trigger('mouseout');
@@ -403,7 +404,6 @@ var ajaxHandle = {
 	loadData: function(getItem,isRefresh){
 		var elemData = this.utils.itemData(getItem);
 		$(getItem).find('.regex-code').html(elemData.regex);
-		
 		this.utils.newRegularText(getItem,elemData.content);
 		this.utils.appendRegularText(getItem);
 		if(!isRefresh){
@@ -474,8 +474,8 @@ var ajaxHandle = {
 			return null;
 		},
 		newRegularText: function(getObj,getText){
-			var dataObject = this.itemData(getObj).temp.content;
-			dataObject.rText = getText;
+			getText = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
+			this.itemData(getObj).temp.content.rText = getText;
 		},
 		newHighlightText: function(getObj,reset){
 			var dataObject = this.itemData(getObj).temp;
@@ -881,7 +881,4 @@ ajaxHandle.init();
 
 
 
-//TO DO:
-	//find some helpful samples of patterns on the internet
-//DONE:
-	
+
