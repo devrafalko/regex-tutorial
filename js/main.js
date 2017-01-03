@@ -44,6 +44,9 @@ var ajaxHandle = {
 		var that = this;
 		$("#main-section").mCustomScrollbar({theme:'minimal-dark'});
 
+		$(document).tooltip({track:true,show: {delay:300,duration: 200},hide: {delay:0,duration: 100}});
+
+
 		$('#nav-max-menu').children().each(function(i,ob) {
 			$(ob).on('mouseover mouseout',function(){
 				$(ob).find(".nav-menu-line").toggleClass('line-hover');
@@ -62,7 +65,8 @@ var ajaxHandle = {
 			location.hash = '';
 		});
 
-		$('#nav-min-menu').on('input',function(){
+		$('#nav-min-menu').on('change',function(){
+			console.log('działam');
 			var getKeyword = $(this).find(':selected').attr('data-key');
 			$('#searchInp').val(getKeyword);
 			that.filterItems(getKeyword);
@@ -88,7 +92,6 @@ var ajaxHandle = {
 		$('#searchInp').on('mouseover',function(){
 			$(this).attr('title',$(this).val());
 		});
-		
 	},
 	addItemListeners:function(){
 		var utils = this.utils;
@@ -132,7 +135,6 @@ var ajaxHandle = {
 		});		
 		
 		s.on('focus blur', '.test-text',function(event){
-			console.log('ab');
 			var dataObject = utils.itemData(item(this)).temp.content;
 			dataObject.focused = event.type==='focusin' ? true:false;
 			if(event.type==='focusout') $(this).trigger('mouseout');
@@ -226,7 +228,6 @@ var ajaxHandle = {
 			}
 		});
 	},
-	
 	generateTempDataObj: function(){
 		for(var i=0;i<this.regexData.length;i++){
 			this.regexData[i].temp = {parsed:{},regex:{},content:{}};
@@ -335,8 +336,6 @@ var ajaxHandle = {
 		attachToggle(1,2,0);
 		attachToggle(2,0,1);
 		
-		$(getHTML).find('[data-toggle="tooltip"]').tooltip({placement: "right",delay: {show: 300, hide: 0}});
-		
 			function attachToggle(a,b,c){
 				var clss = ['tips','keywords','console'];
 				$(getHTML).find('.regex-button-'+clss[a]).click(function(){
@@ -385,7 +384,6 @@ var ajaxHandle = {
 					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">'+getRegEx.output+'</kbd>');
 					if(coll[i]==='StrProto'){
 						$.each(['match','search','split'],function(c,v){
-							
 							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(parseEscapes[v](getRegEx.output))+'</kbd>');	
 						});
 					}
@@ -435,7 +433,6 @@ var ajaxHandle = {
 		prepNum = all-getChildNum>this.nextLoad?this.nextLoad:all-getChildNum;
 		for(var i=0;i<prepNum;i++){
 			var newItem,getHTML;
-			
 			newItem = $(that.htmlSection).clone();
 			newItem[0].regexID = that.matchedData[iterA];
 			getHTML = that.loadData(newItem);
@@ -474,8 +471,7 @@ var ajaxHandle = {
 			return null;
 		},
 		newRegularText: function(getObj,getText){
-			getText = typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
-			this.itemData(getObj).temp.content.rText = getText;
+			this.itemData(getObj).temp.content.rText =  typeof getText==='string' ? getText:$(getObj).find('.test-text').html();
 		},
 		newHighlightText: function(getObj,reset){
 			var dataObject = this.itemData(getObj).temp;
@@ -587,14 +583,17 @@ var ajaxHandle = {
 				.replace(/\\\}/g,'\\x7D');
 		},
 		replaceEscapes: function(getText){
-			return getText
-				.replace(/\\b/g, "\b")
-				.replace(/\\f/g, "\f")
-				.replace(/\\n/g, "\n")
-				.replace(/\\r/g, "\r")
-				.replace(/\\t/g, "\t")
-				.replace(/\\v/g, "\v")
-				.replace(/\\0/g, "\0");
+			var map = {
+				"n": "\n",
+				"r": "\r",
+				"f": "\f",
+				"t": "\t",
+				"v": "\v",
+				"b": "\b"
+			};
+			return getText.replace(/\\(.)/g, function(f,ch) {
+			  return (ch in map) ? map[ch] : ch;
+			});
 		},
 		styleType: function(val){
 			var getEscapeFun = this.escapeHtml;
@@ -624,10 +623,10 @@ var ajaxHandle = {
 		},
 		type: function(obj,t){
 			t = t.toLowerCase();
-			if(typeof obj==='undefined'&&t==='undefined') return true;
-			if(obj===null&&t==='null') return true;
-			if(obj===null||obj===undefined) return false;
-			return obj.constructor.toString().toLowerCase().search(t)>=0;
+				if(typeof obj==='undefined'&&t==='undefined') return true;
+				if(obj===null&&t==='null') return true;
+				if(obj===null||obj===undefined) return false;
+				return obj.constructor.toString().toLowerCase().search(t)>=0;
 		},
 		escapeHtml: function(getStr) {
 			if(typeof getStr!=='string') return getStr;
@@ -829,7 +828,7 @@ var ajaxHandle = {
 			});
 			return srt.concat(getAdditional);
 		},
-		validateJSON(jsonFile,jsonObj){
+		validateJSON: function(jsonFile,jsonObj){
 			var type = this.type;
 			switch(jsonFile){
 				case 'samples':
@@ -878,7 +877,3 @@ var ajaxHandle = {
 };
 
 ajaxHandle.init();
-
-
-
-
