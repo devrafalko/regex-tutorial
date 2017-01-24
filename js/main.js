@@ -42,10 +42,9 @@ var ajaxHandle = {
 	},
 	addNavListeners: function(){
 		var that = this;
-		$("#main-section").mCustomScrollbar({theme:'minimal-dark'});
+		$("#main-section").mCustomScrollbar({theme:'minimal-dark',scrollInertia:250,mouseWheel:{scrollAmount:160},keyboard:{scrollAmount: 160, scrollType:'stepped'}});
 
 		$(document).tooltip({track:true,show: {delay:300,duration: 200},hide: {delay:0,duration: 100}});
-
 
 		$('#nav-max-menu').children().each(function(i,ob) {
 			$(ob).on('mouseover mouseout',function(){
@@ -66,7 +65,6 @@ var ajaxHandle = {
 		});
 
 		$('#nav-min-menu').on('change',function(){
-			console.log('działam');
 			var getKeyword = $(this).find(':selected').attr('data-key');
 			$('#searchInp').val(getKeyword);
 			that.filterItems(getKeyword);
@@ -88,7 +86,7 @@ var ajaxHandle = {
 			$('#searchInp').val('');
 			that.hash = null;
 		});
-		
+
 		$('#searchInp').on('mouseover',function(){
 			$(this).attr('title',$(this).val());
 		});
@@ -97,7 +95,7 @@ var ajaxHandle = {
 		var utils = this.utils;
 		var that = this;
 		var s = $('#inner-section');
-		
+
 		s.on('click','.keyword-butt',function(){
 			var getSearch = $('#searchInp');
 			var getSearchValue = getSearch.val();
@@ -105,39 +103,43 @@ var ajaxHandle = {
 			if(getSearchValue.split(' ').some(function(c){return c===setNew;})) return;
 			getSearch.val(getSearchValue + ' ' + setNew);
 		});	
-		
+
 		s.on('click','.tip-reg',function(){
 			var getRegInp = item(this).find('.regex-code');
 			getRegInp.text($(this).text());
 			getRegInp.trigger('keyup');
 		});	
-	
+
 		s.on('click','.regex-button-reset', function(){
 			var getItem = item(this);
 			that.loadData(getItem,true);
+			that.testRegExp(getItem,true);	
 			$(getItem).find('.regex-code').trigger('keyup');
 		});		
 
 		s.on('click','.regex-header',function(){
 			that.selectHash(item(this));
 		});
-		
+
 		s.on('keyup cut paste', '.regex-code',function(){
 			var dataObject = utils.itemData(item(this)).temp;
 			if($(this).text()===dataObject.regex.output.toString()) return;
 			var getItem = item(this);
-			utils.validateRegex(getItem);
+			utils.validateRegex(getItem,false);
 			that.testRegExp(getItem,true);
 		});
 
 		s.on('keydown', '.regex-code',function(event){
 			if(event.keyCode===13) event.preventDefault();
 		});		
-		
+
 		s.on('focus blur', '.test-text',function(event){
 			var dataObject = utils.itemData(item(this)).temp.content;
 			dataObject.focused = event.type==='focusin' ? true:false;
-			if(event.type==='focusout') $(this).trigger('mouseout');
+			if(event.type==='focusout') {
+				this.blur();
+				$(this).trigger('mouseout');
+			};
 		});
 
 		s.on('mouseover mouseout', '.test-text',function(event){
@@ -147,11 +149,11 @@ var ajaxHandle = {
 			var type = event.type==='mouseover' ? 'appendRegularText':'appendHighlightText';
 			utils[type](item(this));
 		});
-		
+
 		s.on('paste', '.test-text, .regex-code', function(event){
 			event.preventDefault();
 			var text = this;
-			var getText = $(text).html();
+			var getText = $(text).text();
 			var getPaste = (event.originalEvent.clipboardData || window.clipboardData).getData("text");
 			var s = window.getSelection();
 			var a = s.anchorOffset;
@@ -160,9 +162,8 @@ var ajaxHandle = {
 			var textLeft = getText.slice(0,selSide[0]);
 			var textRight = getText.slice(selSide[1],getText.length);
 			var newText = textLeft + getPaste + textRight;
-
 			setTimeout(function(){
-				$(text).html(newText);
+				$(text).text(newText);
 				var range = document.createRange();
 				range.setStart (text.childNodes[0], textLeft.length+getPaste.length);
 				range.collapse(false);
@@ -197,7 +198,7 @@ var ajaxHandle = {
 				$(this).trigger('keyup');
 			}			
 		});
-		
+
 			function item(child){
 				return $(child).parents('.regex-item');
 			}	
@@ -265,6 +266,7 @@ var ajaxHandle = {
 		this.syncLoad[0]++;
 		if(this.syncLoad[0]===this.syncLoad[1]) {
 			this.generateItemKeywords();
+			this.sortDescriptions();
 			this.filterHash();
 		};
 	},
@@ -272,12 +274,22 @@ var ajaxHandle = {
 		for(var i=0;i<this.regexData.length;i++){
 			var r = this.regexData[i];
 			this.utils.validateRegex(r,true);
-			var p = r.temp.parsed;
-			var isPassed = r.temp.regex.passed;
-			var generateKeywords = isPassed ? this.utils.generateKeywordsCollection(p.expression,p.flags,p.plain):[];	
+			var generateKeywords = r.temp.regex.passed ? this.utils.generateKeywordsCollection(r):[];	
 			var sortedKeywords = this.utils.sortKeywords(generateKeywords,r.keywords);
 			r.keywords = sortedKeywords;
 		}
+	},
+	sortDescriptions: function(){
+		var d = this.descData, k = this.kwrdOrder, newD = [];
+		for(var i=0;i<k.length;i++){
+			for(var ii=0;ii<d.length;ii++){
+				if(k[i]===d[ii].key){
+					newD.push(d.splice(ii,1)[0]);
+					break;
+				};
+			}
+		}
+		this.descData = newD.concat(d);
 	},
 	filterHash: function(){
 		var that = this;
@@ -381,7 +393,7 @@ var ajaxHandle = {
 						setClass(button,false);
 						consoleBox.append('<kbd class="fail">Test failed</kbd>');
 					}
-					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">'+getRegEx.output+'</kbd>');
+					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">' + 'SyntaxError: Invalid regular expression. ' + getRegEx.output + '</kbd>');
 					if(coll[i]==='StrProto'){
 						$.each(['match','search','split'],function(c,v){
 							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(parseEscapes[v](getRegEx.output))+'</kbd>');	
@@ -497,7 +509,7 @@ var ajaxHandle = {
 		matchArrays: function(item,filter){
 			for(var i=0;i<filter.length;i++){
 				var test = item.some(function(curr){
-					return curr.toLowerCase() === filter[i].toLowerCase();
+					return curr === filter[i];
 				});
 				if(!test) return false;
 			}
@@ -519,48 +531,73 @@ var ajaxHandle = {
 			return true;
 		},
 		validateRegex: function(getObj,init){
-			var getPlain = init ? getObj.regex:$(getObj).find('.regex-code').text();
-			var dataObject = init ? getObj:this.itemData(getObj);
-			var parseEscapes = this.parseSlashEscaped(getPlain);
+			var fullExpression,parseSlashes,divide,expression,flags,squares,inSquares,outSquares,newRegEx,that=this;
+			fullExpression = init ? getObj.regex:$(getObj).find('.regex-code').text();
+			parseSlashes = this.parseSlashEscaped(fullExpression);
+			divide = this.parseExpressionFlags(parseSlashes);
+			expression = divide.expression;
+			flags = divide.flags;
+			squares = this.parseSquares(expression);
+			inSquares = squares.inside;
+			outSquares = squares.outside;
 			
-			var err = [
-				'SyntaxError: Invalid regular expression. Expression should begin and end with: /',
-				'SyntaxError: Invalid regular expression. Expression should not contain \'/\' inside expression. Use \'\\/\' instead',
-				'SyntaxError: Invalid regular expression. Incorrect flags. Use: g i m y',
-				'SyntaxError: Invalid regular expression. Incorrect flags. Use: \'g\' \'i\' \'m\' \'y\' flag just once'];
+			if(validSyntax()) return;
+			if(validDefaultRegErrors()) return;
+			returnPassedTest();
 
-			var tests = [
-				/^\/.*\/\w*$/,
-				/^\/(?!.*\/.*\/)/,
-				/\/(g|i|m|y){0,4}$/g,
-				/^\x2F.*\x2F(?!(.*g.*g|.*i.*i|.*m.*m))/];
+				function validSyntax(){
+					var dataObj = [
+						{str:parseSlashes,errMsg:'Expression should begin and end with: /',regTest:/^\/.*\/\w*$/},
+						{str:outSquares,errMsg:'Expression should not contain \'/\' inside expression. Use \'\\/\' instead',regTest:/^[^/]*$/},
+						{str:parseSlashes,errMsg:'Incorrect flags. Use: g i m y',regTest:/\/(g|i|m|y){0,4}$/g},
+						{str:parseSlashes,errMsg:'Incorrect flags. Use: \'g\' \'i\' \'m\' \'y\' flag just once',regTest:/^\x2F.*\x2F(?!(.*g.*g|.*i.*i|.*m.*m))/}];
+					for(var i=0;i<dataObj.length;i++){
+						if(!dataObj[i].str.match(dataObj[i].regTest)){
+							retObj(false,dataObj[i].errMsg);
+							return true;
+						};
+					}				
+				}
 
-			for(var i=0;i<tests.length;i++){
-				if(!parseEscapes.match(tests[i])){
-					return retObj(false,err[i]);
-				};
-			}
+				function validDefaultRegErrors(){
+					try{
+						newRegEx = new RegExp(expression,flags);
+					} catch(a){
+						retObj(false,a.name+': '+a.message);
+						return true;
+					};					
+				}
 
-			var firstSlash = parseEscapes.indexOf('/');
-			var lastSlash = parseEscapes.lastIndexOf('/');
-			var parseExpression = parseEscapes.slice(firstSlash+1,lastSlash);
-			var parseFlags = parseEscapes.slice(lastSlash+1,parseEscapes.length);
-
-			try{
-				var newRegEx = new RegExp(parseExpression,parseFlags);
-				} catch(a){
-					return retObj(false,a.name+': '+a.message);
-					};
-
-			return retObj(true,newRegEx);
+				function returnPassedTest(){
+					retObj(true,newRegEx);
+					return true;
+				}
 				
 				function retObj(test,output){
-					dataObject.temp.regex = {passed:test,output:output};
-					dataObject.temp.parsed = {plain:getPlain,expression:parseExpression,flags:parseFlags};
+					var getObject = init ? getObj:that.itemData(getObj);
+					if(init&&!test) throw new SyntaxError('SyntaxError: Invalid regular expression "'+fullExpression+'". '+output);
+					getObject.temp.regex = {passed:test,output:output};
+					getObject.temp.parsed = {plain:fullExpression,expression:expression,flags:flags,inSquares:inSquares,outSquares:outSquares};
 				}
 		},
-		parseSlashEscaped: function(getStr){
-			return getStr
+		parseExpressionFlags: function(getSlashed){
+			var firstSlash = getSlashed.indexOf('/');
+			var lastSlash = getSlashed.lastIndexOf('/');
+			var expression = getSlashed.slice(firstSlash+1,lastSlash);
+			var flags = getSlashed.slice(lastSlash+1,getSlashed.length);
+			return {expression:expression,flags:flags};
+		},
+		parseSquares: function(getExpression){
+			var inSquares = '';
+			var outSquares = getExpression.replace(/(\[.+?\])/g,function(c){
+				inSquares += c;
+				return '[]';
+			});			
+			return {inside:inSquares,outside:outSquares};
+		},
+		parseSlashEscaped: function(getPlain){
+			return getPlain
+				.replace(/\\\\/g,'\\x5C')
 				.replace(/\\\!/g,'\\x21')
 				.replace(/\\\$/g,'\\x24')
 				.replace(/\\\(/g,'\\x28')
@@ -575,7 +612,6 @@ var ajaxHandle = {
 				.replace(/\\\=/g,'\\x3D')
 				.replace(/\\\?/g,'\\x3F')
 				.replace(/\\\[/g,'\\x5B')
-				.replace(/\\\\/g,'\\x5C')
 				.replace(/\\\]/g,'\\x5D')
 				.replace(/\\\^/g,'\\x5E')
 				.replace(/\\\{/g,'\\x7B')
@@ -619,7 +655,6 @@ var ajaxHandle = {
 				spanArr += ']';
 				return spanArr;
 			}
-
 		},
 		type: function(obj,t){
 			t = t.toLowerCase();
@@ -637,7 +672,6 @@ var ajaxHandle = {
 		},
 		generateDescriptions: function(defaultDefs,keywords,additionalDefs){
 			var newList = '<ul class="description-list">';
-
 			var keyColl = defaultDefs.filter(function(cA){
 				return keywords.some(function(cB){
 					return cA.key===cB;
@@ -691,18 +725,21 @@ var ajaxHandle = {
 			});
 			return keywordsCollection;
 		},
-		generateKeywordsCollection: function(expression,flags,plain){
-			var newPlain, brackets, outSquares, inSquares = '', collection = [];
-			prepareParsed();
-
-			var grName = ['modifier','bracket','metacharacter','quantifier'];
+		generateKeywordsCollection: function(getObj){
+			var parsed = getObj.temp.parsed;
+			var plain = parsed.plain;
+			var newPlain = plain.replace(/\\\\/g,'');
+			var expression = parsed.expression;
+			var flags = parsed.flags;
+			var inSquares = parsed.inSquares;
+			var outSquares = parsed.outSquares;
+			var brackets, collection = [];
 			var group = [false,false,false,false];
 			var tests = [
 				[0,flags,/[gim]/,"flag"],
 				[0,flags,/[g]/,"g","no-flag-g"],
 				[0,flags,/[i]/,"i","no-flag-i"],
 				[0,flags,/[m]/,"m","no-flag-m"],
-				[1,outSquares,/\./,"."],
 				[1,outSquares,/\(\?\:.+\)/,"(?:n)"],
 				[1,outSquares,/\|/,"x|y"],
 				[1,expression,/\[(?!\^).*\]/,"[xyz]"],
@@ -715,6 +752,7 @@ var ajaxHandle = {
 				[1,expression,/\[\^.*[A-Z]-[A-Z].*\]/,"[^A-Z]"],
 				[1,expression,/\[\^.*[A-Z]-[a-z].*\]/,"[^A-z]"],
 				[1,expression,/\[\^.*[0-9]-[0-9].*\]/,"[^0-9]"],
+				[2,outSquares,/\./,"."],
 				[2,outSquares,/\\b/,"\\b"],
 				[2,outSquares,/\\B/,"\\B"],
 				[2,outSquares,/\\d/,"\\d"],
@@ -746,15 +784,7 @@ var ajaxHandle = {
 				[3,expression,/[!$()*+,-./:=?\[\]\\^{}|]/,"special"]
 			];
 
-			for(var i=0;i<tests.length;i++){
-				var t = tests[i];
-				if(t[2].test(t[1])&&typeof t[3]!=='undefined'){
-					setKeys(t[3],t[0]);
-					} else if(!t[2].test(t[1])&&typeof t[4]!=='undefined') {
-						setKeys(t[4],t[0]);
-						}
-				}
-
+			addKeys();
 			findParentheses();
 			findOctal();
 			findSpecial(1,outSquares,/\\(?!0)[0-9]{1,3}/g,'\\x',1);
@@ -762,24 +792,27 @@ var ajaxHandle = {
 			addGroupKeys();
 			return collection;
 
+				function addKeys(){
+					for(var i=0;i<tests.length;i++){
+						var t = tests[i];
+						if(t[2].test(t[1])&&typeof t[3]!=='undefined'){
+							setKeys(t[3],t[0]);
+							} else if(!t[2].test(t[1])&&typeof t[4]!=='undefined') {
+								setKeys(t[4],t[0]);
+								}
+						}
+				}
+
 				function setKeys(key,num){
 					collection.push(key);
 					if(num!==null) group[num] = true;
 				}
 
 				function addGroupKeys(){
+					var grName = ['modifier','bracket','metacharacter','quantifier'];
 					for(var i=0;i<group.length;i++){
 						if(group[i]) collection.push(grName[i]);
 					}
-				}
-
-				function prepareParsed(){
-					newPlain = plain.replace(/\\\\/g,'');
-					inSquares = '';
-					outSquares = expression.replace(/(\[.+?\])/g,function(c){
-						inSquares += c;
-						return '[]';
-					});
 				}
 
 				function findParentheses(){
@@ -813,7 +846,7 @@ var ajaxHandle = {
 						}
 					}				
 				}
-
+				
 				function findSimplePattern(){
 					var cond =  (/((^|[^\\])[bBdDfnrsStvwW]|[^0-9bBdDfnrsuxStvwW,=*+{}()\[\]^$\?.\\|]|\\[\*+{}()\[\]^$\?.\\|])/.test(outSquares)) ||
 								(/[ux0-9]/.test(outSquares.replace(/(\(\?\:|\(\?\=|\(\?\!|\\u[0-9A-Fa-f]{4}|\\x[0-9A-Fa-f]{2}|\{\d+\,?\d*?\}|\\[0-7]{1,3})|\\[0-9]{1,2}/g,'')));
@@ -840,13 +873,19 @@ var ajaxHandle = {
 				case 'keywords':
 					keywordsValid();
 					break;
-			}	
+			}
 				
 				function samplesValid(){
 					if(!type(jsonObj,'array')) throw new SyntaxError("The JSON 'samples' object should be of type Array");
+					var idCollection = [];
 					$.each(jsonObj,function(i,v){
 						if(!type(v,'object')) throw new SyntaxError("Each item of JSON 'samples' array should be of type Array");
 						validateProps(v,['regex','content','description','keywords','id'],['String','String','Array','Array','String'],"JSON 'samples'");
+						idCollection.push(v.id);
+					});
+					idCollection.sort(function(a,b){
+						if(a===b) throw new SyntaxError("The id '"+a+"' of JSON 'samples' array is doubled.");
+						return a<b ? -1:a>b ? 1:0;
 					});
 				}
 				function descripitonsValid(){
@@ -870,8 +909,18 @@ var ajaxHandle = {
 					});
 				}
 		},
-		generateId: function(){
-			return new Date().getTime().toString(36);
+		generateId: function(num,callback){
+			if(typeof num !== 'number' || typeof callback !== 'function' || num<=0) return;
+			var ret = "", iter = 0;
+			var newInt = setInterval(function(){
+				var newID = new Date().getTime().toString(36);
+				ret += '{\n\t"regex":"",\n\t"content":"",\n\t"description":[],\n\t"keywords":[],\n\t"id":"'+newID+'"\n},\n';
+				iter++;
+				if(iter===num) {
+					clearInterval(newInt);
+					return callback(ret);
+				}
+			},20);
 		}
 	}
 };
