@@ -136,10 +136,15 @@ var ajaxHandle = {
 		s.on('focus blur', '.test-text',function(event){
 			var dataObject = utils.itemData(item(this)).temp.content;
 			dataObject.focused = event.type==='focusin' ? true:false;
-			if(event.type==='focusout') {
-				this.blur();
-				$(this).trigger('mouseout');
-			};
+			$(this).toggleClass("bounce");
+			
+			if(event.type==='focusin') {
+				$(this).closest('.regex-input-cont').addClass('regex-input-focus');
+				} else {
+					this.blur();
+					$(this).closest('.regex-input-cont').removeClass('regex-input-focus');
+					$(this).trigger('mouseout');
+					}
 		});
 
 		s.on('mouseover mouseout', '.test-text',function(event){
@@ -387,21 +392,21 @@ var ajaxHandle = {
 				for(var i=0;i<coll.length;i++){
 					if(coll[i]==='ok') {
 						setClass(button,true);
-						consoleBox.append('<kbd class="ok">Test passed</kbd>');
+						consoleBox.append('<samp class="ok">Test passed</samp>');
 					}
 					if(coll[i]==='fail') {
 						setClass(button,false);
-						consoleBox.append('<kbd class="fail">Test failed</kbd>');
+						consoleBox.append('<samp class="fail">Test failed</samp>');
 					}
-					if(coll[i]==='failMess') consoleBox.append('<kbd class="fail">' + 'SyntaxError: Invalid regular expression. ' + getRegEx.output + '</kbd>');
+					if(coll[i]==='failMess') consoleBox.append('<samp class="fail">' + 'SyntaxError: Invalid regular expression. ' + getRegEx.output + '</samp>');
 					if(coll[i]==='StrProto'){
 						$.each(['match','search','split'],function(c,v){
-							consoleBox.append('<kbd>String.prototype.'+v+'() return: '+utils.styleType(parseEscapes[v](getRegEx.output))+'</kbd>');	
+							consoleBox.append('<samp>String.prototype.'+v+'() return: '+utils.styleType(parseEscapes[v](getRegEx.output))+'</samp>');	
 						});
 					}
 					if(coll[i]==='StrProto'){
 						$.each(['test','exec'],function(c,v){
-							consoleBox.append('<kbd>RegExp.prototype.'+v+'() return: '+utils.styleType(getRegEx.output[v](parseEscapes))+'</kbd>');	
+							consoleBox.append('<samp>RegExp.prototype.'+v+'() return: '+utils.styleType(getRegEx.output[v](parseEscapes))+'</samp>');	
 						});
 					}
 				}
@@ -424,9 +429,10 @@ var ajaxHandle = {
 		return getItem;
 	},
 	createNextButton: function(){
-		var butt = $.parseHTML('<nav id="load-more"><span>load more</span</nav>');
+		var butt = $.parseHTML('<nav id="load-more"><span>load more</span></nav>');
 		var bLoadNext = this.loadNext.bind(this,false);
 		$(butt).on('click',bLoadNext);
+			
 		$('#inner-section').append(butt);
 
 	},
@@ -491,8 +497,8 @@ var ajaxHandle = {
 			if(reset) delete dataObject.content.hText;
 			var newText = dataObject.content.mText.replace(dataObject.regex.output,function(a){return '{mtch{'+a+'}mtch}';});
 			newText = parse(newText);
-			newText = newText.replace(/\x7Bmtch\x7B/g,'<span class="reg-hlight">');
-			newText = newText.replace(/\x7Dmtch\x7D/g,'</span>');
+			newText = newText.replace(/\x7Bmtch\x7B/g,'<mark class="reg-hlight">');
+			newText = newText.replace(/\x7Dmtch\x7D/g,'</mark><wbr/>');
 			dataObject.content.hText = newText;
 		},
 		appendRegularText: function(getObj){
@@ -650,7 +656,7 @@ var ajaxHandle = {
 				var spanArr = '[';
 				for(var i=0;i<arr.length;i++){
 					spanArr += createSpan(arr[i]);
-					if(i<arr.length-1) spanArr += ",";
+					if(i<arr.length-1) spanArr += ",<wbr/>";
 				}
 				spanArr += ']';
 				return spanArr;
@@ -926,3 +932,15 @@ var ajaxHandle = {
 };
 
 ajaxHandle.init();
+
+ajaxHandle.utils.generateId(5,function(str){
+	console.log(str);
+});
+
+
+//DONE:
+	//The problem of text wrapping in the content box fixed.
+	//The height of toggle boxes changed and suited to the content.
+	//The semantic HTML tags enhanced.
+	//user-select CSS property removed from #load-more button to make the content box blured when load-more button is clicked.
+	//Container for .test-text content box added to change onfocus background-color for both content box and scrollbar.

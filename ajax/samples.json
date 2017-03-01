@@ -769,6 +769,24 @@
 		"keywords":[],
 		"id":"ixkr2eal"
 	},
+	
+	
+	{
+		"regex":"/seen?/g",
+		"content":"see saw seen",
+		"description":[],
+		"keywords":[],
+		"id":"izqb6jih"
+	},
+	{
+		"regex":"/seen??/g",
+		"content":"see saw seen",
+		"description":[],
+		"keywords":[],
+		"id":"izqb6jiw"
+	},
+	
+	
 	{
 		"regex":"/(plum)+?/",
 		"content":"plumplumplumplum",
@@ -1149,10 +1167,103 @@
 	},	
 	{
 		"regex":"/[C-Gf-n]/g",
-		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
 		"description":[],
 		"keywords":[],
 		"id":"ixnm8u3v"
+	},
+	{
+		"regex":"/[B-GP-U]/g",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbq2g"
+	},
+	{
+		"regex":"/[D-GKMO]/g",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbqdb"
+	},
+	{
+		"regex":"/[D-GP-Sc-fu-x]/g",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbqdu"
+	},
+	{
+		"regex":"/[123E-HPRTd-gmouz]/g",
+		"content":"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbqe2"
+	},
+	{
+		"regex":"/[2-47-9]/g",
+		"content":"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbqem"
+	},
+	{
+		"regex":"/[^3-5\\s]/g",
+		"content":"123 123 456 456 678 678 ABC FGH jkl xyz",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbqf6"
+	},
+	{
+		"regex":"/[C-c]/g",
+		"content":"ABCD abcd EFGH efgh IJKL ijkl MONP mnop 0123",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbqfq"
+	},
+
+	{
+		"regex":"/[6-D]/g",
+		"content":"0123 ABC abc 456 DEF def 789 GHI ghi",
+		"description":[],
+		"keywords":[],
+		"id":"iyczbqgt"
+	},
+
+	{
+		"regex":"/[6-f]/g",
+		"content":"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf98w"
+	},
+	{
+		"regex":"/[9-A]/g",
+		"content":"~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'\\n0123456789\\nABCDEFGHabcdefgh",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf99l"
+	},
+	{
+		"regex":"/[Z-a]/g",
+		"content":"~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'\\n0123456789\\nABCDEFGHabcdefgh",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf99u"
+	},
+	{
+		"regex":"/[A-Z]/gi",
+		"content":"Paul Mike Susan Amanda Hannah Lily Rose Sandra Sophie",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf9ah"
+	},
+	{
+		"regex":"/[A-Z][a-z]{1,}/g",
+		"content":"Paul Mike Susan Amanda Hannah Lily Rose Sandra Sophie",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf9ay"
 	},
 	{
 		"regex":"/\\b[P-S]\\w+\\b/g",
@@ -1162,10 +1273,80 @@
 		"id":"ixkryzsd"
 	},
 	{
+		"regex":"/[dp][ei]\\w+ly\\b/g",
+		"content":"devotedly, deviously, piteously, peacefully, diagonally, differently",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf9bh"
+	},
+	{
+		"regex":"/^[AL]\\w+[ae]$/gm",
+		"content":"Adele\\nAdriana\\nErica\\nLucy\\nLuke",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf9c2"
+	},
+	{
+		"regex":"/[a-z]+[?!.]?/g",
+		"content":"hello hello. hello? hello!",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf9cl"
+	},
+	{
+		"regex":"/\\B[^aeiouy\\W]{2}\\B/gi",
+		"content":"My younger brother is called Fred. Fred's very interested in animals. He talks and asks questions about animals ALL the time! Fred's really interested in parrots and pandas and lions and leopards and rabbits.",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf9dc"
+	},
+	{
 		"regex":"/\\b[a-z]{5,}[0-9]{2,}\\b/g",
 		"content":"peter peter5 peter23 chubbypeter123 PeTer123",
 		"description":[],
 		"keywords":[],
 		"id":"ixkryzsv"
+	},
+	{
+		"regex":"/\\b[A-Z]{2,}\\w+\\b/g",
+		"content":"LOoking for DOubled uppercase letters at the BEGinning of each WOrds in the text.",
+		"description":[],
+		"keywords":[],
+		"id":"iyd6n7ap"
+	},
+	{
+		"regex":"/[\\w]/g",
+		"content":"ABCDEF\\nabcdef\\n0123456",
+		"description":[],
+		"keywords":[],
+		"id":"iyd6n7kb"
+	},
+	{
+		"regex":"/[^\\W]/g",
+		"content":"ABCDEF\\nabcdef\\n0123456",
+		"description":[],
+		"keywords":[],
+		"id":"iyd6n7la"
+	},
+	{
+		"regex":"/[\\W]/g",
+		"content":"ABCDEFabcdef\\n0123456 !@#$%^&",
+		"description":[],
+		"keywords":[],
+		"id":"iyd6n7lr"
+	},
+	{
+		"regex":"/[^\\w]/g",
+		"content":"ABCDEFabcdef\\n0123456 !@#$%^&",
+		"description":[],
+		"keywords":[],
+		"id":"iyd6n7mb"
+	},	
+	{
+		"regex":"/(repeted).*\\1/g",
+		"content":"looking for any repeted words in the text with repeted words.",
+		"description":[],
+		"keywords":[],
+		"id":"iyczf9dq"
 	}
 ]
