@@ -1,26 +1,32 @@
 <article class="regex-item">
 	<header  class="regex-header"><h3></h3></header>
 	<main>
-		<div class="regex-section">
-			<p><code class="regex-code" contenteditable spellcheck="false"></code></p>
-		</div>
-		<div class="regex-input">
-			<p class="test-text" contenteditable spellcheck="false"></p>
-		</div>
-		<div class="regex-toggle-panel">
-			<p class="regex-tips"></p>
-			<p class="regex-keywords"></p>
+		<section class="regex-section">
+			<span class="regex-container">
+				<kbd class="regex-code" contenteditable spellcheck="false"></kbd>
+			</span>
+		</section>
+		<section class="regex-input">
+			<div class="regex-input-cont">
+				<samp class="test-text" contenteditable spellcheck="false"></samp>
+			</div>
+		</section>
+		<section class="regex-toggle-panel">
+			<article class="regex-tips"></article>
+			<article class="regex-keywords"></article>
 			<article class="regex-console"><div class="inner-console"></div></article>
-		</div>
+		</section>
 	</main>
 
 	<footer>
 		<nav>
-			<span class="regex-button-reset glyphicon glyphicon-refresh" data-toggle="tooltip" title="reset regex pattern"></span>
-			<span class="regex-button-tips glyphicon glyphicon-list-alt" data-toggle="tooltip" title="description box"></span>
-			<span class="regex-button-keywords glyphicon glyphicon-search" data-toggle="tooltip" title="keywords box"></span>
-			<!-- test-status-fail/ok    glyphicon-remove/ok-sign-->
-			<span class="regex-button-console test-status-ok glyphicon glyphicon-check" data-toggle="tooltip" title="console box"></span>
+			<ul>
+				<li class="regex-button-reset glyphicon glyphicon-refresh" data-toggle="tooltip" title="reset regex pattern"></li>
+				<li class="regex-button-tips glyphicon glyphicon-list-alt" data-toggle="tooltip" title="description box"></li>
+				<li class="regex-button-keywords glyphicon glyphicon-search" data-toggle="tooltip" title="keywords box"></li>
+				<!-- test-status-fail/ok    glyphicon-remove/ok-sign-->
+				<li class="regex-button-console test-status-ok glyphicon glyphicon-check" data-toggle="tooltip" title="console box"></li>
+			</ul>
 		</nav>
 	</footer>
 </article>

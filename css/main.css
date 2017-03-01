@@ -347,6 +347,11 @@ body {
     text-align: center;
     white-space: pre-line; }
 
+.regex-container {
+  display: block;
+  text-align: center;
+  padding: 10px; }
+
 .regex-code {
   display: inline;
   text-indent: 0px;
@@ -385,19 +390,28 @@ body {
   font-family: 'Dosis', sans-serif;
   background-color: rgba(255, 255, 255, 0);
   display: block;
-  letter-spacing: 3px;
-  width: 100%;
+  letter-spacing: 4px;
+  width: auto;
   min-height: 100px;
   padding: 10px;
   margin: 0;
+  padding-right: 0px;
+  margin-right: 16px;
   color: white;
   overflow: hidden;
   border: none 0px transparent;
-  transition: background-color .1s ease-in-out;
-  white-space: pre-wrap; }
+  white-space: pre-wrap;
+  word-break: keep-all; }
   .test-text:focus {
-    color: #0c8da0;
-    background-color: rgba(255, 255, 255, 0.9); }
+    color: #0c8da0; }
+
+.regex-input-cont {
+  transition: background-color .1s ease-in-out;
+  background-color: rgba(255, 255, 255, 0); }
+
+.regex-input-focus {
+  color: #0c8da0;
+  background-color: rgba(255, 255, 255, 0.9); }
 
 .regex-toggle-panel {
   box-shadow: 0px 30px 30px -20px #e6e6e6 inset, 0px -30px 30px -20px #e6e6e6 inset;
@@ -406,7 +420,7 @@ body {
 .regex-tips {
   margin: 0;
   width: 100%;
-  height: 150px;
+  height: 200px;
   padding: 6px 18px;
   color: #438d99;
   font-family: 'PT Sans', sans-serif; }
@@ -414,7 +428,7 @@ body {
 .regex-keywords {
   margin: 0;
   width: 100%;
-  height: 150px;
+  height: 100px;
   padding: 6px; }
   .regex-keywords span {
     font-family: 'Open Sans', sans-serif;
@@ -439,19 +453,19 @@ body {
   height: 22px;
   vertical-align: bottom;
   border-radius: 2px;
-  padding: 0px 4px;
-  margin: 0 2px;
+  padding: 0px 2px 0px 4px;
+  margin: 2px;
   color: #4badb8;
   background-color: white; }
 
 .regex-console {
   width: 100%;
-  height: 150px;
+  height: 180px;
   padding: 6px 18px;
   font-family: 'PT Mono', monospace;
   font-size: 14px;
   color: #438d99; }
-  .regex-console kbd {
+  .regex-console samp {
     display: block;
     border: none 0px transparent;
     border-bottom: solid 1px #aaaaaa;
@@ -465,10 +479,11 @@ body {
     background: transparent;
     background-image: url("../media/triangle.svg");
     background-repeat: no-repeat;
-    background-position-y: 4px; }
-    .regex-console kbd.fail {
+    background-position-y: 4px;
+    word-break: break-all; }
+    .regex-console samp.fail {
       color: #ef5350; }
-    .regex-console kbd.ok {
+    .regex-console samp.ok {
       color: #66bb6a; }
 
 .msgNull {
@@ -546,12 +561,6 @@ body {
   margin: auto;
   left: 0;
   right: 0;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   cursor: pointer;
   color: white;
   width: 140px;
@@ -661,3 +670,5 @@ body {
   color: #438d99;
   font-family: 'Dosis';
   font-size: 15px; }
+
+/*# sourceMappingURL=main.css.map */
