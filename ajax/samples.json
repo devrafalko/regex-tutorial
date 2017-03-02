@@ -1348,5 +1348,172 @@
 		"description":[],
 		"keywords":[],
 		"id":"iyczf9dq"
+	},
+	
+	
+	
+	
+	{
+		"regex":"/\\141\\142\\143/g",
+		"content":"abcdef a b c d e f abcdef",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbp0"
+	},
+	{
+		"regex":"/abc\\041\\041\\041\\sabc\\41\\41\\41/",
+		"content":"abc!!! abc!!!",
+		"description":["Both {code{\\041}} and {code{\\41}} are interpreted as {code{\\041}} octal number metacharacter, representing the exclamation mark."],
+		"keywords":[],
+		"id":"izrgnbpd"
+	},
+	{
+		"regex":"/\\143\\157\\157\\154/g",
+		"content":"cool Cool cool COOL CooL cool coool",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbq9"
+	},
+	{
+		"regex":"/\\143\\157\\157\\154/gi",
+		"content":"cool Cool cool COOL CooL cool coool",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwis"
+	},
+	{
+		"regex":"/\\w+\\157+\\w+/g",
+		"content":"loop mood great group booom place",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwje"
+	},
+	{
+		"regex":"/\\w+\\157*\\w+/g",
+		"content":"loop mood great group booom place",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwjz"
+	},
+	{
+		"regex":"/^\\124.+\\163$/gm",
+		"content":"The sentence with some nice words\nThese are some different words\nAnd here is another sentence",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwkd"
+	},
+	{
+		"regex":"/[\\060\\061\\062\\063\\064\\065\\066\\067\\068\\069\\070\\071]/g",
+		"content":"abcdefABCDEF0123456789",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbnc"
+	},	
+	{
+		"regex":"/^.+(\\041|\\077|\\056)$/gm",
+		"content":"Sentence ended with exclamation mark!\nSentence ended with letter\nSentence ended with period.\nSentence ended with question mark?",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwkx"
+	},
+	{
+		"regex":"/\\040{2,}/g",
+		"content":"looking  for double  spaces in    the text",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbpr"
+	},
+	{
+		"regex":"/\\b\\w*[\\141\\145\\151\\157\\165\\171]{2}\\w*\\b/g",
+		"content":"Mark the words with two vowels next to each other: door weather web week stream",
+		"description":[],
+		"keywords":[],
+		"id":"izrko3vw"
+	},
+	{
+		"regex":"/\\d{2}\\137\\d{3}\\137[a-z0-9]{5}\\.[a-z]{1,}/g",
+		"content":"05_154_a4ff7.js 11_000_024ab.jpg",
+		"description":[],
+		"keywords":[],
+		"id":"izrko3x0"
+	},
+	{
+		"regex":"/\\x61\\x62\\x63/g",
+		"content":"abcdef a b c d e f abcdef",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g73"
+	},
+	{
+		"regex":"/\\x61/g",
+		"content":"aaa bcd a g a 123 a A a AAA Aaa !@#",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g8e"
+	},
+	{
+		"regex":"/\\x61/gi",
+		"content":"aaa bcd a g a 123 a A a AAA Aaa !@#",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g9h"
+	},
+	{
+		"regex":"/\\x3c.+?\\x3e/g",
+		"content":"<mark> some <html> tags",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g8x"
+	},
+	{
+		"regex":"/[\\x23\\x2E]\\S+/gm",
+		"content":"mark some css #id or .class selectors",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2ga1"
+	},	
+	{
+		"regex":"/[\\x61\\x65\\x69\\x6F\\x75\\x79]/g",
+		"content":"Mark all vowels in the text.",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42at"
+	},
+	{
+		"regex":"/\\x20{2,}/g",
+		"content":"looking  for double  spaces in    the text",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42ch"
+	},
+	{
+		"regex":"/\\d{4}\\x2D\\d{2}\\x2D\\d{2}/g",
+		"content":"2017-05-03 2008-11-22 17-03-15 2015-111-10",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42cq"
+	},
+	{
+		"regex":"/\\d{1,3}(\\.\\d{1,3})*(\\u0025|\\u2030)/g",
+		"content":"33% 2‰ 100% 22g 66° 0.55‰",
+		"description":[],
+		"keywords":[],
+		"id":"izsj94q1"
+	},
+	{
+		"regex":"/\\d+(\\.\\d+)*(\\u2103|\\u2109)/g",
+		"content":"33℃ 166℉ 36.6℃  22°C 55°F",
+		"description":[],
+		"keywords":[],
+		"id":"izsj94qm"
+	},
+	{
+		"regex":"/\\d+(\\.\\d+)*(\\u20AC|\\044|\\xA3)/g",
+		"content":"Mark some money amouts:\n200€ 72.33£ 99.99$ 100 20.00 <mark> &#9205;",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42ds"
 	}
 ]
+
+

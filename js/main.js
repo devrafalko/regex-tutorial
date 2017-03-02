@@ -371,6 +371,7 @@ var ajaxHandle = {
 		var getText = $(document.createElement('SPAN')).html(dataObject.content.rText).text();
 		var parseEscapes = utils.replaceEscapes(getText);
 		dataObject.content.mText = parseEscapes;
+		console.log(utils.itemData(getHTML));
 		if(!getRegEx.passed){
 			appendMessage(['fail','failMess']);
 			utils.newHighlightText(getHTML,true);
@@ -419,6 +420,7 @@ var ajaxHandle = {
 	loadData: function(getItem,isRefresh){
 		var elemData = this.utils.itemData(getItem);
 		$(getItem).find('.regex-code').html(elemData.regex);
+		elemData.content = this.utils.escapeHtml(elemData.content);
 		this.utils.newRegularText(getItem,elemData.content);
 		this.utils.appendRegularText(getItem);
 		if(!isRefresh){
@@ -672,7 +674,6 @@ var ajaxHandle = {
 		escapeHtml: function(getStr) {
 			if(typeof getStr!=='string') return getStr;
 			return getStr
-				 .replace(/&/g, "&amp;")
 				 .replace(/</g, "&lt;")
 				 .replace(/>/g, "&gt;");
 		},
@@ -686,8 +687,7 @@ var ajaxHandle = {
 			$.each(keyColl,function(i,c){
 				keyColl[i] = c.desc;
 			});
-
-			var newKeyColl = keyColl.concat(additionalDefs);
+			var newKeyColl = additionalDefs.concat(keyColl);
 
 			for(var i=0;i<newKeyColl.length;i++){
 				newList += '<li>';
@@ -934,13 +934,5 @@ var ajaxHandle = {
 ajaxHandle.init();
 
 ajaxHandle.utils.generateId(5,function(str){
-	console.log(str);
+	//console.log(str);
 });
-
-
-//DONE:
-	//The problem of text wrapping in the content box fixed.
-	//The height of toggle boxes changed and suited to the content.
-	//The semantic HTML tags enhanced.
-	//user-select CSS property removed from #load-more button to make the content box blured when load-more button is clicked.
-	//Container for .test-text content box added to change onfocus background-color for both content box and scrollbar.
