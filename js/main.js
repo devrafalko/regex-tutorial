@@ -44,7 +44,7 @@ var ajaxHandle = {
 		var that = this;
 		$("#main-section").mCustomScrollbar({theme:'minimal-dark',scrollInertia:250,mouseWheel:{scrollAmount:160},keyboard:{scrollAmount: 160, scrollType:'stepped'}});
 
-		$(document).tooltip({track:true,show: {delay:300,duration: 200},hide: {delay:0,duration: 100}});
+		$('*').tooltip({track:true,show: {delay:300,duration: 200},hide: {delay:0,duration: 100}});
 
 		$('#nav-max-menu').children().each(function(i,ob) {
 			$(ob).on('mouseover mouseout',function(){
@@ -371,7 +371,6 @@ var ajaxHandle = {
 		var getText = $(document.createElement('SPAN')).html(dataObject.content.rText).text();
 		var parseEscapes = utils.replaceEscapes(getText);
 		dataObject.content.mText = parseEscapes;
-		console.log(utils.itemData(getHTML));
 		if(!getRegEx.passed){
 			appendMessage(['fail','failMess']);
 			utils.newHighlightText(getHTML,true);
@@ -421,6 +420,7 @@ var ajaxHandle = {
 		var elemData = this.utils.itemData(getItem);
 		$(getItem).find('.regex-code').html(elemData.regex);
 		elemData.content = this.utils.escapeHtml(elemData.content);
+		elemData.content = this.utils.addEscapes(elemData.content);
 		this.utils.newRegularText(getItem,elemData.content);
 		this.utils.appendRegularText(getItem);
 		if(!isRefresh){
@@ -626,6 +626,13 @@ var ajaxHandle = {
 				.replace(/\\\|/g,'\\x7C')
 				.replace(/\\\}/g,'\\x7D');
 		},
+		addEscapes: function(getText){
+			return getText
+				.replace(/\n/g,'\\n')
+				.replace(/\r/g,'\\r')
+				.replace(/\f/g,'\\f')
+				.replace(/\t/g,'\\t');
+		},
 		replaceEscapes: function(getText){
 			var map = {
 				"n": "\n",
@@ -633,7 +640,8 @@ var ajaxHandle = {
 				"f": "\f",
 				"t": "\t",
 				"v": "\v",
-				"b": "\b"
+				"b": "\b",
+				"0": "\0"
 			};
 			return getText.replace(/\\(.)/g, function(f,ch) {
 			  return (ch in map) ? map[ch] : ch;
@@ -758,26 +766,25 @@ var ajaxHandle = {
 				[1,expression,/\[\^.*[A-Z]-[A-Z].*\]/,"[^A-Z]"],
 				[1,expression,/\[\^.*[A-Z]-[a-z].*\]/,"[^A-z]"],
 				[1,expression,/\[\^.*[0-9]-[0-9].*\]/,"[^0-9]"],
-				[2,outSquares,/\./,"."],
 				[2,outSquares,/\\b/,"\\b"],
 				[2,outSquares,/\\B/,"\\B"],
-				[2,outSquares,/\\d/,"\\d"],
-				[2,outSquares,/\\D/,"\\D"],
-				[2,outSquares,/\\f/,"\\f"],
-				[2,outSquares,/\\r/,"\\r"],
-				[2,outSquares,/\\t/,"\\t"],
-				[2,outSquares,/\\v/,"\\v"],
-				[2,outSquares,/\\0/,"\\0"],
-				[2,outSquares,/\\n/,"\\n"],
-				[2,outSquares,/\\s/,"\\s"],
-				[2,outSquares,/\\S/,"\\S"],
-				[2,outSquares,/\\w/,"\\w"],
-				[2,outSquares,/\\W/,"\\W"],
+				[2,expression,/\\d/,"\\d"],
+				[2,expression,/\\D/,"\\D"],
+				[2,expression,/\\f/,"\\f"],
+				[2,expression,/\\r/,"\\r"],
+				[2,expression,/\\t/,"\\t"],
+				[2,expression,/\\v/,"\\v"],
+				[2,expression,/\\n/,"\\n"],
+				[2,expression,/\\s/,"\\s"],
+				[2,expression,/\\S/,"\\S"],
+				[2,expression,/\\w/,"\\w"],
+				[2,expression,/\\W/,"\\W"],
 				[2,expression,/[bBdDfrtv0nsSwW]/,"non-special"],
 				[2,expression,/\\u[0-9A-Fa-f]{4}/,"\\udddd"],
 				[2,newPlain,/[^\\]\\x[0-9A-Fa-f]{2}/,"\\xdd"],
 				[3,expression,/^\^/,"^n"],
 				[3,expression,/\$$/,"n$"],
+				[2,outSquares,/\./,"."],
 				[3,outSquares,/\*/,"n*"],
 				[3,outSquares,/[^(]\?/,"n?"],
 				[3,outSquares,/\+/,"n+"],
@@ -793,7 +800,6 @@ var ajaxHandle = {
 			addKeys();
 			findParentheses();
 			findOctal();
-			findSpecial(1,outSquares,/\\(?!0)[0-9]{1,3}/g,'\\x',1);
 			findSimplePattern();
 			addGroupKeys();
 			return collection;
@@ -824,33 +830,43 @@ var ajaxHandle = {
 				function findParentheses(){
 					var bracketsReg = /\((?!(\?\=|\?\!|\?\:))/g;
 					brackets = outSquares.match(bracketsReg);
+					brackets = brackets === null ? []:brackets;
 					if(brackets&&brackets.length) {
 						setKeys('(n)',1);
 					};				
 				}
 
 				function findOctal(){
-					if(/\\[0-7]{3}/.test(expression)){
-						setKeys('\\ddd',2);
-					} else if(/\\[0-7]{1,2}/.test(inSquares)) {
-						setKeys('\\ddd',2);
-					} else {
-						findSpecial(2,outSquares,/\\[0-7]{1,2}/g,'\\ddd',0);
-					}
-				}
+					var outDecimals = outSquares.match(/\\\d{1,3}/g);
+					var inDecimals = inSquares.match(/\\\d{1,3}/g);
+					var numOfGroups = brackets.length;
+					var hasGroupRef = false;
+					outDecimals = outDecimals===null ? []:outDecimals;
+					inDecimals = inDecimals===null ? []:inDecimals;
 
-				function findSpecial(getGroup,getStr,getReg,key,assert){
-					var c = getStr.match(getReg);
-					if(c&&brackets){
-						for(var i=0;i<c.length;i++){
-							var a = Number(c[i].slice(1));
-							var b = brackets.length;
-							if(!assert ? a>b:a<=b){
-								setKeys(key,getGroup);
-								break;
-							}
+					var withoutGroups = outDecimals.filter(function(curr,ind,arr){
+						for(var i=1;i<=numOfGroups;i++){
+							if(curr===("\\"+i)) {
+								hasGroupRef = true;
+								return false;
+							};
 						}
-					}				
+						return true;
+					});
+					
+					withoutGroups = withoutGroups.concat(inDecimals);
+						
+					var hasZero = withoutGroups.some(function(curr){
+						return /(^\\0$)|(^\\0[89]{1,2}$)/.test(curr);
+					});
+
+					var hasOctal = withoutGroups.some(function(curr){
+						return /(\\[0-7]{2,3})|(\\[1-7])/.test(curr);
+					});
+
+					if(hasGroupRef) setKeys('\\x',1);
+					if(hasZero) setKeys('\\0',2);
+					if(hasOctal) setKeys('\\ddd',2);
 				}
 				
 				function findSimplePattern(){
@@ -880,7 +896,7 @@ var ajaxHandle = {
 					keywordsValid();
 					break;
 			}
-				
+
 				function samplesValid(){
 					if(!type(jsonObj,'array')) throw new SyntaxError("The JSON 'samples' object should be of type Array");
 					var idCollection = [];
@@ -936,3 +952,8 @@ ajaxHandle.init();
 ajaxHandle.utils.generateId(5,function(str){
 	//console.log(str);
 });
+
+
+
+	
+
