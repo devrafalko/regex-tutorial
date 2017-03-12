@@ -949,6 +949,13 @@
 		"id":"ixkryzxv"
 	},
 	{
+		"regex":"/[\\w]/g",
+		"content":"banana",
+		"description":[],
+		"keywords":[],
+		"id":"ixkryzxx"
+	},
+	{
 		"regex":"/[^bn]/g",
 		"content":"banana",
 		"description":[],
@@ -1348,5 +1355,783 @@
 		"description":[],
 		"keywords":[],
 		"id":"iyczf9dq"
+	},
+	
+	
+	
+	
+	{
+		"regex":"/\\141\\142\\143/g",
+		"content":"abcdef a b c d e f abcdef",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbp0"
+	},
+	{
+		"regex":"/abc\\041\\041\\041\\sabc\\41\\41\\41/",
+		"content":"abc!!! abc!!!",
+		"description":["Both {code{\\041}} and {code{\\41}} are interpreted as {code{\\041}} octal number metacharacter, representing the exclamation mark."],
+		"keywords":[],
+		"id":"izrgnbpd"
+	},
+	{
+		"regex":"/\\143\\157\\157\\154/g",
+		"content":"cool Cool cool COOL CooL cool coool",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbq9"
+	},
+	{
+		"regex":"/\\143\\157\\157\\154/gi",
+		"content":"cool Cool cool COOL CooL cool coool",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwis"
+	},
+	{
+		"regex":"/\\w+\\157+\\w+/g",
+		"content":"loop mood great group booom place",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwje"
+	},
+	{
+		"regex":"/\\w+\\157*\\w+/g",
+		"content":"loop mood great group booom place",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwjz"
+	},
+	{
+		"regex":"/^\\124.+\\163$/gm",
+		"content":"The sentence with some nice words\nThese are some different words\nAnd here is another sentence",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwkd"
+	},
+	{
+		"regex":"/[\\060\\061\\062\\063\\064\\065\\066\\067\\068\\069\\070\\071]/g",
+		"content":"abcdefABCDEF0123456789",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbnc"
+	},	
+	{
+		"regex":"/^.+(\\041|\\077|\\056)$/gm",
+		"content":"Sentence ended with exclamation mark!\nSentence ended with letter\nSentence ended with period.\nSentence ended with question mark?",
+		"description":[],
+		"keywords":[],
+		"id":"izriwwkx"
+	},
+	{
+		"regex":"/\\040{2,}/g",
+		"content":"looking  for double  spaces in    the text",
+		"description":[],
+		"keywords":[],
+		"id":"izrgnbpr"
+	},
+	{
+		"regex":"/\\b\\w*[\\141\\145\\151\\157\\165\\171]{2}\\w*\\b/g",
+		"content":"Mark the words with two vowels next to each other: door weather web week stream",
+		"description":[],
+		"keywords":[],
+		"id":"izrko3vw"
+	},
+	{
+		"regex":"/\\d{2}\\137\\d{3}\\137[a-z0-9]{5}\\.[a-z]{1,}/g",
+		"content":"05_154_a4ff7.js 11_000_024ab.jpg",
+		"description":[],
+		"keywords":[],
+		"id":"izrko3x0"
+	},
+	{
+		"regex":"/\\x61\\x62\\x63/g",
+		"content":"abcdef a b c d e f abcdef",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g73"
+	},
+	{
+		"regex":"/\\x61/g",
+		"content":"aaa bcd a g a 123 a A a AAA Aaa !@#",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g8e"
+	},
+	{
+		"regex":"/\\x61/gi",
+		"content":"aaa bcd a g a 123 a A a AAA Aaa !@#",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g9h"
+	},
+	{
+		"regex":"/\\x3c.+?\\x3e/g",
+		"content":"<mark> some <html> tags",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g8x"
+	},
+	{
+		"regex":"/[\\x23\\x2E]\\S+/gm",
+		"content":"mark some css #id or .class selectors",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2ga1"
+	},	
+	{
+		"regex":"/[\\x61\\x65\\x69\\x6F\\x75\\x79]/g",
+		"content":"Mark all vowels in the text.",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42at"
+	},
+	{
+		"regex":"/\\x20{2,}/g",
+		"content":"looking  for double  spaces in    the text",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42ch"
+	},
+	{
+		"regex":"/\\d{4}\\x2D\\d{2}\\x2D\\d{2}/g",
+		"content":"2017-05-03 2008-11-22 17-03-15 2015-111-10",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42cq"
+	},
+	{
+		"regex":"/\\u0020{2,}/g",
+		"content":"looking  for double  spaces in    the text",
+		"description":[],
+		"keywords":[],
+		"id":"izssd5cu"
+	},
+	{
+		"regex":"/[\\u0061\\u0065\\u0069\\u006F\\u0075\\u0079]/g",
+		"content":"abcdefghijklmnopqrstuvwxyz\nABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		"description":[],
+		"keywords":[],
+		"id":"izssd5b2"
+	},
+	{
+		"regex":"/[\\u0061\\u0065\\u0069\\u006F\\u0075\\u0079]/gi",
+		"content":"abcdefghijklmnopqrstuvwxyz\nABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		"description":[],
+		"keywords":[],
+		"id":"izssd5c1"
+	},
+	{
+		"regex":"/\\d{1,3}(\\.\\d{1,3})*(\\u0025|\\u2030)/g",
+		"content":"33% 2‰ 100% 22g 66° 0.55‰",
+		"description":[],
+		"keywords":[],
+		"id":"izsj94q1"
+	},
+	{
+		"regex":"/\\d+(\\.\\d+)*(\\u2103|\\u2109)/g",
+		"content":"33℃ 166℉ 36.6℃  22°C 55°F",
+		"description":[],
+		"keywords":[],
+		"id":"izsj94qm"
+	},
+	{
+		"regex":"/[\\u23FA\\u23F9\\u23F8\\u23F5]/g",
+		"content":"&#9210;&#9209;&#9208;&#9205;",
+		"description":[],
+		"keywords":[],
+		"id":"izss0lzs"
+	},
+	{
+		"regex":"/\\u2713\\s?\\w+$/gm",
+		"content":"✓ taskA\n✗ taskB\n✗ taskC\n✓ taskD",
+		"description":[],
+		"keywords":[],
+		"id":"izssd5ag"
+	},
+	{
+		"regex":"/[A-Za-z0-9_-]+\\u002E[a-z0-9]+/g",
+		"content":"Find out some image_22.jpg extensions in the text init.exe unit-tests.js",
+		"description":[],
+		"keywords":[],
+		"id":"izssd5d5"
+	},
+	{
+		"regex":"/\\d+(\\.\\d+)*(\\u20AC|\\044|\\xA3)/g",
+		"content":"Mark some money amouts:\n200€ 72.33£ 99.99$ 100 20.00",
+		"description":[],
+		"keywords":[],
+		"id":"izrl42ds"
+	},
+	{
+		"regex":"/a(?=b)/g",
+		"content":"aa ab ac ad ae",
+		"description":[],
+		"keywords":[],
+		"id":"izst2tg4"
+	},
+	{
+		"regex":"/\\d(?=-)/g",
+		"content":"a- 1- b_ 2_ c+ 3+ b- 4- f- 6-",
+		"description":[],
+		"keywords":[],
+		"id":"izsv672d"
+	},
+	{
+		"regex":"/\\D(?=-)/g",
+		"content":"a- 1- b_ 2_ c+ 3+ b- 4- f- 6-",
+		"description":[],
+		"keywords":[],
+		"id":"izsv6746"
+	},
+	{
+		"regex":"/a(?=[?!%.])/g",
+		"content":"a? a! a: a+ a_ a. a%",
+		"description":[],
+		"keywords":[],
+		"id":"izsw6mp1"
+	},
+	{
+		"regex":"/[abc](?=[123])/g",
+		"content":"a1 b2 c3 d4 a5 bc c1",
+		"description":[],
+		"keywords":[],
+		"id":"izsw6mps"
+	},	
+	{
+		"regex":"/\\w+(?=\\.css)/g",
+		"content":"mixins.css mixins.less media.css media.sass",
+		"description":[],
+		"keywords":[],
+		"id":"izsw6mnq"
+	},
+	{
+		"regex":"/\\d+(?=px|em|%)/g",
+		"content":"Length is a number followed by a length unit, such as 10px, 2em, 3cm, 50%, etc.",
+		"description":[],
+		"keywords":[],
+		"id":"izst2tj9"
+	},
+	{
+		"regex":"/\\d+(\\.\\d+)*(?=%)/g",
+		"content":"10% 0.33% 155 0.3‰",
+		"description":[],
+		"keywords":[],
+		"id":"izst2tju"
+	},
+	{
+		"regex":"/\\w+(?=,|$)/g",
+		"content":"Peter,George,Simon,Hannah,Judy",
+		"description":[],
+		"keywords":[],
+		"id":"izst2tli"
+	},
+	{
+		"regex":"/\\w+(?=ed\\b|ing\\b)/g",
+		"content":"killed killing killingly kill killer fetch fetched fetching execute executed executing",
+		"description":[],
+		"keywords":[],
+		"id":"izsv675y"
+	},
+	{
+		"regex":"/[A-Za-z0-9_-]+(?=\\.[A-Za-z0-9]+)/g",
+		"content":"Match file names image_22.jpg init.exe unit-tests.js without extensions",
+		"description":[],
+		"keywords":[],
+		"id":"izst2tl7"
+	},
+	{
+		"regex":"/[\\w_$]+(?=\\x28abc\\x29)/g",
+		"content":"myFunction(abc) myFun(1,2,3) init() setOption() $get_Name(abc)",
+		"description":[],
+		"keywords":[],
+		"id":"izsv6752"
+	},
+	{
+		"regex":"/\\d+(\\.\\d+)*(?=\\x24|\\xA3)/g",
+		"content":"Match pound and dollar sums: 100€, 550.000£, 350$, 70$, 4400.500$, 33€, 750€, 3£, 56£, 0.33€",
+		"description":[],
+		"keywords":[],
+		"id":"izsv675n"
+	},
+	{
+		"regex":"/a(?=[123])/g",
+		"content":"a1 a2 a3 a4 a5 a6 ab ac ad",
+		"description":[],
+		"keywords":[],
+		"id":"izvufw9y"
+	},
+	{
+		"regex":"/a(?=[^123])/g",
+		"content":"a1 a2 a3 a4 a5 a6 ab ac ad",
+		"description":[],
+		"keywords":[],
+		"id":"izsw6mq9"
+	},
+	{
+		"regex":"/a(?![123])/g",
+		"content":"a1 a2 a3 a4 a5 a6 ab ac ad",
+		"description":[],
+		"keywords":[],
+		"id":"izsw6mqt"
+	},
+	{
+		"regex":"/a(?![^123])/g",
+		"content":"a1 a2 a3 a4 a5 a6 ab ac ad",
+		"description":[],
+		"keywords":[],
+		"id":"izsxsscq"
+	},
+	{
+		"regex":"/samp(?!1)/g",
+		"content":"samp0 samp1 samp2 samp3 samp4",
+		"description":[],
+		"keywords":[],
+		"id":"izsxsse5"
+	},
+	{
+		"regex":"/g{2}(?!\\b)/g",
+		"content":"egg struggle aggresive dragged",
+		"description":[],
+		"keywords":[],
+		"id":"izvuime4"
+	},
+	{
+		"regex":"/January\\s(?!2015)/g",
+		"content":"January 2017 January 2015 January 2016",
+		"description":[],
+		"keywords":[],
+		"id":"izvuimfn"
+	},
+	{
+		"regex":"/\\w+\\b(?!\\s{2,})/g",
+		"content":"Do not match        words which follow more than one   space",
+		"description":[],
+		"keywords":[],
+		"id":"izvuimfp"
+	},
+	{
+		"regex":"/\\[.*\\](?!\\.slice)/g",
+		"content":"[1,2,3,4].slice()\n[3,4,5,6].split()\n[a,b,c,d].concat()\n",
+		"description":[],
+		"keywords":[],
+		"id":"izvuimg9"
+	},
+	{
+		"regex":"/^.+?(?=\\s)/gm",
+		"content":"some text not followed",
+		"description":[],
+		"keywords":[],
+		"id":"izvuimgt"
+	},
+	{
+		"regex":"/^.+(?=.{7})/g",
+		"content":"Match text without last few characters.",
+		"description":[],
+		"keywords":[],
+		"id":"izvy443z"
+	},
+	{
+		"regex":"/\\w+\\b(?!$)/g",
+		"content":"Match text without last word",
+		"description":[],
+		"keywords":[],
+		"id":"izvy49d3"
+	},
+	{
+		"regex":"/^A\\w+\\b(?!\\s[F-Z])/gm",
+		"content":"Angelina Curtis\nAlice Morgan\nAlex Brown\nAmbrosia Anderson\nGeorge Blake",
+		"description":[],
+		"keywords":[],
+		"id":"izvy49eg"
+	},
+	{
+		"regex":"/\\f/g",
+		"content":"\fI was born an idiot - but I'm cleverer than people think.\f",
+		"description":[],
+		"keywords":[],
+		"id":"izvy49f4"
+	},
+	{
+		"regex":"/\\f{2}/g",
+		"content":"\fHe waked up late next day after a broken sleep. \f\fBut his sleep had not refreshed him; \f\f\fhe waked up bilious, irritable, \fill-tempered, and looked with hatred at his room.",
+		"description":[],
+		"keywords":[],
+		"id":"izw4956h"
+	},
+	{
+		"regex":"/\\f$/gm",
+		"content":"\fAlice Black\f\nSteven Hepburn\nHolly \fMoore\f\nMeg Roberts",
+		"description":[],
+		"keywords":[],
+		"id":"izw4957k"
+	},
+	{
+		"regex":"/([A-Z][a-z]+)\\s([A-Z][a-z]+)\\f/gm",
+		"content":"Pauly Carter\f\nMike Gunn\f\nRobin Taylor\f",
+		"description":[],
+		"keywords":[],
+		"id":"izw49585"
+	},
+	{
+		"regex":"/“.+”\\n?\\f“.+”/g",
+		"content":"“What are you doing?”\n“Work...”\n\f“What sort of work?”\n“I am thinking,” he answered seriously after a pause.",
+		"description":[],
+		"keywords":[],
+		"id":"izw4958o"
+	},
+	{
+		"regex":"/.+\\f{3}/g",
+		"content":"He waked up late\f next\f\f day after a broken sleep.\f\f\fBut his sleep had not refreshed him; he waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
+		"description":[],
+		"keywords":[],
+		"id":"izw49598"
+	},	
+	{
+		"regex":"/\\r/g",
+		"content":"I was born an idiot - \rbut I'm cleverer than people think.",
+		"description":[],
+		"keywords":[],
+		"id":"izvzn5ro"
+	},
+	{
+		"regex":"/^\\r|\\r$/gm",
+		"content":"\rI was born an idiot - \rbut I'm cleverer than people think.\r",
+		"description":[],
+		"keywords":[],
+		"id":"izw48u2f"
+	},
+	{
+		"regex":"/[A-Z]\\w+\\r/gm",
+		"content":"Alice Black\rSteven hepburn\rHolly Moore\rMeg Roberts",
+		"description":[],
+		"keywords":[],
+		"id":"izw48u37"
+	},
+	{
+		"regex":"/“[^\\r]+”/g",
+		"content":"“What \rare \ryou \rdoing?”\n“Work...”\n“What sort of work?”\n“I am thinking,” he answered seriously after a pause.",
+		"description":[],
+		"keywords":[],
+		"id":"izw48u3q"
+	},
+	{
+		"regex":"/[0-9a-z]{3}\\x5F[1-3a-c]{3}(?=\\r|\\n)/g",
+		"content":"0a4_111 025_a33\r79g_2a3 006_bb4\r20g_acc g49_caa\n",
+		"description":[],
+		"keywords":[],
+		"id":"izw48u4a"
+	},
+	{
+		"regex":"/\\b([a-z]\\r)+\\b/g",
+		"content":"samp\ns\ra\rm\rp\rsamp",
+		"description":[],
+		"keywords":[],
+		"id":"izw48u55"
+	},	
+	{
+		"regex":"/\\t/g",
+		"content":"I was born an idiot\t -\t but I'm cleverer than people think.",
+		"description":[],
+		"keywords":[],
+		"id":"izvzn5st"
+	},
+	{
+		"regex":"/^\\t/gm",
+		"content":"\tI was born \tan idiot -but \n\tI'm cleverer than \tpeople think.",
+		"description":[],
+		"keywords":[],
+		"id":"izw48eq1"
+	},
+	{
+		"regex":"/\\t{2}/g",
+		"content":"He\t waked up\t late next day after a broken sleep. \t\tBut his sleep had not refreshed him; \t\the waked up bilious, irritable, ill\t-\ttempered, and looked with hatred at his room.",
+		"description":[],
+		"keywords":[],
+		"id":"izw48equ"
+	},
+	{
+		"regex":"/([A-Z][a-z]+)\\t([A-Z][a-z]+)/gm",
+		"content":"Pauly\tCarter\nJames\tGunn\nRobin\tTaylor",
+		"description":[],
+		"keywords":[],
+		"id":"izw48er8"
+	},
+	{
+		"regex":"/^.+\\t{2}.+\\t{2}.+$/gm",
+		"content":"Jan\\t\\t16\\t\\t2017\\nDec      22     2016\\nSep\\t\\t03\\t\\t2016",
+		"description":[],
+		"keywords":[],
+		"id":"izw48ert"
+	},
+	{
+		"regex":"/(-\\t)“.+”/g",
+		"content":"-\t“What are you doing?”\n-  “Work...”\n-\t“What sort of work?”\n-\t“I am thinking,” he answered seriously after a pause.",
+		"description":[],
+		"keywords":[],
+		"id":"izw48esc"
+	},	
+	{
+		"regex":"/\\v/g",
+		"content":"\\vI was \born an idiot - but I'm cleverer than people think.\\v",
+		"description":[],
+		"keywords":[],
+		"id":"izvzn5ta"
+	},
+	{
+		"regex":"/\\v{2}/g",
+		"content":"\\v\\vHe waked up late next day after a broken sleep. \\vBut his sleep had not refreshed him; he waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
+		"description":[],
+		"keywords":[],
+		"id":"izw47y9r"
+	},
+	{
+		"regex":"/([A-Z][a-z]+)\\s([A-Z][a-z]+)(?=\\v)/gm",
+		"content":"Pauly\tCarter\\v\nJames\tGunn\nRobin\tTaylor\\v",
+		"description":[],
+		"keywords":[],
+		"id":"izw47yai"
+	},
+	{
+		"regex":"/\\w+[^\\v\\s.]/g",
+		"content":"He wa\\vked up late next day af\\vter a bro\\vken sleep.",
+		"description":[],
+		"keywords":[],
+		"id":"izw47yam"
+	},
+	{
+		"regex":"/\\v+\\w+/g",
+		"content":"He waked up late next day after a broken sleep. \\v\\vBut his sleep had not refreshed him; \\v\\vhe waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
+		"description":[],
+		"keywords":[],
+		"id":"izw47yb4"
+	},
+	{
+		"regex":"/\\0/g",
+		"content":"I was born an idiot - but I'm cleverer than people think.\\0",
+		"description":[],
+		"keywords":[],
+		"id":"izvzn5tt"
+	},
+	{
+		"regex":"/\\0$/gm",
+		"content":"\\0Alice Black\\0\nSteven Hepburn\nHolly \\0Moore\\0\nMeg Roberts",
+		"description":[],
+		"keywords":[],
+		"id":"izw47j36"
+	},
+	{
+		"regex":"/\\w+\\0/gm",
+		"content":"\\0Alice Black\\0\nSteven Hepburn\nHolly \\0Moore\\0\nMeg Roberts",
+		"description":[],
+		"keywords":[],
+		"id":"izw47j3p"
+	},
+	{
+		"regex":"/[A-Z][a-z]{2,4}\\s\\d{2}(?=\\s\\0)/gm",
+		"content":"Jan 22 2017\\nMar 13 \\0\\nSep 03 2016",
+		"description":[],
+		"keywords":[],
+		"id":"izw47j43"
+	},
+	{
+		"regex":"/[A-Za-z_$]+(?=\\s?\\x3d\\s?\\x5B.*\\0.*\\x5D\\x3B?)/g",
+		"content":"var sampA = [1,2,3,\\0,\\0];\nvar _sampB = [1,2,3,4,5];\nvar samp_c = [];\nvar $samp_d = [1,2,3,\\0,5,6,7];\n",
+		"description":[],
+		"keywords":[],
+		"id":"izw47j4h"
+	},
+	
+	{
+		"regex":"/(hello\\s)\\1\\1\\1/",
+		"content":"hello hello hello hello hello hello hello",
+		"description":[],
+		"keywords":[],
+		"id":"izw7fr35"
+	},
+	{
+		"regex":"/(there\\s)(is\\s)(some\\s)(word\\s)\\1\\2\\3\\4/g",
+		"content":"there is some word there is some word",
+		"description":[],
+		"keywords":[],
+		"id":"izw7fr4e"
+	},
+	{
+		"regex":"/(dog;)\\1(cat;)\\2/g",
+		"content":"dog;dog;cat;cat;",
+		"description":[],
+		"keywords":[],
+		"id":"izw7fr4p"
+	},
+	{
+		"regex":"/(_name)B\\n\\1C\\n\\1D/g",
+		"content":"_nameA\n_nameB\n_nameC\n_nameD\n_nameE\n_nameF\n_nameG\n",
+		"description":[],
+		"keywords":[],
+		"id":"izw7fr5f"
+	},
+	{
+		"regex":"/(dog;)\\1(cat;)\\2\\1\\2\\1\\2/g",
+		"content":"dog;dog;cat;cat;dog;cat;dog;cat;",
+		"description":[],
+		"keywords":[],
+		"id":"izw7h4xq"
+	},
+	{
+		"regex":"/(dog(;))(cat\\2)/g",
+		"content":"dogcat dog;cat; dog;cat dog;cat;",
+		"description":[],
+		"keywords":[],
+		"id":"izw7h4yv"
+	},
+	{
+		"regex":"/(dog(;))(cat\\2)\\1\\3\\1\\3/g",
+		"content":"dog;cat;dog;cat;dog;cat;",
+		"description":[],
+		"keywords":[],
+		"id":"izw7h4z5"
+	},
+	{
+		"regex":"/([0-9]{3})\\x5F[a-z]{3}\\x5F\\1/g",
+		"content":"123_abc_123 123_abc_321 555_gab_555 001_ccc_001 999_abc_987 123_bbb_456",
+		"description":[],
+		"keywords":[],
+		"id":"izw7fr5s"
+	},	
+	{
+		"regex":"/(a|b)\\1/g",
+		"content":"aa aaa bb bbb ab ba abb baa",
+		"description":[],
+		"keywords":[],
+		"id":"izw7h4zo"
+	},
+	{
+		"regex":"/(user_name)(002|333) \\1(005|333)/gm",
+		"content":"user_name002 user_name333\nuser_name003 user_name005\nuser_name333 user_name005",
+		"description":[],
+		"keywords":[],
+		"id":"izwnrft5"
+	},
+	{
+		"regex":"/(name:\\t)Amanda\\n\\1Patrick\\n\\1Peter\\n\\1John/g",
+		"content":"name:\tAmanda\nname:\tPatrick\nname:\tPeter\nname:\tJohn",
+		"description":[],
+		"keywords":[],
+		"id":"izw7h509"
+	},	
+	{
+		"regex":"/(file_name_005)\\.js\\n\\1\\.css\\n\\1\\.html/g",
+		"content":"file_name_005.js\nfile_name_005.css\nfile_name_005.html",
+		"description":[],
+		"keywords":[],
+		"id":"izw7hayv"
+	},
+	{
+		"regex":"/(January) 15 (2017)\\n(February) 02 \\2\\n\\1 22 \\2\\n\\1 31 \\2\\n\\3 13 \\2/g",
+		"content":"January 15 2017\nFebruary 02 2017\nJanuary 22 2017\nJanuary 31 2017\nFebruary 13 2017\n",
+		"description":[],
+		"keywords":[],
+		"id":"izw7hb04"
+	},
+	{
+		"regex":"/(a)(?:b)(c) \\1\\1 \\2\\2 \\1\\2/g",
+		"content":"abc aa cc ac",
+		"description":[],
+		"keywords":[],
+		"id":"izw7hb0j"
+	},
+	{
+		"regex":"/(a)(?:b)(c)(?:d)(e) \\1b\\2d\\3 \\3x\\2x\\1/g",
+		"content":"abcde abcde excxa",
+		"description":[],
+		"keywords":[],
+		"id":"izwnrfsb"
+	},
+	{
+		"regex":"/(000_)(?:\\d[a-z])+(.js; )\\1(?:\\d..)+\\2\\1(?:[A-Z][a-z])+\\2/g",
+		"content":"000_0a.js; 000_2xx2xx.js; 000_AbCd.js;",
+		"description":[],
+		"keywords":[],
+		"id":"izw7hb19"
+	},
+	{
+		"regex":"/(person: )(?:[A-Z][a-z]+?\\s){2}(id: )([a-z]\\d){2,5}\\n\\1([A-Z][a-z]+?\\s){2}\\2([a-z]\\d){2,5}/g",
+		"content":"person: John Smith id: a4c6\nperson: Andy Brown id: v8r5a9c0",
+		"description":[],
+		"keywords":[],
+		"id":"izw7hb1l"
+	}	,
+	{
+		"regex":"/\\001\\002\\003\\004\\005\\041\\043\\044/",
+		"content":"&#001;&#002;&#003;&#004;&#005;&#33;&#35;&#36;",
+		"description":[],
+		"keywords":[],
+		"id":"j03i36av"
+	},
+	{
+		"regex":"/\\01\\02\\03\\04\\05\\41\\43\\44/",
+		"content":"&#001;&#002;&#003;&#004;&#005;&#33;&#35;&#36;",
+		"description":[],
+		"keywords":[],
+		"id":"j03i36cg"
+	},
+	{
+		"regex":"/\\1\\2\\3\\4\\5\\41\\43\\44/",
+		"content":"&#001;&#002;&#003;&#004;&#005;&#33;&#35;&#36;",
+		"description":[],
+		"keywords":[],
+		"id":"j03i36ck"
+	},
+	{
+		"regex":"/(a)(b)(c)(d)\\001\\002\\003\\004/",
+		"content":"abcd&#001;&#002;&#003;&#004;",
+		"description":[],
+		"keywords":[],
+		"id":"j03i36d4"
+	},
+	{
+		"regex":"/(a)(b)(c)(d)\\01\\02\\03\\04/",
+		"content":"abcd&#001;&#002;&#003;&#004;",
+		"description":[],
+		"keywords":[],
+		"id":"j03i36dm"
+	},
+	{
+		"regex":"/(a)(b)(c)(d)\\1\\2\\3\\4/",
+		"content":"abcd&#001;&#002;&#003;&#004;",
+		"description":[],
+		"keywords":[],
+		"id":"j03iq8py"
+	},
+	{
+		"regex":"/(a)(b)(c)(d)\\1\\2\\3\\4\\001\\002\\003\\004/",
+		"content":"abcdabcd&#001;&#002;&#003;&#004;",
+		"description":[],
+		"keywords":[],
+		"id":"j03iq8ni"
+	},
+	{
+		"regex":"/(?:a)(?:b)(c)(d)\\1\\2\\001\\002\\003\\004/",
+		"content":"abcdabcd&#001;&#002;&#003;&#004;",
+		"description":[],
+		"keywords":[],
+		"id":"j03iq8om"
+	},
+	{
+		"regex":"/\\1\\2\\3\\4(a)(b)(c)(d)\\1\\2\\3\\4/",
+		"content":"&#001;&#002;&#003;&#004;abcd#001;&#002;&#003;&#004;",
+		"description":[],
+		"keywords":[],
+		"id":"j03ir7qk"
+	},
+	{
+		"regex":"/\\1\\2\\3\\4(a)(b)(c)(d)\\1\\2\\3\\4/",
+		"content":"&#001;&#002;&#003;&#004;&#005;&#006;&#007;&#008;&#009;&#010;&#011;&#012;&#013;&#014;&#015;&#016;",
+		"description":[],
+		"keywords":[],
+		"id":"j03ir7r6"
 	}
 ]
+
+
+
