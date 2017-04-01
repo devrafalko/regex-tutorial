@@ -113,10 +113,11 @@ var ajaxHandle = {
 		s.on('click','.regex-header',function(){
 			var elem = item(this);
 			var elemID = elem[0].regexID;
+			var encodedID = encodeURI(elemID);
 			if(typeof elemID==='undefined') return;
 			if(elemID===props.hash) return;
 			props.hash = elemID;
-			location.hash = elemID;
+			location.hash = encodedID;
 			renderUtils.matchedData = [elemID];
 			renderUtils.filters = [null];
 			$('#searchInp').val('');
@@ -250,10 +251,10 @@ var ajaxHandle = {
 				}
 				
 				function validateJSON(jsonObj){
-					if(!that.utils.type(jsonObj,'array')) throw new SyntaxError("The JSON 'samples' object should be of type Array");
+					if(!that.utils.type(jsonObj,'array')) throw new TypeError("The JSON 'samples' object should be of type Array");
 					var idCollection = [];
-					$.each(jsonObj,function(i,v){
-						if(!that.utils.type(v,'object')) throw new SyntaxError("Each item of JSON 'samples' array should be of type Array");
+					$.each(jsonObj,function(i,v,b){
+						if(!that.utils.type(v,'object')) throw new TypeError("Each item of JSON 'samples' array should be of type Array");
 						that.propsValid(v,['regex','content','description','keywords','id'],['String','String','Array','Array','String'],"JSON 'samples'");
 						idCollection.push(v.id);
 					});
@@ -276,9 +277,9 @@ var ajaxHandle = {
 			});
 			
 				function validateJSON(jsonObj){
-					if(!that.utils.type(jsonObj,'array')) throw new SyntaxError("The JSON 'descriptions' object should be of type Array");
+					if(!that.utils.type(jsonObj,'array')) throw new TypeError("The JSON 'descriptions' object should be of type Array");
 					$.each(jsonObj,function(i,v){
-						if(!that.utils.type(v,'object')) throw new SyntaxError("Each item of JSON 'descriptions' array should be of type Array");
+						if(!that.utils.type(v,'object')) throw new TypeError("Each item of JSON 'descriptions' array should be of type Array");
 						that.propsValid(v,['key','desc'],['String','String'],"JSON 'descriptions'");
 					});
 				}			
@@ -302,16 +303,23 @@ var ajaxHandle = {
 					}
 				}
 				function validateJSON(jsonObj){
-					if(!that.utils.type(jsonObj,'array')) throw new SyntaxError("The JSON 'keywords' object should be of type Array");
+					if(!that.utils.type(jsonObj,'array')) throw new TypeError("The JSON 'keywords' object should be of type Array.");
 					$.each(jsonObj,function(i,v){
-						if(!that.utils.type(v,'string')) throw new SyntaxError("Each item of JSON 'keywords' array should be of type String");
+						if(!that.utils.type(v,'string')) throw new TypeError("Each item of JSON 'keywords' array should be of type String.");
 					});
 				}
 		},
 		propsValid: function(getObject,propNames,dataTypes,source){
 			var that = this;
 			$.each(propNames,function(iter,val){
-				if(!that.utils.type(getObject[val],dataTypes[iter])) throw new SyntaxError("Each "+val+" property of "+source+" item should be of type "+dataTypes[iter]+".");
+				if(!that.utils.type(getObject[val],dataTypes[iter])) {
+					throw new TypeError("Each "+val+" property of "+source+" item should be of type "+dataTypes[iter]+".");
+					} else if(val==="keywords"){
+						 $.each(getObject[val],function(_,item){
+							if(!that.utils.type(item,"String")) throw new TypeError("Each keywords property of JSON 'samples' item should contain items of type String.");
+							if(item.search(/\s/g)!==-1) throw new SyntaxError("Each keywords property of JSON 'samples' item should contain items that do not contain space character.");
+						 });
+					}
 			});
 		},
 
@@ -361,6 +369,7 @@ var ajaxHandle = {
 					
 					
 					if(hash){
+						hash = decodeURI(hash);
 						$.each(this.ajaxData.regexData,function(i,val){
 							if(hash===val.id) {
 								found = val.id;
@@ -640,6 +649,7 @@ var ajaxHandle = {
 				}
 		},
 		loadDescriptions: function(elem,data){
+			var utils = this.utils;
 			$(elem).find('.regex-tips').append(generateDescriptions.call(this,this.ajaxData.descriptionData,data.keywords,data.description));
 				function generateDescriptions(defaultDefinitions,keywords,addDefinitions){
 					var newList = '<ul class="description-list">';
@@ -652,14 +662,18 @@ var ajaxHandle = {
 						keyCollection[i] = c.desc;
 					});
 					var newKeyCollection = addDefinitions.concat(keyCollection);
-
 					for(var i=0;i<newKeyCollection.length;i++){
 						newList += '<li>';
-						if(typeof newKeyCollection[i]==='string') {
+						if(utils.type(newKeyCollection[i],'String')) {
 							newList += parseStringToCode(newKeyCollection[i]);
-							} else if(this.utils.type(newKeyCollection[i],'Object')){
+							} else if(utils.type(newKeyCollection[i],'Object')){
 								var name = Object.getOwnPropertyNames(newKeyCollection[i])[0];
-								newList += parseStringToCode(name)+generateDescriptions([],null,newKeyCollection[i][name]);
+								var value = newKeyCollection[i][name];
+								if(utils.type(name,'undefined')) throw new SyntaxError("Each description property of JSON 'samples' item should contain items of type Object with header property.");
+								if(!utils.type(value,'Array')) throw new TypeError("Each description property of JSON 'samples' item should be of type Array.");
+								newList += parseStringToCode(name)+generateDescriptions([],null,value);
+								} else {
+									throw new TypeError("Each description property of JSON 'samples' item should contain items of type String or Object.");
 								}
 						newList += '</li>';
 					}
@@ -976,10 +990,6 @@ var ajaxHandle = {
 
 ajaxHandle.init();
 
-
-
-
-	
 
 
 //for jasmine unit tests
