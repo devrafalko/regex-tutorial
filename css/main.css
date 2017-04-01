@@ -511,6 +511,36 @@ body {
   height: 30px;
   padding: 0 10px;
   border-radius: 0 0 10px 10px; }
+  .regex-item footer ul {
+    float: left; }
+  .regex-item footer .regexpChars {
+    display: none;
+    text-align: right;
+    float: right; }
+  .regex-item footer .regexpChars li {
+    display: inline-block;
+    background-color: rgba(235, 235, 235, 0);
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    margin: 2px 0px;
+    border-radius: 4px;
+    padding: 2px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Open Sans;
+    color: #c8c8c8;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out, opacity .3s ease-in-out; }
+@media screen and (max-width: 480px) {
+  .regex-item footer .regexpChars li {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    margin: 4px 0px; } }
+
+    .regex-item footer .regexpChars li:hover {
+      color: #438d99;
+      background-color: #ebebeb; }
 
 [class^=regex-button] {
   display: inline-block;
