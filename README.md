@@ -46,6 +46,7 @@ RegExp Tutorial contains over 350 useful, vivid and easy-to-understand samples o
 
 # Keywords
 The default content of keywords box is generated automatically. It contains the keywords corresponding to regexp special characters used in regular expression structure. Click on the chosen keyword in the **keywords box** or **description box** or enter the keywords *(separated by space)* into **search widget** to filter the regular expression samples.
+
 |keyword|description|sample|
 |:---:|:---|:---:|
 |`simple-pattern`|Select samples with character combinations that are not any regex special character|`/hello/`|
