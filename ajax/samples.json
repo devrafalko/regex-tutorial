@@ -161,6 +161,20 @@
 		"id":"ixk3e6di"
 	},
 	{
+		"regex":"/y g/g",
+		"content":"play game playgame",
+		"description":[],
+		"keywords":[],
+		"id":"j06nft8j"
+	},
+	{
+		"regex":"/y *g/g",
+		"content":"play game playgame",
+		"description":[],
+		"keywords":[],
+		"id":"j06nft93"
+	},
+	{
 		"regex":"/ab?c/g",
 		"content":"ac abc abbc abbbc",
 		"description":[],
@@ -476,6 +490,13 @@
 		"id":"ixk8xunm"
 	},
 	{
+		"regex":"/\\w+\\s/g",
+		"content":"match the? words! followed by space.",
+		"description":[],
+		"keywords":[],
+		"id":"j06nft7z"
+	},	
+	{
 		"regex":"/\\S+\\s\\S+/g",
 		"content":"Carrie-Anne Moss Peter Parker Jessica Jones",
 		"description":[],
@@ -581,11 +602,25 @@
 		"id":"ixkqzsf1"
 	},
 	{
+		"regex":"/^g.+/gm",
+		"content":"goat\\ngorilla\\nelephant\\ngiraffe",
+		"description":[],
+		"keywords":[],
+		"id":"j06tu9kc"
+	},
+	{
 		"regex":"/bc$/g",
 		"content":"abc abc abc",
 		"description":[],
 		"keywords":[],
 		"id":"ixkqzwe2"
+	},
+	{
+		"regex":"/.+(er)$/gm",
+		"content":"banner\\ncoffee\\nblower\\ntoffee\\ncaller",
+		"description":[],
+		"keywords":[],
+		"id":"j06tu9k7"
 	},
 	{
 		"regex":"/^\\d+\\. \\w+/g",
@@ -684,6 +719,20 @@
 		"description":[],
 		"keywords":[],
 		"id":"ixkr11es"
+	},
+	{
+		"regex":"/\\{{3}.*\\}{3}/g",
+		"content":"Some text with {{{special}}} characters.",
+		"description":[],
+		"keywords":[],
+		"id":"j06nshdg"
+	},
+	{
+		"regex":"/\\{{3}|\\}{3}/g",
+		"content":"Some text with {{{special}}} characters.",
+		"description":[],
+		"keywords":[],
+		"id":"j06nshe3"
 	},
 	{
 		"regex":"/\\b\\w{3}\\b/g",
@@ -942,6 +991,132 @@
 		"id":"ixkryzxb"
 	},
 	{
+		"regex":"/hel*o/g",
+		"content":"helo hello helllo",
+		"description":[],
+		"keywords":[],
+		"id":"j06o00ip"
+	},
+	{
+		"regex":"/hel*o\\*/g",
+		"content":"heo helo hello helllo heo* helo* hello* helllo*",
+		"description":[],
+		"keywords":[],
+		"id":"j06o00jn"
+	},
+	{
+		"regex":"/\\w+/g",
+		"content":"I don't like+ bananas much. Only banana+ cake. I like that+ all right.",
+		"description":[],
+		"keywords":[],
+		"id":"j06o00js"
+	},
+	{
+		"regex":"/\\w+\\+/g",
+		"content":"I don't like+ bananas much. Only banana+ cake. I like that+ all right.",
+		"description":[],
+		"keywords":[],
+		"id":"j06o00kb"
+	},
+	{
+		"regex":"/(hello){3}/gi",
+		"content":"HelloHelloHello",
+		"description":[],
+		"keywords":[],
+		"id":"j06o00kv"
+	},	
+	{
+		"regex":"/(\\(hello\\)){3}/gi",
+		"content":"(Hello)(Hello)(Hello)",
+		"description":[],
+		"keywords":[],
+		"id":"j06o04yv"
+	},
+	{
+		"regex":"/(\\{hello\\}){3}/gi",
+		"content":"{Hello}{Hello}{Hello}",
+		"description":[],
+		"keywords":[],
+		"id":"j06o04zo"
+	},
+	{
+		"regex":"/(h[ea]llo\\s){3}/gi",
+		"content":"Hello Hello Hallo Hallo Hello Hallo",
+		"description":[],
+		"keywords":[],
+		"id":"j06o0503"
+	},
+	{
+		"regex":"/(\\[h[ea]llo\\]\\s){3}/gi",
+		"content":"[Hello] [Hello] [Hallo] [Hallo] [Hello] [Hallo] ",
+		"description":[],
+		"keywords":[],
+		"id":"j06o050q"
+	},
+	{
+		"regex":"/^hello\\^world$/gm",
+		"content":"hello^world\\nhello$world\\n",
+		"description":[],
+		"keywords":[],
+		"id":"j06o0517"
+	},
+	{
+		"regex":"/^hello\\$world$/gm",
+		"content":"hello^world\\nhello$world\\n",
+		"description":[],
+		"keywords":[],
+		"id":"j06pum30"
+	},
+	{
+		"regex":"/hello?/g",
+		"content":"hell hello helloo hellooo\\nhell? hello? helloo? hellooo? ",
+		"description":[],
+		"keywords":[],
+		"id":"j06pum3z"
+	},
+	{
+		"regex":"/hello\\?/g",
+		"content":"hell hello helloo hellooo\\nhell? hello? helloo? hellooo? ",
+		"description":[],
+		"keywords":[],
+		"id":"j06pum4l"
+	},
+	{
+		"regex":"/p.+?m(\\.|\\+|\\?)/g",
+		"content":"plum. poem? pharm+ prism. podium?",
+		"description":[],
+		"keywords":[],
+		"id":"j06pum4w"
+	},
+	{
+		"regex":"/p.+?m[.+?]/g",
+		"content":"plum. poem? pharm+ prism. podium?",
+		"description":[],
+		"keywords":[],
+		"id":"j06pum5l"
+	},	
+	{
+		"regex":"/^\\.{2}\\\\.+\\..+/gm",
+		"content":"C:\\\\movies\\\\avatar.avi\\n..\\\\movies\\\\Forrest Gump.avi",
+		"description":[],
+		"keywords":[],
+		"id":"j06qfwc4"
+	},
+	{
+		"regex":"/(abc)|(ABC)/g",
+		"content":"abc ABC abc ABC bac BCA",
+		"description":[],
+		"keywords":[],
+		"id":"j06qfwcn"
+	},
+	{
+		"regex":"/[ABC]\\|[abc]/g",
+		"content":"A|a B|d B|b C|c A|b C|a A|d A|e",
+		"description":[],
+		"keywords":[],
+		"id":"j06qfwd5"
+	},
+	{
 		"regex":"/[bn]/g",
 		"content":"banana",
 		"description":[],
@@ -1067,6 +1242,14 @@
 		"keywords":[],
 		"id":"ixnm6nab"
 	},
+	
+	{
+		"regex":"/[A-Z]/g",
+		"content":"AÀÁĄaāąæEÈËĘeēĕęIÌÎÏiìíîOÒÓÔoòôõCĆĈČcĉćč",
+		"description":[],
+		"keywords":[],
+		"id":"j06uk0nt"
+	},	
 	{
 		"regex":"/[^A-Z]/g",
 		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
@@ -1095,6 +1278,13 @@
 		"keywords":[],
 		"id":"ixnky332"
 	},
+	{
+		"regex":"/[a-z]/g",
+		"content":"AÀÁĄaāąæEÈËĘeēĕęIÌÎÏiìíîOÒÓÔoòôõCĆĈČcĉćč",
+		"description":[],
+		"keywords":[],
+		"id":"j06uk0n6"
+	},	
 	{
 		"regex":"/[^a-z]/g",
 		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
@@ -1152,6 +1342,13 @@
 		"id":"ixnm86zr"
 	},
 	{
+		"regex":"/[A-z]/g",
+		"content":"AÀÁĄaāąæEÈËĘeēĕęIÌÎÏiìíîOÒÓÔoòôõCĆĈČcĉćč",
+		"description":[],
+		"keywords":[],
+		"id":"j06uk0o2"
+	},	
+	{
 		"regex":"/[^A-z]/g",
 		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
 		"description":[],
@@ -1165,6 +1362,20 @@
 		"keywords":[],
 		"id":"ixnm8gn5"
 	},
+	{
+		"regex":"/[ABCDefgh]/g",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"j06vx2j2"
+	},
+	{
+		"regex":"/[A-De-h]/g",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"j06vx2jd"
+	},	
 	{
 		"regex":"/[D-GM-P]/g",
 		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
@@ -1222,13 +1433,19 @@
 		"id":"iyczbqf6"
 	},
 	{
+		"regex":"/\\.[^0-9]+?$/gm",
+		"content":"samp.ogg\\nsamp.mp4\\nsamp.mpeg\\nsamp.3gp",
+		"description":[],
+		"keywords":[],
+		"id":"j07jvo0n"
+	},
+	{
 		"regex":"/[C-c]/g",
 		"content":"ABCD abcd EFGH efgh IJKL ijkl MONP mnop 0123",
 		"description":[],
 		"keywords":[],
 		"id":"iyczbqfq"
 	},
-
 	{
 		"regex":"/[6-D]/g",
 		"content":"0123 ABC abc 456 DEF def 789 GHI ghi",
@@ -1669,6 +1886,13 @@
 		"id":"izsw6mq9"
 	},
 	{
+		"regex":"/(Celine|Angelina)\\s(?=(Parker|Evans))/gm",
+		"content":"Celine Evans\\nCeline Brown\\nCeline Parker\\nAngelina Parker\\nEmma Parker",
+		"description":[],
+		"keywords":[],
+		"id":"j06uk0p7"
+	},
+	{
 		"regex":"/a(?![123])/g",
 		"content":"a1 a2 a3 a4 a5 a6 ab ac ad",
 		"description":[],
@@ -1717,6 +1941,20 @@
 		"keywords":[],
 		"id":"izvuimg9"
 	},
+	{
+		"regex":"/\\\\(?=\\w+\\.\\w+$)/g",
+		"content":"C:\\\\New Folder\\\\CSS\\\\styles.css",
+		"description":[],
+		"keywords":[],
+		"id":"izvuimg4"
+	},	
+	{
+		"regex":"/\\\\(?!\\w+\\.\\w+$)/g",
+		"content":"C:\\\\New Folder\\\\CSS\\\\styles.css",
+		"description":[],
+		"keywords":[],
+		"id":"izvuimg3"
+	},	
 	{
 		"regex":"/^.+?(?=\\s)/gm",
 		"content":"some text not followed",
@@ -1927,6 +2165,94 @@
 		"keywords":[],
 		"id":"izw47j3p"
 	},
+	
+	
+	
+
+	{
+		"regex":"/\\dd/g",
+		"content":"1d 2d 3d 1a 2a 3a",
+		"description":[],
+		"keywords":[],
+		"id":"j06s7m1q"
+	},
+	{
+		"regex":"/^\\D\\w+/gm",
+		"content":"Down the hill\nHis heart gave a sudden bound\nDrive down the boulevard",
+		"description":[],
+		"keywords":[],
+		"id":"j06s7m2c"
+	},
+	{
+		"regex":"/^D\\w+/gm",
+		"content":"Down the hill\nHis heart gave a sudden bound\nDrive down the boulevard",
+		"description":[],
+		"keywords":[],
+		"id":"j06s7m2p"
+	},
+	{
+		"regex":"/\\bw\\w+\b/gm",
+		"content":"which is the best way to the station?",
+		"description":[],
+		"keywords":[],
+		"id":"j06s7m3c"
+	},
+	{
+		"regex":"/\\b\\w+b\\w+\\b/gm",
+		"content":"man the lifeboats! abandon ship!",
+		"description":[],
+		"keywords":[],
+		"id":"j06s7m3u"
+	},	
+	{
+		"regex":"/(\\B|B)/gi",
+		"content":"Bus brings me right to the neighbour's door",
+		"description":[],
+		"keywords":[],
+		"id":"j06sekv9"
+	},
+	{
+		"regex":"/[\\WW]/g",
+		"content":"ABC WXY abc wxy 123 !@# ?$*",
+		"description":[],
+		"keywords":[],
+		"id":"j06sekvf"
+	},
+	{
+		"regex":"/\\w+s\\s/g",
+		"content":"not suitable for persons of a nervous disposition ",
+		"description":[],
+		"keywords":[],
+		"id":"j06sekvx"
+	},
+	{
+		"regex":"/\\bS\\S+\\b/g",
+		"content":"See you on Sunday!",
+		"description":[],
+		"keywords":[],
+		"id":"j06sekwg"
+	},
+	{
+		"regex":"/[n\\n]/g",
+		"content":"she felt irrationally calm\\nironically, she never replied\\nI’d never dare say it to her",
+		"description":[],
+		"keywords":[],
+		"id":"j06sekx5"
+	},	
+	{
+		"regex":"/[frtv\\f\\r\\t\\v]/g",
+		"content":"\\fshe felt irrationally calm\\r\\tironically, she never replied\\r\\vI’d never dare say it to her",
+		"description":[],
+		"keywords":[],
+		"id":"j06sevg9"
+	},
+	{
+		"regex":"/\\d00|\\d\\0\\0/g",
+		"content":"100 200 300 400 1\\0\\0 2\\0\\0 3\\0\\0 4\\0\\0",
+		"description":[],
+		"keywords":[],
+		"id":"j06sevgr"
+	},
 	{
 		"regex":"/[A-Z][a-z]{2,4}\\s\\d{2}(?=\\s\\0)/gm",
 		"content":"Jan 22 2017\\nMar 13 \\0\\nSep 03 2016",
@@ -1950,6 +2276,13 @@
 		"id":"izw7fr35"
 	},
 	{
+		"regex":"/sup(ple) sim\\1 peo\\1 cou\\1/g",
+		"content":"supple simple people couple",
+		"description":[],
+		"keywords":[],
+		"id":"j06tu9j1"
+	},	
+	{
 		"regex":"/(there\\s)(is\\s)(some\\s)(word\\s)\\1\\2\\3\\4/g",
 		"content":"there is some word there is some word",
 		"description":[],
@@ -1963,6 +2296,13 @@
 		"keywords":[],
 		"id":"izw7fr4p"
 	},
+	{
+		"regex":"/2(\\u2030) 1\\.1\\1 0\\.3\\1 0\\.33\\1/g",
+		"content":"2‰ 1.1‰ 0.3‰ 0.33‰",
+		"description":[],
+		"keywords":[],
+		"id":"j06tu9hq"
+	},	
 	{
 		"regex":"/(_name)B\\n\\1C\\n\\1D/g",
 		"content":"_nameA\n_nameB\n_nameC\n_nameD\n_nameE\n_nameF\n_nameG\n",
@@ -1984,6 +2324,15 @@
 		"keywords":[],
 		"id":"izw7h4yv"
 	},
+	
+	{
+		"regex":"/(A(1))(B(2))\\1\\2\\3\\4/g",
+		"content":"A1B2A11B22",
+		"description":[],
+		"keywords":[],
+		"id":"j06tu9j6"
+	},	
+	
 	{
 		"regex":"/(dog(;))(cat\\2)\\1\\3\\1\\3/g",
 		"content":"dog;cat;dog;cat;dog;cat;",
@@ -2119,7 +2468,7 @@
 	},
 	{
 		"regex":"/\\1\\2\\3\\4(a)(b)(c)(d)\\1\\2\\3\\4/",
-		"content":"&#001;&#002;&#003;&#004;abcd#001;&#002;&#003;&#004;",
+		"content":"&#001;&#002;&#003;&#004;abcd&#001;&#002;&#003;&#004;",
 		"description":[],
 		"keywords":[],
 		"id":"j03ir7qk"
@@ -2132,6 +2481,4 @@
 		"id":"j03ir7r6"
 	}
 ]
-
-
 
