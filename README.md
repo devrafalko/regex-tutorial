@@ -154,12 +154,12 @@ The default content of keywords box is generated automatically. It contains the 
 * the value of *"content" property* will appear in the **text box**
 * HTML reserved characters, as `<` `>` entered in *"content" propertie's* value **will not** be parsed into **HTML tags**. They will appear as plain text in the **text box**
 * the HTML entities, as `&#36;` `&#93;`, entered in "content" propertie's value **will be** parsed into appropriate HTML symbols `$` `]` in **regexp box**
-* in order to insert **form feed** `\f` character into **text box**, enter **`"\f"`** or **`"\&#012;"`** into *"content" property* value. In order to insert **`"\f"`** as a plain text into **text box**, enter **`"\\f"`** into *"content" property* value
-* in order to insert **line feed** `\n` character into **text box**, enter **`"\n"`** or **`"\&#010;"`** into *"content" property* value. In order to insert **`"\n"`** as a plain text into **text box**, enter **`"\\n"`** into *"content" property* value
-* in order to insert **carriage return** `\r` character into **text box**, enter **`"\r"`** or **`"\&#013;"`** into *"content" property* value. In order to insert **`"\r"`** as a plain text into **text box**, enter **`"\\r"`** into *"content" property* value
-* in order to insert **horizontal tab** `\t` character into **text box**, enter **`"\t"`** or **`"\&#009;"`** into *"content" property* value. In order to insert **`"\t"`** as a plain text into **text box**, enter **`"\\t"`** into *"content" property* value
-* in order to insert **vertical tab** `\v` character into **text box**, enter **`"\&#011;"`** into *"content" property* value. In order to insert **`"\v"`** as a plain text into **text box**, enter **`"\\v"`** into *"content" property* value
-* in order to insert **null** `\0` character into **text box**, enter **`"\&#000;"`** into *"content" property* value. In order to insert **`"\0"`** as a plain text into **text box**, enter **`"\\0"`** into *"content" property* value
+* in order to insert **form feed** `\f` character into **text box**, enter **`"\f"`** or **`"&#012;"`** into *"content" property* value. In order to insert **`"\f"`** as a plain text into **text box**, enter **`"\\f"`** into *"content" property* value
+* in order to insert **line feed** `\n` character into **text box**, enter **`"\n"`** or **`"&#010;"`** into *"content" property* value. In order to insert **`"\n"`** as a plain text into **text box**, enter **`"\\n"`** into *"content" property* value
+* in order to insert **carriage return** `\r` character into **text box**, enter **`"\r"`** or **`"&#013;"`** into *"content" property* value. In order to insert **`"\r"`** as a plain text into **text box**, enter **`"\\r"`** into *"content" property* value
+* in order to insert **horizontal tab** `\t` character into **text box**, enter **`"\t"`** or **`"&#009;"`** into *"content" property* value. In order to insert **`"\t"`** as a plain text into **text box**, enter **`"\\t"`** into *"content" property* value
+* in order to insert **vertical tab** `\v` character into **text box**, enter **`"&#011;"`** into *"content" property* value. In order to insert **`"\v"`** as a plain text into **text box**, enter **`"\\v"`** into *"content" property* value
+* in order to insert **null** `\0` character into **text box**, enter **`"&#000;"`** into *"content" property* value. In order to insert **`"\0"`** as a plain text into **text box**, enter **`"\\0"`** into *"content" property* value
 
 ###### `"description"` property:
 * use *"description" property* to add **extra descriptions** to each regexp sample. They will appear at the top of the **description box**

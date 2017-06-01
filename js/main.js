@@ -909,7 +909,7 @@ var ajaxHandle = {
 		},
 		pasteIntoContentBox: function(type,event){
 			event.preventDefault();
-			var contentBox = $(event.target).closest('.regex-item').find('.test-text').get()[0];
+			var contentBox = type==='buttons' ? $(event.target).closest('.regex-item').find('.test-text').get()[0]:event.target;
 			var getText = $(contentBox).text();
 			var getPaste = type==='clipboard' ? (event.originalEvent.clipboardData || window.clipboardData).getData("text"):event.target.textContent;
 			var s = window.getSelection();
@@ -990,6 +990,8 @@ var ajaxHandle = {
 
 ajaxHandle.init();
 
+//to do:
+	//paste into regex input does not work!
 
 
 //for jasmine unit tests
@@ -997,6 +999,7 @@ ajaxHandle.init();
 //	module.exports.parseSlashEscaped = ajaxHandle.regexpUtils.parseSlashEscaped;;	
 //	module.exports.parseExpressionFlags = ajaxHandle.regexpUtils.parseExpressionFlags;	
 //	module.exports.parseSquares = ajaxHandle.regexpUtils.parseSquares;
+
 
 
 
