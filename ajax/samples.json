@@ -29,14 +29,14 @@
 	},
 	{
 		"regex":"/Simon/",
-		"content":"Peter,\\nGeorge,\\nSimon,\\nHannah,\\nJudy",
+		"content":"Peter,\nGeorge,\nSimon,\nHannah,\nJudy",
 		"description":[],
 		"keywords":[],
 		"id":"ixinrhki"
 	},
 	{
 		"regex":"/o w/",
-		"content":"Hello World!\\nhello world!",
+		"content":"Hello World!\nhello world!",
 		"description":[],
 		"keywords":[],
 		"id":"ixint26u"
@@ -343,7 +343,7 @@
 		"id":"ixk8vo9k"
 	},
 	{
-		"regex":"/a\\w+\\ly/g",
+		"regex":"/a\\w+ly/g",
 		"content":"absent absently absolute absolutely total totally",
 		"description":[],
 		"keywords":[],
@@ -456,28 +456,28 @@
 	},
 	{
 		"regex":"/\\s/g",
-		"content":"text\\nwith\\nline feed",
+		"content":"text\nwith\nline feed",
 		"description":[],
 		"keywords":[],
 		"id":"ixk8wzqa"
 	},
 	{
 		"regex":"/\\s/g",
-		"content":"text\\fwith\\fhorizontal-tabulator",
+		"content":"text\fwith\fhorizontal-tabulator",
 		"description":[],
 		"keywords":[],
 		"id":"ixk8xl4v"
 	},
 	{
 		"regex":"/\\s/g",
-		"content":"text\\twith\\tvertical-tabulator",
+		"content":"text\twith\tvertical-tabulator",
 		"description":[],
 		"keywords":[],
 		"id":"ixk8xo0a"
 	},
 	{
 		"regex":"/\\s/g",
-		"content":"text\\rwith\\rcarriage-return",
+		"content":"text\rwith\rcarriage-return",
 		"description":[],
 		"keywords":[],
 		"id":"ixk8xr8b"
@@ -490,19 +490,19 @@
 		"id":"ixk8xunm"
 	},
 	{
-		"regex":"/\\w+\\s/g",
-		"content":"match the? words! followed by space.",
-		"description":[],
-		"keywords":[],
-		"id":"j06nft7z"
-	},	
-	{
 		"regex":"/\\S+\\s\\S+/g",
 		"content":"Carrie-Anne Moss Peter Parker Jessica Jones",
 		"description":[],
 		"keywords":[],
 		"id":"ixk8xxlh"
 	},
+	{
+		"regex":"/\\w+\\s/g",
+		"content":"match the? words! followed by space.",
+		"description":[],
+		"keywords":[],
+		"id":"j06nft7z"
+	},	
 	{
 		"regex":"/\\s\\s+/gi",
 		"content":"   Match only  mulispaces    in the     text",
@@ -511,29 +511,29 @@
 		"id":"ixkqzmm3"
 	},	
 	{
-		"regex":"/abc\\nabc/g",
-		"content":"abc abc abc\\nabc abc abc",
+		"regex":"/abc\nabc/g",
+		"content":"abc abc abc\nabc abc abc",
 		"description":[],
 		"keywords":[],
 		"id":"ixkqy8sz"
 	},
 	{
-		"regex":"/\\w\\n/g",
-		"content":"a\\nb\\nc",
+		"regex":"/\\w\n/g",
+		"content":"a\nb\nc",
 		"description":[],
 		"keywords":[],
 		"id":"ixkqz2xy"
 	},
 	{
-		"regex":"/\\d\\.\\s\\S+\\s\\S+\\n*/g",
+		"regex":"/\\d\\.\\s\\S+\\s\\S+\n*/g",
 		"content":"1. Carrie-Anne Moss\na) Peter Parker\n2. Jessica Jones",
 		"description":[],
 		"keywords":[],
 		"id":"ixk8y1ag"
 	},
 	{
-		"regex":"/\\w+\\n*\\w+/g",
-		"content":"hello\\n\\nworld",
+		"regex":"/\\w+\n*\\w+/g",
+		"content":"hello\n\nworld",
 		"description":[],
 		"keywords":[],
 		"id":"ixkqz9ml"
@@ -603,7 +603,7 @@
 	},
 	{
 		"regex":"/^g.+/gm",
-		"content":"goat\\ngorilla\\nelephant\\ngiraffe",
+		"content":"goat\ngorilla\nelephant\ngiraffe",
 		"description":[],
 		"keywords":[],
 		"id":"j06tu9kc"
@@ -617,42 +617,42 @@
 	},
 	{
 		"regex":"/.+(er)$/gm",
-		"content":"banner\\ncoffee\\nblower\\ntoffee\\ncaller",
+		"content":"banner\ncoffee\nblower\ntoffee\ncaller",
 		"description":[],
 		"keywords":[],
 		"id":"j06tu9k7"
 	},
 	{
 		"regex":"/^\\d+\\. \\w+/g",
-		"content":"1. Amanda\\n2. Tom\\n3. Peter",
+		"content":"1. Amanda\n2. Tom\n3. Peter",
 		"description":[],
 		"keywords":[],
 		"id":"ixkqzzwi"
 	},
 	{
 		"regex":"/\\d+\\. \\w+$/g",
-		"content":"1. Amanda\\n2. Tom\\n3. Peter",
+		"content":"1. Amanda\n2. Tom\n3. Peter",
 		"description":[],
 		"keywords":[],
 		"id":"ixkr02c4"
 	},
 	{
 		"regex":"/^\\d\\.\\s/gm",
-		"content":"1. Amanda\\n2. Tom\\n3. Peter",
+		"content":"1. Amanda\n2. Tom\n3. Peter",
 		"description":[],
 		"keywords":[],
 		"id":"ixkr06rm"
 	},
 	{
 		"regex":"/\\w+$/gm",
-		"content":"1. Amanda\\n2. Tom\\n3. Peter",
+		"content":"1. Amanda\n2. Tom\n3. Peter",
 		"description":[],
 		"keywords":[],
 		"id":"ixkr0arg"
 	},
 	{
 		"regex":"/^.+\\.$/gm",
-		"content":"Match only sentences with period.\\nDo not match any other sentences!\\nJust the ones with period.",
+		"content":"Match only sentences with period.\nDo not match any other sentences!\nJust the ones with period.",
 		"description":[],
 		"keywords":[],
 		"id":"ixkr0e6m"
@@ -663,6 +663,13 @@
 		"description":[],
 		"keywords":[],
 		"id":"ixkr0ln3"
+	},
+	{
+		"regex":"/\\b\\w+(er)+/g",
+		"content":"I was born an idiot - but I'm cleverer than people think.",
+		"description":[],
+		"keywords":[],
+		"id":"ixkr0ln4"
 	},
 	{
 		"regex":"/(\\d2)+/gi",
@@ -818,8 +825,6 @@
 		"keywords":[],
 		"id":"ixkr2eal"
 	},
-	
-	
 	{
 		"regex":"/seen?/g",
 		"content":"see saw seen",
@@ -834,8 +839,6 @@
 		"keywords":[],
 		"id":"izqb6jiw"
 	},
-	
-	
 	{
 		"regex":"/(plum)+?/",
 		"content":"plumplumplumplum",
@@ -879,7 +882,7 @@
 		"id":"ixkryzpj"
 	},
 	{
-		"regex":"/.+?\\./",
+		"regex":"/.+?\\./g",
 		"content":"I don't like bananas much. Only banana cake. I like that all right.",
 		"description":[],
 		"keywords":[],
@@ -905,6 +908,13 @@
 		"description":[],
 		"keywords":[],
 		"id":"ixkryzuj"
+	},
+	{
+		"regex":"/0|5|8/gi",
+		"content":"0123456789",
+		"description":[],
+		"keywords":[],
+		"id":"ixkryzuk"
 	},
 	{
 		"regex":"/the (brother|sister)/gi",
@@ -956,6 +966,13 @@
 		"id":"ixkryzw7"
 	},
 	{
+		"regex":"/\\band|the\\b/gi",
+		"content":"Three days later, the man in the car came and got me out of school. Mom was there, and they got all the things out of my desk and put them in a brown paper bag.",
+		"description":[],
+		"keywords":[],
+		"id":"ixkryzw9"
+	},
+	{
 		"regex":"/\\b\\S+(ay|ays)\\b/g",
 		"content":"day whey way days wheys ways",
 		"description":[],
@@ -971,7 +988,7 @@
 	},
 	{
 		"regex":"/^.+(\\.|\\?)$/gm",
-		"content":"Match sentences ended with period.\\nMatch sentences ended with question mark?\\nDo not match any other sentences!",
+		"content":"Match sentences ended with period.\nMatch sentences ended with question mark?\nDo not match any other sentences!",
 		"description":[],
 		"keywords":[],
 		"id":"ixkryznv"
@@ -1041,7 +1058,7 @@
 	},
 	{
 		"regex":"/(h[ea]llo\\s){3}/gi",
-		"content":"Hello Hello Hallo Hallo Hello Hallo",
+		"content":"Hello Hello Hallo Hallo Hello Hallo ",
 		"description":[],
 		"keywords":[],
 		"id":"j06o0503"
@@ -1055,28 +1072,28 @@
 	},
 	{
 		"regex":"/^hello\\^world$/gm",
-		"content":"hello^world\\nhello$world\\n",
+		"content":"hello^world\nhello$world\n",
 		"description":[],
 		"keywords":[],
 		"id":"j06o0517"
 	},
 	{
 		"regex":"/^hello\\$world$/gm",
-		"content":"hello^world\\nhello$world\\n",
+		"content":"hello^world\nhello$world\n",
 		"description":[],
 		"keywords":[],
 		"id":"j06pum30"
 	},
 	{
 		"regex":"/hello?/g",
-		"content":"hell hello helloo hellooo\\nhell? hello? helloo? hellooo? ",
+		"content":"hell hello helloo hellooo\nhell? hello? helloo? hellooo? ",
 		"description":[],
 		"keywords":[],
 		"id":"j06pum3z"
 	},
 	{
 		"regex":"/hello\\?/g",
-		"content":"hell hello helloo hellooo\\nhell? hello? helloo? hellooo? ",
+		"content":"hell hello helloo hellooo\nhell? hello? helloo? hellooo? ",
 		"description":[],
 		"keywords":[],
 		"id":"j06pum4l"
@@ -1097,7 +1114,7 @@
 	},	
 	{
 		"regex":"/^\\.{2}\\\\.+\\..+/gm",
-		"content":"C:\\\\movies\\\\avatar.avi\\n..\\\\movies\\\\Forrest Gump.avi",
+		"content":"C:\\movies\\avatar.avi\n..\\movies\\Forrest Gump.avi",
 		"description":[],
 		"keywords":[],
 		"id":"j06qfwc4"
@@ -1131,6 +1148,13 @@
 		"id":"ixkryzxx"
 	},
 	{
+		"regex":"/[\\W\\d]/g",
+		"content":"banana123!@#",
+		"description":[],
+		"keywords":[],
+		"id":"ixkryzxy"
+	},
+	{
 		"regex":"/[^bn]/g",
 		"content":"banana",
 		"description":[],
@@ -1150,6 +1174,13 @@
 		"description":[],
 		"keywords":[],
 		"id":"ixkryzzj"
+	},
+	{
+		"regex":"/[late]{2}/g",
+		"content":"When it got late, he told me to take the harmonica with me, and I played it for a long time in my room.",
+		"description":[],
+		"keywords":[],
+		"id":"ixkryzzk"
 	},
 	{
 		"regex":"/[^late\\W]/g",
@@ -1187,7 +1218,7 @@
 		"id":"ixnk6t5f"
 	},
 	{
-		"regex":"/\\b[CJE]\\S+[ah]\\b/g",
+		"regex":"/\\b[CJE]\\w+[ah]\\b/g",
 		"content":"Alice Cecilia Edith Emily Gabrielle Hannah Judith Julia Camille Claudia Lilly",
 		"description":[],
 		"keywords":[],
@@ -1236,14 +1267,20 @@
 		"id":"ixnky2y2"
 	},
 	{
+		"regex":"/[A-Z]/gi",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"ixnky2y3"
+	},
+	{
 		"regex":"/[A-Z]/g",
 		"content":"0123456789~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'",
 		"description":[],
 		"keywords":[],
 		"id":"ixnm6nab"
 	},
-	
-	{
+		{
 		"regex":"/[A-Z]/g",
 		"content":"AÀÁĄaāąæEÈËĘeēĕęIÌÎÏiìíîOÒÓÔoòôõCĆĈČcĉćč",
 		"description":[],
@@ -1251,11 +1288,25 @@
 		"id":"j06uk0nt"
 	},	
 	{
+		"regex":"/[A-Z]/gi",
+		"content":"AÀÁĄaāąæEÈËĘeēĕęIÌÎÏiìíîOÒÓÔoòôõCĆĈČcĉćč",
+		"description":[],
+		"keywords":[],
+		"id":"j06uk0nu"
+	},	
+	{
 		"regex":"/[^A-Z]/g",
 		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
 		"description":[],
 		"keywords":[],
 		"id":"ixnky2za"
+	},
+	{
+		"regex":"/[^A-Z]/gi",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"ixnky2zb"
 	},
 	{
 		"regex":"/[^A-Z]/g",
@@ -1272,6 +1323,13 @@
 		"id":"ixnky32a"
 	},
 	{
+		"regex":"/[a-z]/gi",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"ixnky32b"
+	},
+	{
 		"regex":"/[a-z]/g",
 		"content":"0123456789~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'",
 		"description":[],
@@ -1286,11 +1344,25 @@
 		"id":"j06uk0n6"
 	},	
 	{
+		"regex":"/[a-z]/gi",
+		"content":"AÀÁĄaāąæEÈËĘeēĕęIÌÎÏiìíîOÒÓÔoòôõCĆĈČcĉćč",
+		"description":[],
+		"keywords":[],
+		"id":"j06uk0n8"
+	},	
+	{
 		"regex":"/[^a-z]/g",
 		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
 		"description":[],
 		"keywords":[],
 		"id":"ixnky33l"
+	},
+	{
+		"regex":"/[^a-z]/gi",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+		"description":[],
+		"keywords":[],
+		"id":"ixnky333"
 	},
 	{
 		"regex":"/[^a-z]/g",
@@ -1385,28 +1457,28 @@
 	},	
 	{
 		"regex":"/[C-Gf-n]/g",
-		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz",
 		"description":[],
 		"keywords":[],
 		"id":"ixnm8u3v"
 	},
 	{
 		"regex":"/[B-GP-U]/g",
-		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz",
 		"description":[],
 		"keywords":[],
 		"id":"iyczbq2g"
 	},
 	{
 		"regex":"/[D-GKMO]/g",
-		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz",
 		"description":[],
 		"keywords":[],
 		"id":"iyczbqdb"
 	},
 	{
 		"regex":"/[D-GP-Sc-fu-x]/g",
-		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\\nabcdefghijklmnopqrstuvwxyz",
+		"content":"ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz",
 		"description":[],
 		"keywords":[],
 		"id":"iyczbqdu"
@@ -1434,7 +1506,7 @@
 	},
 	{
 		"regex":"/\\.[^0-9]+?$/gm",
-		"content":"samp.ogg\\nsamp.mp4\\nsamp.mpeg\\nsamp.3gp",
+		"content":"samp.ogg\nsamp.mp4\nsamp.mpeg\nsamp.3gp",
 		"description":[],
 		"keywords":[],
 		"id":"j07jvo0n"
@@ -1463,14 +1535,14 @@
 	},
 	{
 		"regex":"/[9-A]/g",
-		"content":"~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'\\n0123456789\\nABCDEFGHabcdefgh",
+		"content":"~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'\n0123456789\nABCDEFGHabcdefgh",
 		"description":[],
 		"keywords":[],
 		"id":"iyczf99l"
 	},
 	{
 		"regex":"/[Z-a]/g",
-		"content":"~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'\\n0123456789\\nABCDEFGHabcdefgh",
+		"content":"~`!@#$%^&*()_+-={}[]:;|\\<>,.?/\"'\n0123456789\nABCDEFGHabcdefgh",
 		"description":[],
 		"keywords":[],
 		"id":"iyczf99u"
@@ -1505,7 +1577,7 @@
 	},
 	{
 		"regex":"/^[AL]\\w+[ae]$/gm",
-		"content":"Adele\\nAdriana\\nErica\\nLucy\\nLuke",
+		"content":"Adele\nAdriana\nErica\nLucy\nLuke",
 		"description":[],
 		"keywords":[],
 		"id":"iyczf9c2"
@@ -1540,28 +1612,28 @@
 	},
 	{
 		"regex":"/[\\w]/g",
-		"content":"ABCDEF\\nabcdef\\n0123456",
+		"content":"ABCDEF\nabcdef\n0123456",
 		"description":[],
 		"keywords":[],
 		"id":"iyd6n7kb"
 	},
 	{
 		"regex":"/[^\\W]/g",
-		"content":"ABCDEF\\nabcdef\\n0123456",
+		"content":"ABCDEF\nabcdef\n0123456",
 		"description":[],
 		"keywords":[],
 		"id":"iyd6n7la"
 	},
 	{
 		"regex":"/[\\W]/g",
-		"content":"ABCDEFabcdef\\n0123456 !@#$%^&",
+		"content":"ABCDEFabcdef\n0123456 !@#$%^&",
 		"description":[],
 		"keywords":[],
 		"id":"iyd6n7lr"
 	},
 	{
 		"regex":"/[^\\w]/g",
-		"content":"ABCDEFabcdef\\n0123456 !@#$%^&",
+		"content":"ABCDEFabcdef\n0123456 !@#$%^&",
 		"description":[],
 		"keywords":[],
 		"id":"iyd6n7mb"
@@ -1573,11 +1645,7 @@
 		"keywords":[],
 		"id":"iyczf9dq"
 	},
-	
-	
-	
-	
-	{
+		{
 		"regex":"/\\141\\142\\143/g",
 		"content":"abcdef a b c d e f abcdef",
 		"description":[],
@@ -1688,6 +1756,13 @@
 		"description":[],
 		"keywords":[],
 		"id":"izrl2g8x"
+	},
+	{
+		"regex":"/\\x3c(.+?)\\x3e.*\\x3c\\/\\1\\x3e/gim",
+		"content":"<span>content</span>\n<span>content</mark>\n<div>content</div>",
+		"description":[],
+		"keywords":[],
+		"id":"izrl2g8y"
 	},
 	{
 		"regex":"/[\\x23\\x2E]\\S+/gm",
@@ -1823,6 +1898,13 @@
 		"id":"izsw6mnq"
 	},
 	{
+		"regex":"/\\w+(?=\\.(s[ca]ss|html?))/g",
+		"content":"media.scss media.sass index.html template.htm",
+		"description":[],
+		"keywords":[],
+		"id":"izsw6mnz"
+	},
+	{
 		"regex":"/\\d+(?=px|em|%)/g",
 		"content":"Length is a number followed by a length unit, such as 10px, 2em, 3cm, 50%, etc.",
 		"description":[],
@@ -1886,13 +1968,6 @@
 		"id":"izsw6mq9"
 	},
 	{
-		"regex":"/(Celine|Angelina)\\s(?=(Parker|Evans))/gm",
-		"content":"Celine Evans\\nCeline Brown\\nCeline Parker\\nAngelina Parker\\nEmma Parker",
-		"description":[],
-		"keywords":[],
-		"id":"j06uk0p7"
-	},
-	{
 		"regex":"/a(?![123])/g",
 		"content":"a1 a2 a3 a4 a5 a6 ab ac ad",
 		"description":[],
@@ -1905,6 +1980,13 @@
 		"description":[],
 		"keywords":[],
 		"id":"izsxsscq"
+	},
+	{
+		"regex":"/(Celine|Angelina)\\s(?=(Parker|Evans))/gm",
+		"content":"Celine Evans\nCeline Brown\nCeline Parker\nAngelina Parker\nEmma Parker",
+		"description":[],
+		"keywords":[],
+		"id":"j06uk0p7"
 	},
 	{
 		"regex":"/samp(?!1)/g",
@@ -1921,7 +2003,7 @@
 		"id":"izvuime4"
 	},
 	{
-		"regex":"/January\\s(?!2015)/g",
+		"regex":"/January(?!\\s2015)/g",
 		"content":"January 2017 January 2015 January 2016",
 		"description":[],
 		"keywords":[],
@@ -1929,7 +2011,7 @@
 	},
 	{
 		"regex":"/\\w+\\b(?!\\s{2,})/g",
-		"content":"Do not match        words which follow more than one   space",
+		"content":"Do not match        words that follow more than one   space",
 		"description":[],
 		"keywords":[],
 		"id":"izvuimfp"
@@ -1943,25 +2025,25 @@
 	},
 	{
 		"regex":"/\\\\(?=\\w+\\.\\w+$)/g",
-		"content":"C:\\\\New Folder\\\\CSS\\\\styles.css",
+		"content":"C:\\New Folder\\CSS\\styles.css",
 		"description":[],
 		"keywords":[],
 		"id":"izvuimg4"
 	},	
 	{
 		"regex":"/\\\\(?!\\w+\\.\\w+$)/g",
-		"content":"C:\\\\New Folder\\\\CSS\\\\styles.css",
+		"content":"C:\\New Folder\\CSS\\styles.css",
 		"description":[],
 		"keywords":[],
 		"id":"izvuimg3"
 	},	
 	{
-		"regex":"/^.+?(?=\\s)/gm",
-		"content":"some text not followed",
+		"regex":"/.+\\\\(?=\\w+\\.\\w+$)/g",
+		"content":"C:\\New Folder\\CSS\\styles.css",
 		"description":[],
 		"keywords":[],
-		"id":"izvuimgt"
-	},
+		"id":"izvuimg5"
+	},	
 	{
 		"regex":"/^.+(?=.{7})/g",
 		"content":"Match text without last few characters.",
@@ -1984,191 +2066,187 @@
 		"id":"izvy49eg"
 	},
 	{
-		"regex":"/\\f/g",
+		"regex":"/\f/g",
 		"content":"\fI was born an idiot - but I'm cleverer than people think.\f",
 		"description":[],
 		"keywords":[],
 		"id":"izvy49f4"
 	},
 	{
-		"regex":"/\\f{2}/g",
+		"regex":"/\f{2}/g",
 		"content":"\fHe waked up late next day after a broken sleep. \f\fBut his sleep had not refreshed him; \f\f\fhe waked up bilious, irritable, \fill-tempered, and looked with hatred at his room.",
 		"description":[],
 		"keywords":[],
 		"id":"izw4956h"
 	},
 	{
-		"regex":"/\\f$/gm",
+		"regex":"/\f$/gm",
 		"content":"\fAlice Black\f\nSteven Hepburn\nHolly \fMoore\f\nMeg Roberts",
 		"description":[],
 		"keywords":[],
 		"id":"izw4957k"
 	},
 	{
-		"regex":"/([A-Z][a-z]+)\\s([A-Z][a-z]+)\\f/gm",
+		"regex":"/([A-Z][a-z]+)\\s([A-Z][a-z]+)\f/gm",
 		"content":"Pauly Carter\f\nMike Gunn\f\nRobin Taylor\f",
 		"description":[],
 		"keywords":[],
 		"id":"izw49585"
 	},
 	{
-		"regex":"/“.+”\\n?\\f“.+”/g",
+		"regex":"/“.+”\n\f?“.+”/g",
 		"content":"“What are you doing?”\n“Work...”\n\f“What sort of work?”\n“I am thinking,” he answered seriously after a pause.",
 		"description":[],
 		"keywords":[],
 		"id":"izw4958o"
 	},
 	{
-		"regex":"/.+\\f{3}/g",
+		"regex":"/.+\f{3}/g",
 		"content":"He waked up late\f next\f\f day after a broken sleep.\f\f\fBut his sleep had not refreshed him; he waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
 		"description":[],
 		"keywords":[],
 		"id":"izw49598"
 	},	
 	{
-		"regex":"/\\r/g",
+		"regex":"/\r/g",
 		"content":"I was born an idiot - \rbut I'm cleverer than people think.",
 		"description":[],
 		"keywords":[],
 		"id":"izvzn5ro"
 	},
 	{
-		"regex":"/^\\r|\\r$/gm",
+		"regex":"/^\r|\r$/gm",
 		"content":"\rI was born an idiot - \rbut I'm cleverer than people think.\r",
 		"description":[],
 		"keywords":[],
 		"id":"izw48u2f"
 	},
 	{
-		"regex":"/[A-Z]\\w+\\r/gm",
+		"regex":"/[A-Z]\\w+\r/gm",
 		"content":"Alice Black\rSteven hepburn\rHolly Moore\rMeg Roberts",
 		"description":[],
 		"keywords":[],
 		"id":"izw48u37"
 	},
 	{
-		"regex":"/“[^\\r]+”/g",
+		"regex":"/“[^\r]+”/g",
 		"content":"“What \rare \ryou \rdoing?”\n“Work...”\n“What sort of work?”\n“I am thinking,” he answered seriously after a pause.",
 		"description":[],
 		"keywords":[],
 		"id":"izw48u3q"
 	},
 	{
-		"regex":"/[0-9a-z]{3}\\x5F[1-3a-c]{3}(?=\\r|\\n)/g",
+		"regex":"/[0-9a-z]{3}\\x5F[1-3a-c]{3}(?=\r|\n)/g",
 		"content":"0a4_111 025_a33\r79g_2a3 006_bb4\r20g_acc g49_caa\n",
 		"description":[],
 		"keywords":[],
 		"id":"izw48u4a"
 	},
 	{
-		"regex":"/\\b([a-z]\\r)+\\b/g",
+		"regex":"/\\b([a-z]\r)+\\b/g",
 		"content":"samp\ns\ra\rm\rp\rsamp",
 		"description":[],
 		"keywords":[],
 		"id":"izw48u55"
 	},	
 	{
-		"regex":"/\\t/g",
+		"regex":"/\t/g",
 		"content":"I was born an idiot\t -\t but I'm cleverer than people think.",
 		"description":[],
 		"keywords":[],
 		"id":"izvzn5st"
 	},
 	{
-		"regex":"/^\\t/gm",
+		"regex":"/^\t/gm",
 		"content":"\tI was born \tan idiot -but \n\tI'm cleverer than \tpeople think.",
 		"description":[],
 		"keywords":[],
 		"id":"izw48eq1"
 	},
 	{
-		"regex":"/\\t{2}/g",
+		"regex":"/\t{2}/g",
 		"content":"He\t waked up\t late next day after a broken sleep. \t\tBut his sleep had not refreshed him; \t\the waked up bilious, irritable, ill\t-\ttempered, and looked with hatred at his room.",
 		"description":[],
 		"keywords":[],
 		"id":"izw48equ"
 	},
 	{
-		"regex":"/([A-Z][a-z]+)\\t([A-Z][a-z]+)/gm",
+		"regex":"/([A-Z][a-z]+)\t([A-Z][a-z]+)/gm",
 		"content":"Pauly\tCarter\nJames\tGunn\nRobin\tTaylor",
 		"description":[],
 		"keywords":[],
 		"id":"izw48er8"
 	},
 	{
-		"regex":"/^.+\\t{2}.+\\t{2}.+$/gm",
-		"content":"Jan\\t\\t16\\t\\t2017\\nDec      22     2016\\nSep\\t\\t03\\t\\t2016",
+		"regex":"/^.+\t{2}.+\t{2}.+$/gm",
+		"content":"Jan\t\t16\t\t2017\nDec      22     2016\nSep\t\t03\t\t2016",
 		"description":[],
 		"keywords":[],
 		"id":"izw48ert"
 	},
 	{
-		"regex":"/(-\\t)“.+”/g",
+		"regex":"/(-\t)“.+”/g",
 		"content":"-\t“What are you doing?”\n-  “Work...”\n-\t“What sort of work?”\n-\t“I am thinking,” he answered seriously after a pause.",
 		"description":[],
 		"keywords":[],
 		"id":"izw48esc"
-	},	
+	},
 	{
 		"regex":"/\\v/g",
-		"content":"\\vI was \born an idiot - but I'm cleverer than people think.\\v",
+		"content":"&#011;I was born an idiot - but I'm cleverer than people think.&#011;",
 		"description":[],
 		"keywords":[],
 		"id":"izvzn5ta"
 	},
 	{
 		"regex":"/\\v{2}/g",
-		"content":"\\v\\vHe waked up late next day after a broken sleep. \\vBut his sleep had not refreshed him; he waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
+		"content":"&#011;&#011;He waked up late next day after a broken sleep. &#011;But his sleep had not refreshed him; he waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
 		"description":[],
 		"keywords":[],
 		"id":"izw47y9r"
 	},
 	{
 		"regex":"/([A-Z][a-z]+)\\s([A-Z][a-z]+)(?=\\v)/gm",
-		"content":"Pauly\tCarter\\v\nJames\tGunn\nRobin\tTaylor\\v",
+		"content":"Pauly\tCarter&#011;\nJames\tGunn\nRobin\tTaylor&#011;",
 		"description":[],
 		"keywords":[],
 		"id":"izw47yai"
 	},
 	{
 		"regex":"/\\w+[^\\v\\s.]/g",
-		"content":"He wa\\vked up late next day af\\vter a bro\\vken sleep.",
+		"content":"He wa&#011;ked up late next day af&#011;ter a bro&#011;ken sleep.",
 		"description":[],
 		"keywords":[],
 		"id":"izw47yam"
 	},
 	{
 		"regex":"/\\v+\\w+/g",
-		"content":"He waked up late next day after a broken sleep. \\v\\vBut his sleep had not refreshed him; \\v\\vhe waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
+		"content":"He waked up late next day after a broken sleep. &#011;&#011;But his sleep had not refreshed him; &#011;&#011;he waked up bilious, irritable, ill-tempered, and looked with hatred at his room.",
 		"description":[],
 		"keywords":[],
 		"id":"izw47yb4"
 	},
 	{
 		"regex":"/\\0/g",
-		"content":"I was born an idiot - but I'm cleverer than people think.\\0",
+		"content":"I was born an idiot - but I'm cleverer than people think.&#000;",
 		"description":[],
 		"keywords":[],
 		"id":"izvzn5tt"
 	},
 	{
 		"regex":"/\\0$/gm",
-		"content":"\\0Alice Black\\0\nSteven Hepburn\nHolly \\0Moore\\0\nMeg Roberts",
+		"content":"&#000;Alice Black&#000;\nSteven Hepburn\nHolly &#000;Moore&#000;\nMeg Roberts",
 		"description":[],
 		"keywords":[],
 		"id":"izw47j36"
 	},
 	{
 		"regex":"/\\w+\\0/gm",
-		"content":"\\0Alice Black\\0\nSteven Hepburn\nHolly \\0Moore\\0\nMeg Roberts",
+		"content":"&#000;Alice Black&#000;\nSteven Hepburn\nHolly &#000;Moore&#000;\nMeg Roberts",
 		"description":[],
 		"keywords":[],
 		"id":"izw47j3p"
 	},
-	
-	
-	
-
 	{
 		"regex":"/\\dd/g",
 		"content":"1d 2d 3d 1a 2a 3a",
@@ -2191,7 +2269,7 @@
 		"id":"j06s7m2p"
 	},
 	{
-		"regex":"/\\bw\\w+\b/gm",
+		"regex":"/\\bw\\w+\\b/gm",
 		"content":"which is the best way to the station?",
 		"description":[],
 		"keywords":[],
@@ -2233,36 +2311,36 @@
 		"id":"j06sekwg"
 	},
 	{
-		"regex":"/[n\\n]/g",
-		"content":"she felt irrationally calm\\nironically, she never replied\\nI’d never dare say it to her",
+		"regex":"/[n\n]/g",
+		"content":"she felt irrationally calm\nironically, she never replied\nI’d never dare say it to her",
 		"description":[],
 		"keywords":[],
 		"id":"j06sekx5"
 	},	
 	{
-		"regex":"/[frtv\\f\\r\\t\\v]/g",
-		"content":"\\fshe felt irrationally calm\\r\\tironically, she never replied\\r\\vI’d never dare say it to her",
+		"regex":"/[frtv\f\r\t\\v]/g",
+		"content":"\fshe felt irrationally calm\r\tironically, she never replied&#011;I’d never dare say it to her",
 		"description":[],
 		"keywords":[],
 		"id":"j06sevg9"
 	},
 	{
 		"regex":"/\\d00|\\d\\0\\0/g",
-		"content":"100 200 300 400 1\\0\\0 2\\0\\0 3\\0\\0 4\\0\\0",
+		"content":"100 200 300 400 1&#000;&#000; 2&#000;&#000; 3&#000;&#000; 4&#000;&#000;",
 		"description":[],
 		"keywords":[],
 		"id":"j06sevgr"
 	},
 	{
 		"regex":"/[A-Z][a-z]{2,4}\\s\\d{2}(?=\\s\\0)/gm",
-		"content":"Jan 22 2017\\nMar 13 \\0\\nSep 03 2016",
+		"content":"Jan 22 2017\nMar 13 &#000;\nSep 03 2016",
 		"description":[],
 		"keywords":[],
 		"id":"izw47j43"
 	},
 	{
 		"regex":"/[A-Za-z_$]+(?=\\s?\\x3d\\s?\\x5B.*\\0.*\\x5D\\x3B?)/g",
-		"content":"var sampA = [1,2,3,\\0,\\0];\nvar _sampB = [1,2,3,4,5];\nvar samp_c = [];\nvar $samp_d = [1,2,3,\\0,5,6,7];\n",
+		"content":"var sampA = [1,2,3,&#000;,&#000];\nvar _sampB = [1,2,3,4,5];\nvar samp_c = [];\nvar $samp_d = [1,2,3,&#000,5,6,7];\n",
 		"description":[],
 		"keywords":[],
 		"id":"izw47j4h"
@@ -2284,7 +2362,7 @@
 	},	
 	{
 		"regex":"/(there\\s)(is\\s)(some\\s)(word\\s)\\1\\2\\3\\4/g",
-		"content":"there is some word there is some word",
+		"content":"there is some word there is some word ",
 		"description":[],
 		"keywords":[],
 		"id":"izw7fr4e"
@@ -2304,7 +2382,7 @@
 		"id":"j06tu9hq"
 	},	
 	{
-		"regex":"/(_name)B\\n\\1C\\n\\1D/g",
+		"regex":"/(_name)B\n\\1C\n\\1D/g",
 		"content":"_nameA\n_nameB\n_nameC\n_nameD\n_nameE\n_nameF\n_nameG\n",
 		"description":[],
 		"keywords":[],
@@ -2362,21 +2440,21 @@
 		"id":"izwnrft5"
 	},
 	{
-		"regex":"/(name:\\t)Amanda\\n\\1Patrick\\n\\1Peter\\n\\1John/g",
+		"regex":"/(name:\t)Amanda\n\\1Patrick\n\\1Peter\n\\1John/g",
 		"content":"name:\tAmanda\nname:\tPatrick\nname:\tPeter\nname:\tJohn",
 		"description":[],
 		"keywords":[],
 		"id":"izw7h509"
 	},	
 	{
-		"regex":"/(file_name_005)\\.js\\n\\1\\.css\\n\\1\\.html/g",
+		"regex":"/(file_name_005)\\.js\n\\1\\.css\n\\1\\.html/g",
 		"content":"file_name_005.js\nfile_name_005.css\nfile_name_005.html",
 		"description":[],
 		"keywords":[],
 		"id":"izw7hayv"
 	},
 	{
-		"regex":"/(January) 15 (2017)\\n(February) 02 \\2\\n\\1 22 \\2\\n\\1 31 \\2\\n\\3 13 \\2/g",
+		"regex":"/(January) 15 (2017)\n(February) 02 \\2\n\\1 22 \\2\n\\1 31 \\2\n\\3 13 \\2/g",
 		"content":"January 15 2017\nFebruary 02 2017\nJanuary 22 2017\nJanuary 31 2017\nFebruary 13 2017\n",
 		"description":[],
 		"keywords":[],
@@ -2398,13 +2476,13 @@
 	},
 	{
 		"regex":"/(000_)(?:\\d[a-z])+(.js; )\\1(?:\\d..)+\\2\\1(?:[A-Z][a-z])+\\2/g",
-		"content":"000_0a.js; 000_2xx2xx.js; 000_AbCd.js;",
+		"content":"000_0a.js; 000_2xx2xx.js; 000_AbCd.js; ",
 		"description":[],
 		"keywords":[],
 		"id":"izw7hb19"
 	},
 	{
-		"regex":"/(person: )(?:[A-Z][a-z]+?\\s){2}(id: )([a-z]\\d){2,5}\\n\\1([A-Z][a-z]+?\\s){2}\\2([a-z]\\d){2,5}/g",
+		"regex":"/(person: )(?:[A-Z][a-z]+?\\s){2}(id: )([a-z]\\d){2,5}\n\\1([A-Z][a-z]+?\\s){2}\\2([a-z]\\d){2,5}/g",
 		"content":"person: John Smith id: a4c6\nperson: Andy Brown id: v8r5a9c0",
 		"description":[],
 		"keywords":[],
@@ -2461,7 +2539,7 @@
 	},
 	{
 		"regex":"/(?:a)(?:b)(c)(d)\\1\\2\\001\\002\\003\\004/",
-		"content":"abcdabcd&#001;&#002;&#003;&#004;",
+		"content":"abcdcd&#001;&#002;&#003;&#004;",
 		"description":[],
 		"keywords":[],
 		"id":"j03iq8om"
@@ -2475,7 +2553,7 @@
 	},
 	{
 		"regex":"/\\1\\2\\3\\4(a)(b)(c)(d)\\1\\2\\3\\4/",
-		"content":"&#001;&#002;&#003;&#004;&#005;&#006;&#007;&#008;&#009;&#010;&#011;&#012;&#013;&#014;&#015;&#016;",
+		"content":"&#001;&#002;&#003;&#004;abcdabcd",
 		"description":[],
 		"keywords":[],
 		"id":"j03ir7r6"
